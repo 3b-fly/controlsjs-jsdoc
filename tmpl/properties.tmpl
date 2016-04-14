@@ -17,16 +17,11 @@
     });
     
     /* determine if we need extra columns, "attributes" and "default" */
-    props.hasAttributes = false;
     props.hasDefault = false;
     props.hasName = false;
     
     props.forEach(function(prop) {
         if (!prop) { return; }
-        
-        if (prop.optional || prop.nullable) {
-            props.hasAttributes = true;
-        }
         
         if (prop.name) {
             props.hasName = true;
@@ -46,10 +41,6 @@
 		<?js } ?>
 		
 		<th>Type</th>
-		
-		<?js if (props.hasAttributes) {?>
-		<th>Argument</th>
-		<?js } ?>
 		
 		<?js if (props.hasDefault) {?>
 		<th>Default</th>
@@ -76,18 +67,6 @@
                 <?js= self.partial('type.tmpl', prop.type.names) ?>
             <?js } ?>
             </td>
-            
-            <?js if (props.hasAttributes) {?>
-                <td class="attributes">
-                <?js if (prop.optional) { ?>
-                    &lt;optional><br>
-                <?js } ?>
-                    
-                <?js if (prop.nullable) { ?>
-                    &lt;nullable><br>
-                <?js } ?>
-                </td>
-            <?js } ?>
             
             <?js if (props.hasDefault) {?>
                 <td class="default">
