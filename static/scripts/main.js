@@ -31,15 +31,15 @@ $(function () {
 
     // Show an item related a current documentation automatically
     var filename = $('.page-title').data('filename').replace(/\.[a-z]+$/, '');
-    var $currentItem = $('.navigation .item[data-name*="' + filename + '"]:eq(0)');
+    var $linkItem = $('.navigation .item .title a[href="' + filename + '.html"]:eq(0)');
 
-    if ($currentItem.length) {
-        $currentItem
-            .remove()
-            .prependTo('.navigation .list')
-            .show()
-            .find('.itemMembers')
-                .show();
+    if ($linkItem.length) {
+        var $currentItem = $linkItem.parent().parent();
+        $currentItem.find('.itemMembers').show();
+  
+        var $list = $('.navigation .list');
+        var $firstItem = $list.find('.item:eq(0)');
+        $list.scrollTop($currentItem.offset().top - $firstItem.offset().top);
     }
 
     // Auto resizing on navigation
