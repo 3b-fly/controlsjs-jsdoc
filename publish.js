@@ -53,6 +53,10 @@ function needsSignature(doclet) {
             }
         }
     }
+    //function type event
+    else if (doclet.kind === 'event' && doclet.params){
+        needsSig = true;
+    }
 
     return needsSig;
 }
