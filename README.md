@@ -1,4 +1,4 @@
-Jaguar.js template for JSDoc 3
+JSDoc 3 template for Controlsjs
 ---
 - [Controlsjs](http://controlsjs.com/)
 - [Controlsjs on GitHub](https://github.com/controlsjs/controls.js)
