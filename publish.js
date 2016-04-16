@@ -40,7 +40,10 @@ function needsSignature(doclet) {
     var needsSig = false;
 
     // function and class definitions always get a signature
-    if (doclet.kind === 'function' || doclet.kind === 'class') {
+    if (
+        (doclet.kind === 'function')
+        || ((doclet.kind === 'class') && (doclet.static !== true))
+    ) {
         needsSig = true;
     }
     // typedefs that contain functions get a signature, too
@@ -240,6 +243,7 @@ function buildNav(members) {
         _.each(members.classes, function (v) {
             nav.push({
                 type: 'class',
+                static: v.static,
                 longname: v.longname,
                 name: v.name,
                 members: find({
@@ -414,6 +418,7 @@ exports.publish = function(taffyData, opts, tutorials) {
             addSignatureReturns(doclet);
             addAttribs(doclet);
         }
+
     });
 
     // do this after the urls have all been generated
@@ -445,6 +450,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     // once for all
     view.nav = buildNav(members);
+
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
 

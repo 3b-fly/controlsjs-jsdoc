@@ -1,6 +1,7 @@
 html,
 body {
-  font: 1em "jaf-bernino-sans", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+  font-family: Arial CE, Helvetica CE, Arial, Helvetica, sans-serif;
+  font-size: 16px;
   background-color: #fff;
 }
 ul,
@@ -33,7 +34,8 @@ li {
   margin: 0;
   margin-top: 15px;
   padding: 10px 15px;
-  font: bold 1.25em Helvetica;
+  font-size: 18px;
+  font-weight: bold;
   color: #fff;
 }
 .navigation .applicationName a {
@@ -68,7 +70,7 @@ li {
   cursor: pointer;
   position: relative;
   display: block;
-  font-size: 0.8em;
+  font-size: 13px;
 }
 .navigation li.item .title a {
   color: #e1e1e1;
@@ -76,18 +78,27 @@ li {
 .navigation li.item .title a:hover {
   color: #fff;
 }
-.navigation li.item .title .static {
+.navigation li.item .title .type-signature {
+  position: relative;
   display: block;
   border-radius: 3px;
+  font-size: 11px;
+  padding: 2px 5px;
+  float: right;
+  top: -1px;
+}
+.navigation li.item .title .static {
   background-color: #779c34;
   color: #000;
-  font-size: 0.7em;
-  padding: 2px 4px;
-  float: right;
+}
+.navigation li.item .title .namespace {
+  background-color: #808080;
+  color: #000;
 }
 .navigation li.item .subtitle {
   margin-top: 10px;
-  font: bold 0.65em Helvetica;
+  font-size: 10px;
+  font-weight: bold;
   color: #779c34;
   display: block;
 }
@@ -158,20 +169,40 @@ li {
   margin-right: 8px;
   top: -2px;
 }
-.main span.number {
-  background-color: gray!important;
-}
+.main span.number,
 .main span.string {
-  background-color: gray!important;
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
+  background-color: #888888 !important;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 8px;
+  top: -2px;
 }
-.main span.object {
-  background-color: #2a6496 !important;
-}
+.main span.object,
 .main span.array {
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
   background-color: #2a6496 !important;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 8px;
+  top: -2px;
 }
 .main span.boolean {
+  position: relative;
+  display: inline-block;
+  border-radius: 3px;
   background-color: #ee7d7d !important;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 8px;
+  top: -2px;
 }
 .main .subsection-title {
   font-size: 14px;
