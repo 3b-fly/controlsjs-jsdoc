@@ -1,6 +1,7 @@
 Jaguar.js template for JSDoc 3
 ---
 - [Controlsjs](http://controlsjs.com/)
+- [Controlsjs on GitHub](https://github.com/controlsjs/controls.js)
 - [JSDoc3](https://github.com/jsdoc3/jsdoc)
 - [JSDoc3 API Documentations](http://usejsdoc.org)
 
