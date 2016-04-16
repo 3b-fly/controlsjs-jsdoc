@@ -108,12 +108,12 @@ li {
 }
 .main h1 {
   font-weight: bold;
-  font-size: 1.6em;
+  font-size: 26px;
   margin: 0;
 }
 .main h2 {
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 24px;
   margin: 0;
 }
 .main h3 {
@@ -123,7 +123,7 @@ li {
 }
 .main h4 {
   font-weight: bold;
-  font-size: 1em;
+  font-size: 16px;
 }
 .main h5 {
   font-weight: bold;
@@ -132,14 +132,6 @@ li {
 .main dd {
   font-size: 12px;
 }
-.main h4.name span.type-signature {
-  display: inline-block;
-  border-radius: 3px;
-  background-color: gray;
-  color: #fff;
-  font-size: 0.7em;
-  padding: 2px 4px;
-}
 .main h4.name span.type {
   margin-left: 5px;
 }
@@ -147,21 +139,24 @@ li {
   display: inline-block;
   vertical-align: middle;
   color: #e1e1e1;
-  margin-left: 7px;
+  margin: 0px 7px;
 }
 .main h4.name span.returnType {
   margin-left: 3px;
-  background-color: transparent!important;
-  color: gray!important;
+  background-color: transparent !important;
+  color: gray !important;
+  font-weight: normal !important;
 }
 .main span.static {
+  position: relative;
   display: inline-block;
   border-radius: 3px;
   background-color: #779c34 !important;
   color: #fff;
-  font-size: 0.7em;
-  padding: 2px 4px;
+  font-size: 11px;
+  padding: 2px 5px;
   margin-right: 8px;
+  top: -2px;
 }
 .main span.number {
   background-color: gray!important;
@@ -184,7 +179,7 @@ li {
   color: #779c34;
 }
 .main .description {
-  margin-top: 10px;
+  margin: 10px 0px;
   font-size: 13px;
   font-style: italic;
 }
@@ -211,15 +206,14 @@ li {
   margin-top: 5px;
 }
 .main dt.tag-todo {
-  font-size: 10px;
+  position: relative;
   display: inline-block;
+  border-radius: 3px;
   background-color: #2a6496;
   color: #fff;
-  padding: 2px 4px;
-  border-radius: 5px;
-}
-.main .type-signature {
-  font-size: 12px;
+  font-size: 10px;
+  padding: 2px 5px;
+  top: -2px;
 }
 .main .tag-deprecated {
   display: inline-block;
@@ -228,8 +222,8 @@ li {
 .main .important {
   background-color: #ee7d7d;
   color: #fff;
-  padding: 2px 4px;
-  border-radius: 5px;
+  padding: 2px 5px;
+  border-radius: 3px;
 }
 .main .nameContainer {
   position: relative;
@@ -238,12 +232,14 @@ li {
   border-top: 1px solid #e1e1e1;
 }
 .main .nameContainer .inherited {
+  position: relative;
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #888 !important;
-  font-size: 80%;
-  padding: 2px 4px;
+  font-size: 11px;
+  padding: 2px 5px;
   margin-right: 5px;
+  top: -2px;
 }
 .main .nameContainer .inherited a {
   color: #fff;
@@ -265,9 +261,8 @@ li {
   line-height: 1.3;
 }
 .main .nameContainer h4 .signature {
-  font-size: 13px;
   font-weight: normal;
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  margin-left: 3px;
 }
 .main .nameContainer h4 .type-signature.type a {
   color: #fff;
@@ -313,9 +308,9 @@ li {
 }
 .main table .optional {
   float: left;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #ddd !important;
-  font-size: 80%;
+  font-size: 10px;
   padding: 2px 4px;
   margin-right: 5px;
   color: #808080;
@@ -323,10 +318,10 @@ li {
 .main .readme p {
   margin-top: 15px;
   line-height: 1.2;
-  font-size: 0.85em;
+  font-size: 14px;
 }
 .main .readme h1 {
-  font-size: 1.7em;
+  font-size: 26px;
 }
 .main .readme h2 {
   margin-top: 30px;
@@ -335,7 +330,7 @@ li {
   border-bottom: 1px solid #e1e1e1;
 }
 .main .readme li {
-  font-size: 0.9em;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 .main article ol,
