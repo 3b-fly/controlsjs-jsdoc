@@ -36,10 +36,14 @@ li {
   padding: 10px 15px;
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: #ffffff;
+  text-align: center;
 }
 .navigation .applicationName a {
-  color: #fff;
+  color: #ffffff;
+}
+.navigation .applicationName a:hover {
+  color: #cccccc;
 }
 .navigation .search {
   padding: 10px 15px;
