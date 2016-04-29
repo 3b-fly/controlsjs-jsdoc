@@ -150,11 +150,16 @@ li {
 .main h4.name span.type {
   margin-left: 5px;
 }
-.main h4.name span.glyphicon {
+.main h4.name span.arrow-right {
   display: inline-block;
   vertical-align: middle;
-  color: #e1e1e1;
   margin: 0px 7px;
+}
+.main h4.name span.arrow-right:empty {
+  width: 15px;
+}
+.main h4.name span.arrow-right:before {
+  content: "\25b6";
 }
 .main h4.name span.returnType {
   margin-left: 3px;

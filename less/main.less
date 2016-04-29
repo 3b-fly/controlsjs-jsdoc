@@ -46,11 +46,17 @@
       margin-left: 5px;
     }
 
-    span.glyphicon{
+    span.arrow-right{
       display: inline-block;
       vertical-align: middle;
-      color: #e1e1e1;
       margin: 0px 7px;
+
+      &:empty{
+        width: 15px;
+      }
+      &:before{
+        content: "\25b6";
+      }
     }
 
     span.returnType{
