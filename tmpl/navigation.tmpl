@@ -27,6 +27,17 @@ var self = this;
         </span>
 
         <ul class="members itemMembers">
+          <?js if (item.properties && item.properties.length) { ?>
+            <span class="subtitle">Properties</span>
+              <?js item.properties.forEach(function (p) { ?>
+                <li data-name="<?js= p.name ?>">
+                  <?js= self.linkto(item.longname, p.name, undefined, 'property:'+p.name) ?>
+                </li>
+              <?js }); ?>
+          <?js } ?>
+        </ul>
+
+        <ul class="members itemMembers">
           <?js if (item.members.length) { ?>
             <span class="subtitle">Members</span>
               <?js item.members.forEach(function (v) { ?>

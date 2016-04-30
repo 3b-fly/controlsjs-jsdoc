@@ -246,6 +246,7 @@ function buildNav(members) {
                 static: v.static,
                 longname: v.longname,
                 name: v.name,
+                properties: v.properties,
                 members: find({
                     kind: 'member',
                     memberof: v.longname
