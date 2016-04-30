@@ -43,6 +43,7 @@ function needsSignature(doclet) {
     if (
         (doclet.kind === 'function')
         || ((doclet.kind === 'class') && (doclet.static !== true))
+        || ((doclet.kind === 'event') && doclet.is_function)
     ) {
         needsSig = true;
     }
@@ -55,10 +56,6 @@ function needsSignature(doclet) {
                 break;
             }
         }
-    }
-    //function type event
-    else if (doclet.kind === 'event' && doclet.params){
-        needsSig = true;
     }
 
     return needsSig;
