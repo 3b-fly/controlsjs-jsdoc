@@ -1,6 +1,8 @@
 exports.defineTags = function(dictionary) {
   dictionary.defineTag("class-static", {
+
     onTagged: function(doclet,tag) {
+
       doclet.addTag('kind','class');
       doclet.static = true;
 

@@ -1,6 +1,8 @@
 exports.defineTags = function(dictionary) {
   dictionary.defineTag("event-function", {
+
     onTagged: function(doclet,tag) {
+
       doclet.addTag('kind','event');
       doclet.is_function = true;
 
