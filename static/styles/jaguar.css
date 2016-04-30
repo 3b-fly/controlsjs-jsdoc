@@ -1,8 +1,11 @@
 html,
 body {
+  margin: 0;
+  padding: 0;
   font-family: Arial CE, Helvetica CE, Arial, Helvetica, sans-serif;
   font-size: 16px;
   background-color: #fff;
+  color: #333333;
 }
 ul,
 ol {
@@ -40,24 +43,31 @@ li {
   text-align: center;
 }
 .navigation .applicationName a {
+  outline: 0;
   color: #ffffff;
+  text-decoration: none;
 }
-.navigation .applicationName a:hover {
+.navigation .applicationName a:hover,
+.navigation .applicationName a:focus {
   color: #cccccc;
+  text-decoration: underline;
 }
 .navigation .search {
   padding: 10px 15px;
 }
 .navigation .search input {
-  background-color: #333;
+  width: 90%;
+  padding: 4px 5% 4px 5%;
+  font-size: 12px;
+  line-height: 20px;
+  border: 1px solid #555555;
+  background-color: #333333;
   color: #fff;
-  border-color: #555;
 }
 .navigation .list {
   padding: 10px 15px 0 15px;
   position: relative;
   overflow: auto;
-  width: 100%;
 }
 .navigation li.item {
   margin-bottom: 8px;
@@ -65,9 +75,12 @@ li {
   border-bottom: 1px solid #333;
 }
 .navigation li.item a {
+  outline: 0;
   color: #bbb;
+  text-decoration: none;
 }
-.navigation li.item a:hover {
+.navigation li.item a:hover,
+.navigation li.item a:focus {
   color: #fff;
 }
 .navigation li.item .title {
@@ -77,9 +90,12 @@ li {
   font-size: 13px;
 }
 .navigation li.item .title a {
+  outline: 0;
   color: #e1e1e1;
+  text-decoration: none;
 }
-.navigation li.item .title a:hover {
+.navigation li.item .title a:hover,
+.navigation li.item .title a:focus {
   color: #fff;
 }
 .navigation li.item .title .type-signature {
@@ -107,7 +123,7 @@ li {
   display: block;
 }
 .navigation li.item ul > li {
-  font-size: 0.7em;
+  font-size: 11px;
   padding-left: 8px;
   margin-top: 2px;
 }
@@ -143,6 +159,16 @@ li {
 .main h5 {
   font-weight: bold;
   font-size: 12px;
+}
+.main a {
+  outline: 0;
+  color: #428bca;
+  text-decoration: none;
+}
+.main a:hover,
+.main a:focus {
+  color: #2a6496;
+  text-decoration: underline;
 }
 .main dd {
   font-size: 12px;
