@@ -59,7 +59,9 @@
 
         <tr id="property:<?js= prop.name ?>">
             <?js if (props.hasName) {?>
-                <td class="name"><code><?js= prop.name ?></code></td>
+                <td class="name">
+                  <span class="param-name"><?js= prop.name ?></span>
+                </td>
             <?js } ?>
 
             <td class="type">
