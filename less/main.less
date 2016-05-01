@@ -29,11 +29,18 @@
   h4{
     font-weight: bold;
     font-size: 16px;
+    margin: 15px 0px 15px 0px;
   }
 
   h5{
     font-weight: bold;
     font-size: 12px;
+    margin: 15px 0px 15px 0px;
+  }
+
+  h6{
+    font-size: 12px;
+    font-style: normal;
   }
 
   a{
@@ -127,9 +134,13 @@
   }
 
   .subsection-title{
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 30px;
     color: @colorSubtitle;
+  }
+
+  .subsection-list{
+    margin-top: 20px;
   }
 
   .description{
@@ -226,7 +237,7 @@
 
     h4{
       margin-right: 150px;
-      line-height: 1.3;
+      margin-bottom: 10px;
 
       .signature{
         font-weight: normal;
@@ -335,6 +346,17 @@
     ul > li{
       margin-bottom: 5px;
       list-style-type: disc;
+    }
+  }
+
+  dd.member-content{
+    .details{
+      margin-left: 30px;
+      .subsection-title{
+        font-size: 14px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
