@@ -95,17 +95,6 @@
     <?js } ?>
 
     <?js
-        var members = self.find({kind: 'member', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
-        if (members && members.length && members.forEach) {
-    ?>
-        <h3 class="subsection-title">Members</h3>
-
-        <dl><?js members.forEach(function(p) { ?>
-            <?js= self.partial('members.tmpl', p) ?>
-        <?js }); ?></dl>
-    <?js } ?>
-
-    <?js
         var interfaces = self.find({kind: 'interface', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
         if (interfaces && interfaces.length && interfaces.forEach) {
     ?>
@@ -114,6 +103,17 @@
         <ul><?js interfaces.forEach(function(i) { ?>
             <li><?js= self.linkto(i.longname, i.name) ?></li>
         <?js }); ?></ul>
+    <?js } ?>
+
+    <?js
+        var members = self.find({kind: 'member', memberof: title === 'Global' ? {isUndefined: true} : doc.longname});
+        if (members && members.length && members.forEach) {
+    ?>
+        <h3 class="subsection-title">Members</h3>
+
+        <dl><?js members.forEach(function(p) { ?>
+            <?js= self.partial('members.tmpl', p) ?>
+        <?js }); ?></dl>
     <?js } ?>
 
     <?js
