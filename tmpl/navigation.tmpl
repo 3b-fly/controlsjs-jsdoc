@@ -21,8 +21,10 @@ var self = this;
           <?js if (item.type === 'module') { ?>
             <span class="type-signature module">module</span>
           <?js } ?>
-          <?js if ((item.type === 'class') && (item.static === true)) { ?>
-            <span class="type-signature static">static</span>
+          <?js if (item.type === 'class') {
+            if(item.static === true) { ?>
+              <span class="type-signature static">static</span>
+            <?js } ?>
           <?js } ?>
         </span>
 
