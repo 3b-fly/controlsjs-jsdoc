@@ -39,21 +39,21 @@ var self = this;
           <?js } ?>
         </ul>
 
-        <ul class="members itemMembers">
-          <?js if (item.members.length) { ?>
-            <span class="subtitle">Members</span>
-              <?js item.members.forEach(function (v) { ?>
-                <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
-              <?js }); ?>
-          <?js } ?>
-        </ul>
-
         <ul class="typedefs itemMembers">
           <?js if (item.typedefs.length) { ?>
             <span class="subtitle">Typedefs</span>
             <?js item.typedefs.forEach(function (v) { ?>
               <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
             <?js }); ?>
+          <?js } ?>
+        </ul>
+
+        <ul class="members itemMembers">
+          <?js if (item.members.length) { ?>
+            <span class="subtitle">Members</span>
+              <?js item.members.forEach(function (v) { ?>
+                <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+              <?js }); ?>
           <?js } ?>
         </ul>
 
