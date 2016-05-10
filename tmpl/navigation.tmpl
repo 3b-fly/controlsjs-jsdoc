@@ -31,7 +31,8 @@ var self = this;
         <ul class="members itemMembers">
           <?js if (item.properties && item.properties.length) { ?>
             <span class="subtitle">Properties</span>
-              <?js item.properties.forEach(function (p) { ?>
+              <?js item.properties.forEach(function (p) {
+                if(!p){ return; } ?>
                 <li data-name="<?js= p.name ?>">
                   <?js= self.linkto(item.longname, p.name, undefined, 'property:'+p.name) ?>
                 </li>

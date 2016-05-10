@@ -1,0 +1,63 @@
+<?js
+    var props = obj.props;
+    var propLevel = obj.prop_level;
+    var hasDefault = obj.has_default;
+    var hasName = obj.has_name;
+
+    /* sort subprops under their parent props (like opts.classname) */
+    var parentProp = null;
+    props.forEach(function(prop, i) {
+        if (!prop) { return; }
+        if ( parentProp && prop.name && prop.name.indexOf(parentProp.name + '.') === 0 ) {
+            prop.name = prop.name.substr(parentProp.name.length+1);
+
+            if(!parentProp.subprops){
+                parentProp.subprops = {
+                    props: [],
+                    prop_level: propLevel+1,
+                    has_default: hasDefault,
+                    has_name: hasName
+                };
+            }
+
+            parentProp.subprops.props.push(prop);
+            props[i] = null;
+        }
+        else {
+            parentProp = prop;
+        }
+    });
+
+    var self = this;
+    props.forEach(function(prop) {
+        if (!prop) { return; }
+?>
+
+    <tr id="property:<?js= prop.longname ?>" class="subprop subrowlevel_<?js= propLevel ?>">
+        <?js if (hasName) {?>
+            <td class="name">
+              <span class="param-name"><?js= prop.name ?></span>
+            </td>
+        <?js } ?>
+
+        <td class="type">
+        <?js if (prop.type && prop.type.names) {?>
+            <?js= self.partial('type.tmpl', prop.type.names) ?>
+        <?js } ?>
+        </td>
+
+        <?js if (hasDefault) {?>
+            <td class="default">
+            <?js if (typeof prop.defaultvalue !== 'undefined') { ?>
+                <?js= self.htmlsafe(prop.defaultvalue) ?>
+            <?js } ?>
+            </td>
+        <?js } ?>
+
+        <td class="description last"><?js= prop.description ?></td>
+    </tr>
+    <?js if (prop.subprops) { ?>
+        <?js= self.partial('subproperties.tmpl', prop.subprops) ?>
+    <?js } ?>
+
+<?js }); ?>

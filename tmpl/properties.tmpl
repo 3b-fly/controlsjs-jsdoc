@@ -1,34 +1,38 @@
 <?js
     var props = obj;
 
+    /* determine if we need extra columns, "attributes" and "default" */
+    var hasDefault = false;
+    var hasName = false;
+
+    props.forEach(function(prop) {
+        if (!prop) { return; }
+        if (prop.name) { hasName = true; }
+        if (typeof prop.defaultvalue !== 'undefined') { hasDefault = true; }
+    });
+
     /* sort subprops under their parent props (like opts.classname) */
     var parentProp = null;
     props.forEach(function(prop, i) {
         if (!prop) { return; }
+        prop.longname = prop.name;
         if ( parentProp && prop.name && prop.name.indexOf(parentProp.name + '.') === 0 ) {
             prop.name = prop.name.substr(parentProp.name.length+1);
-            parentProp.subprops = parentProp.subprops || [];
-            parentProp.subprops.push(prop);
+
+            if(!parentProp.subprops){
+                parentProp.subprops = {
+                    props: [],
+                    prop_level: 1,
+                    has_default: hasDefault,
+                    has_name: hasName
+                };
+            }
+
+            parentProp.subprops.props.push(prop);
             props[i] = null;
         }
         else {
             parentProp = prop;
-        }
-    });
-
-    /* determine if we need extra columns, "attributes" and "default" */
-    props.hasDefault = false;
-    props.hasName = false;
-
-    props.forEach(function(prop) {
-        if (!prop) { return; }
-
-        if (prop.name) {
-            props.hasName = true;
-        }
-
-        if (typeof prop.defaultvalue !== 'undefined') {
-            props.hasDefault = true;
         }
     });
 ?>
@@ -36,13 +40,13 @@
 <table class="props">
     <thead>
 	<tr>
-		<?js if (props.hasName) {?>
+		<?js if (hasName) {?>
 		<th>Name</th>
 		<?js } ?>
 
 		<th>Type</th>
 
-		<?js if (props.hasDefault) {?>
+		<?js if (hasDefault) {?>
 		<th>Default</th>
 		<?js } ?>
 
@@ -57,8 +61,8 @@
 	        if (!prop) { return; }
 	?>
 
-        <tr id="property:<?js= prop.name ?>">
-            <?js if (props.hasName) {?>
+        <tr id="property:<?js= prop.longname ?>">
+            <?js if (hasName) {?>
                 <td class="name">
                   <span class="param-name"><?js= prop.name ?></span>
                 </td>
@@ -70,7 +74,7 @@
             <?js } ?>
             </td>
 
-            <?js if (props.hasDefault) {?>
+            <?js if (hasDefault) {?>
                 <td class="default">
                 <?js if (typeof prop.defaultvalue !== 'undefined') { ?>
                     <?js= self.htmlsafe(prop.defaultvalue) ?>
@@ -78,10 +82,11 @@
                 </td>
             <?js } ?>
 
-            <td class="description last"><?js= prop.description ?><?js if (prop.subprops) { ?>
-                <h6>Properties</h6><?js= self.partial('properties.tmpl', prop.subprops) ?>
-            <?js } ?></td>
+            <td class="description last"><?js= prop.description ?></td>
         </tr>
+        <?js if (prop.subprops) { ?>
+            <?js= self.partial('subproperties.tmpl', prop.subprops) ?>
+        <?js } ?>
 
 	<?js }); ?>
 	</tbody>

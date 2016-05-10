@@ -415,8 +415,32 @@ li {
   font-size: 90%;
   color: #c7254e;
   white-space: nowrap;
-  background-color: #f9f2f4;
+  background-color: #f9dde5;
   border-radius: 4px;
+}
+.main table .subrowlevel_1 .name span {
+  margin-left: 30px;
+  color: #f9dde5;
+  background-color: #c7254e;
+}
+.main table .subrowlevel_2 .name span {
+  margin-left: 60px;
+}
+.main table .subrowlevel_3 .name span {
+  margin-left: 90px;
+  color: #f9dde5;
+  background-color: #c7254e;
+}
+.main table .subrowlevel_4 .name span {
+  margin-left: 120px;
+}
+.main table .subrowlevel_5 .name span {
+  margin-left: 150px;
+  color: #f9dde5;
+  background-color: #c7254e;
+}
+.main table .subrowlevel_6 .name span {
+  margin-left: 180px;
 }
 .main table .type {
   width: 120px;
