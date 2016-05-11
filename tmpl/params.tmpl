@@ -1,39 +1,43 @@
 <?js
     var params = obj;
 
+    /* determine if we need extra columns, "attributes" and "default" */
+    var hasAttributes = false;
+    var hasDefault = false;
+    var hasName = false;
+
+    params.forEach(function(param) {
+        if (!param) { return; }
+        if (param.name) { hasName = true; }
+        if (typeof param.defaultvalue !== 'undefined') { hasDefault = true; }
+        if (param.optional || param.nullable || param.variable) {
+            hasAttributes = true;
+        }
+    });
+
     /* sort subparams under their parent params (like opts.classname) */
     var parentParam = null;
     params.forEach(function(param, i) {
         if (!param) { return; }
+        param.longname = param.name;
         if ( parentParam && param.name && param.name.indexOf(parentParam.name + '.') === 0 ) {
             param.name = param.name.substr(parentParam.name.length+1);
-            parentParam.subparams = parentParam.subparams || [];
-            parentParam.subparams.push(param);
+
+            if(!parentParam.subparams){
+                parentParam.subparams = {
+                    params: [],
+                    param_level: 1,
+                    has_attributes: hasAttributes,
+                    has_default: hasDefault,
+                    has_name: hasName
+                };
+            }
+
+            parentParam.subparams.params.push(param);
             params[i] = null;
         }
         else {
             parentParam = param;
-        }
-    });
-
-    /* determine if we need extra columns, "attributes" and "default" */
-    params.hasAttributes = false;
-    params.hasDefault = false;
-    params.hasName = false;
-
-    params.forEach(function(param) {
-        if (!param) { return; }
-
-        if (param.optional || param.nullable || param.variable) {
-            params.hasAttributes = true;
-        }
-
-        if (param.name) {
-            params.hasName = true;
-        }
-
-        if (typeof param.defaultvalue !== 'undefined') {
-            params.hasDefault = true;
         }
     });
 ?>
@@ -41,13 +45,13 @@
 <table class="params">
     <thead>
 	<tr>
-		<?js if (params.hasName) {?>
+		<?js if (hasName) {?>
 		<th>Name</th>
 		<?js } ?>
 
 		<th>Type</th>
 
-		<?js if (params.hasDefault) {?>
+		<?js if (hasDefault) {?>
 		<th>Default</th>
 		<?js } ?>
 
@@ -63,7 +67,7 @@
 	?>
 
         <tr>
-            <?js if (params.hasName) {?>
+            <?js if (hasName) {?>
                 <td class="name">
                   <span class="param-name"><?js= param.name ?></span>
                 </td>
@@ -75,7 +79,7 @@
             <?js } ?>
             </td>
 
-            <?js if (params.hasDefault) {?>
+            <?js if (hasDefault) {?>
                 <td class="default">
                 <?js if (typeof param.defaultvalue !== 'undefined') { ?>
                     <?js= self.htmlsafe(param.defaultvalue) ?>
@@ -84,7 +88,7 @@
             <?js } ?>
 
             <td class="description last">
-                <?js if (params.hasAttributes) {?>
+                <?js if (hasAttributes) {?>
                     <?js if (param.optional) { ?>
                         <span class="optional">optional</span>
                     <?js } ?>
@@ -96,10 +100,12 @@
                         <span class="repeatable">repeatable</span>
                     <?js } ?>
                 <?js } ?>
-                <?js= param.description ?><?js if (param.subparams) { ?>
-                <?js= self.partial('params.tmpl', param.subparams) ?>
-            <?js } ?></td>
+                <?js= param.description ?>
+            </td>
         </tr>
+        <?js if (param.subparams) { ?>
+            <?js= self.partial('subparams.tmpl', param.subparams) ?>
+        <?js } ?>
 
 	<?js }); ?>
 	</tbody>

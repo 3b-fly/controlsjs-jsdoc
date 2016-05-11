@@ -1,0 +1,79 @@
+<?js
+    var params = obj.params;
+    var paramLevel = obj.param_level;
+    var hasAttributes = obj.has_attributes;
+    var hasDefault = obj.has_default;
+    var hasName = obj.has_name;
+
+    /* sort subparams under their parent params (like opts.classname) */
+    var parentParam = null;
+    params.forEach(function(param, i) {
+        if (!param) { return; }
+        if ( parentParam && param.name && param.name.indexOf(parentParam.name + '.') === 0 ) {
+            param.name = param.name.substr(parentParam.name.length+1);
+
+            if(!parentParam.subparams){
+                parentParam.subparams = {
+                    params: [],
+                    param_level: paramLevel+1,
+                    has_attributes: hasAttributes,
+                    has_default: hasDefault,
+                    has_name: hasName
+                };
+            }
+
+            parentParam.subparams.params.push(param);
+            params[i] = null;
+        }
+        else {
+            parentParam = param;
+        }
+    });
+
+    var self = this;
+    params.forEach(function(param) {
+        if (!param) { return; }
+?>
+
+    <tr id="param:<?js= param.longname ?>" class="subparam subrowlevel_<?js= paramLevel ?>">
+        <?js if (hasName) {?>
+            <td class="name">
+              <span class="param-name"><?js= param.name ?></span>
+            </td>
+        <?js } ?>
+
+        <td class="type">
+        <?js if (param.type && param.type.names) {?>
+            <?js= self.partial('type.tmpl', param.type.names) ?>
+        <?js } ?>
+        </td>
+
+        <?js if (hasDefault) {?>
+            <td class="default">
+            <?js if (typeof param.defaultvalue !== 'undefined') { ?>
+                <?js= self.htmlsafe(param.defaultvalue) ?>
+            <?js } ?>
+            </td>
+        <?js } ?>
+
+        <td class="description last">
+            <?js if (hasAttributes) {?>
+                <?js if (param.optional) { ?>
+                    <span class="optional">optional</span>
+                <?js } ?>
+                <?js if (param.nullable) { ?>
+                    <span class="nullable">nullable</span>
+                <?js } ?>
+
+                <?js if (param.variable) { ?>
+                    <span class="repeatable">repeatable</span>
+                <?js } ?>
+            <?js } ?>
+            <?js= param.description ?>
+        </td>
+    </tr>
+    <?js if (param.subparams) { ?>
+        <?js= self.partial('subparams.tmpl', param.subparams) ?>
+    <?js } ?>
+
+<?js }); ?>
