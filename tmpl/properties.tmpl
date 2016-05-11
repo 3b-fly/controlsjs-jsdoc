@@ -1,7 +1,9 @@
 <?js
     var props = obj;
+    var parentKind = props.parentKind;
 
     /* determine if we need extra columns, "attributes" and "default" */
+    var hasAttributes = false;
     var hasDefault = false;
     var hasName = false;
 
@@ -9,6 +11,12 @@
         if (!prop) { return; }
         if (prop.name) { hasName = true; }
         if (typeof prop.defaultvalue !== 'undefined') { hasDefault = true; }
+        if (
+            prop.optional && parentKind
+            && ((parentKind === 'typedef') || (parentKind === 'interface'))
+        ) {
+          hasAttributes = true;
+        }
     });
 
     /* sort subprops under their parent props (like opts.classname) */
@@ -23,6 +31,7 @@
                 parentProp.subprops = {
                     props: [],
                     prop_level: 1,
+                    has_attributes: hasAttributes,
                     has_default: hasDefault,
                     has_name: hasName
                 };
@@ -37,7 +46,7 @@
     });
 ?>
 
-<table class="props">
+<table class="props" my="test">
     <thead>
 	<tr>
 		<?js if (hasName) {?>
@@ -60,7 +69,6 @@
 	    props.forEach(function(prop) {
 	        if (!prop) { return; }
 	?>
-
         <tr id="property:<?js= prop.longname ?>">
             <?js if (hasName) {?>
                 <td class="name">
@@ -82,9 +90,17 @@
                 </td>
             <?js } ?>
 
-            <td class="description last"><?js= prop.description ?></td>
+            <td class="description last">
+              <?js if (hasAttributes) {?>
+                  <?js if (prop.optional) { ?>
+                    <span class="optional">optional</span>
+                  <?js } ?>
+
+              <?js } ?>
+              <?js= prop.description ?>
+            </td>
         </tr>
-        <?js if (prop.subprops) { ?>
+        <?js if (prop.subprops && false) { ?>
             <?js= self.partial('subproperties.tmpl', prop.subprops) ?>
         <?js } ?>
 

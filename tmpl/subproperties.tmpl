@@ -1,6 +1,7 @@
 <?js
     var props = obj.props;
     var propLevel = obj.prop_level;
+    var hasAttributes = obj.has_attributes;
     var hasDefault = obj.has_default;
     var hasName = obj.has_name;
 
@@ -15,6 +16,7 @@
                 parentProp.subprops = {
                     props: [],
                     prop_level: propLevel+1,
+                    has_attributes: hasAttributes,
                     has_default: hasDefault,
                     has_name: hasName
                 };
@@ -54,7 +56,14 @@
             </td>
         <?js } ?>
 
-        <td class="description last"><?js= prop.description ?></td>
+        <td class="description last">
+          <?js if (hasAttributes) {?>
+              <?js if (prop.optional) { ?>
+                <span class="optional">optional</span>
+              <?js } ?>
+          <?js } ?>
+          <?js= prop.description ?>
+        </td>
     </tr>
     <?js if (prop.subprops) { ?>
         <?js= self.partial('subproperties.tmpl', prop.subprops) ?>
