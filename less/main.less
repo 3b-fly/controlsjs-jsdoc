@@ -95,8 +95,8 @@
     position: relative;
     display: inline-block;
     border-radius: 3px;
-    background-color: @colorSubtitle !important;
-    color: #fff;
+    background-color: #779c34 !important;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
@@ -108,11 +108,26 @@
     display: inline-block;
     border-radius: 3px;
     background-color: #d96629 !important;
-    color: #fff;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
     top: -2px;
+  }
+
+  span.inherited,
+  span.overrides{
+    position: relative;
+    display: inline-block;
+    border-radius: 3px;
+    background-color: #888888 !important;
+    font-size: 11px;
+    padding: 2px 5px;
+    margin-right: 5px;
+    top: -2px;
+    a{
+      color: #ffffff;
+    }
   }
 
   span.string{
@@ -120,7 +135,7 @@
     display: inline-block;
     border-radius: 3px;
     background-color: #888888 !important;
-    color: #fff;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
@@ -129,12 +144,13 @@
 
   span.number,
   span.integer,
-  span.float{
+  span.float,
+  span.boolean{
     position: relative;
     display: inline-block;
     border-radius: 3px;
     background-color: #888888 !important;
-    color: #fff;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
@@ -145,20 +161,8 @@
     position: relative;
     display: inline-block;
     border-radius: 3px;
-    background-color: @colorLink !important;
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 8px;
-    top: -2px;
-  }
-
-  span.boolean{
-   position: relative;
-    display: inline-block;
-    border-radius: 3px;
-    background-color: @colorRed !important;
-    color: #fff;
+    background-color: #2a6496 !important;
+    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
@@ -168,7 +172,7 @@
   .subsection-title{
     font-size: 16px;
     margin-top: 30px;
-    color: @colorSubtitle;
+    color: #779c34;
   }
 
   .subsection-list{
@@ -212,8 +216,8 @@
     position: relative;
     display: inline-block;
     border-radius: 3px;
-    background-color: @colorLink;
-    color: #fff;
+    background-color: #2a6496;
+    color: #ffffff;
     font-size: 10px;
     padding: 2px 5px;
     top: -2px;
@@ -225,8 +229,8 @@
   }
 
   .important{
-    background-color: @colorRed;
-    color: #fff;
+    background-color: #D99B28;
+    color: #333333;
     padding: 2px 5px;
     border-radius: 3px;
   }
@@ -236,21 +240,6 @@
     margin-top: 20px;
     padding-top: 5px;
     border-top: 1px solid #e1e1e1;
-
-    .inherited{
-      position: relative;
-      display: inline-block;
-      border-radius: 3px;
-      background-color: #888 !important;
-      font-size: 11px;
-      padding: 2px 5px;
-      margin-right: 5px;
-      top: -2px;
-
-      a{
-        color: #fff;
-      }
-    }
 
     .tag-source{
       position: absolute;
@@ -277,7 +266,7 @@
       }
 
       .type-signature.type a{
-        color: #fff;
+        color: #ffffff;
       }
     }
   }
@@ -337,7 +326,7 @@
       span{
         margin-left: 30px;
         color: #f9dde5;
-        background-color: #c7254e;
+        background-color: #cb607b;
       }
     }
     .subrowlevel_2 .name{
@@ -349,7 +338,7 @@
       span{
         margin-left: 90px;
         color: #f9dde5;
-        background-color: #c7254e;
+        background-color: #cb607b;
       }
     }
     .subrowlevel_4 .name{
@@ -361,7 +350,7 @@
       span{
         margin-left: 150px;
         color: #f9dde5;
-        background-color: #c7254e;
+        background-color: #cb607b;
       }
     }
     .subrowlevel_6 .name{
@@ -372,13 +361,13 @@
 
     .type{
       width: 120px;
-      color: #aaa;
+      color: #aaaaaa;
       font-size: 12px;
     }
 
     .attributes{
       width: 120px;
-      color: #aaa;
+      color: #aaaaaa;
       font-size: 12px;
     }
 
@@ -399,7 +388,7 @@
     .optional{
       float: left;
       border-radius: 3px;
-      background-color: #ddd !important;
+      background-color: #dddddd !important;
       font-size: 10px;
       padding: 2px 4px;
       margin-right: 5px;

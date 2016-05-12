@@ -1,11 +1,19 @@
 <?js
 var data = obj;
 var self = this;
+
 ?>
 <dt>
-    <div class="nameContainer<?js if (data.inherited) { ?> inherited<?js } ?>">
+    <?js
+        var cl = '';
+        if(data.overrides){cl = ' overrides';}
+        else if(data.inherited || data.inherits){cl = ' inherited';}
+    ?>
+    <div class="nameContainer<?js= cl ?>">
         <h4 class="name" id="<?js= id ?>">
-            <?js if (data.inherited || data.inherits) { ?>
+            <?js if (data.overrides) { ?>
+                <span class="overrides"><?js= this.linkto(data.overrides, 'overrides') ?></span>
+            <?js } else if (data.inherited || data.inherits) { ?>
                 <span class="inherited"><?js= this.linkto(data.inherits, 'inherited') ?></span>
             <?js } ?>
             <?js= data.attribs + ((kind === 'class' && !data.static) ? 'new ' : '') + (data.scope === 'static' ? longname : name) + (data.signature ? data.signature : '') ?>
