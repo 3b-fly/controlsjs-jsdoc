@@ -48,6 +48,12 @@ You can set options for customizing your documentations.
 }
 ```
 
+Plugins
+---
+You can add new plugins located in plugins directory into your JSDoc configuration to use new tags:
+- @class-static
+- @event-function
+
 License
 ---
 This project under the MIT License. and this project refered by default template for JSDoc 3.
