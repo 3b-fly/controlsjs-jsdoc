@@ -11,7 +11,7 @@
     <?js= self.partial('file.tmpl', doc) ?>
 <?js } else { ?>
 
-<section>
+<section class="kind-<?js= doc.kind.toLowerCase() ?>">
 
 <header>
     <h2><?js if (doc.ancestors && doc.ancestors.length) { ?>
