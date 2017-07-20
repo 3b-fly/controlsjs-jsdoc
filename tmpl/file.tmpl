@@ -1,0 +1,40 @@
+<?js
+var data = obj;
+var self = this;
+?>
+
+<section class="kind-file">
+
+<header>
+    <h2><?js= data.name ?></h2>
+</header>
+
+<article>
+    <div class="container-overview">
+
+    <?js if (data.description) { ?>
+        <div class="description"><?js= data.description ?></div>
+    <?js } ?>
+
+    <?js= self.partial('details.tmpl', data) ?>
+
+    </div>
+
+    <?js if (data.requires && data.requires.length) { ?>
+
+        <dl class="details">
+            <dt class="tag-requires">Requires:</dt>
+            <dd class="tag-requires">
+                <ul class="dummy">
+                    <?js data.requires.forEach(function(r) { ?>
+                        <li><?js= self.linkto(r, r) ?></li>
+                    <?js }); ?>
+                </ul>
+            </dd>
+        </dl>
+
+    <?js } ?>
+
+</article>
+
+</section>
