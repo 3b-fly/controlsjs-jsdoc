@@ -201,7 +201,7 @@ li {
 .main h4.name span.arrow-right {
   display: inline-block;
   vertical-align: middle;
-  margin: 0px 7px;
+  margin: -2px 7px 0px 7px;
   color: #808080;
 }
 .main h4.name span.arrow-right:empty {
