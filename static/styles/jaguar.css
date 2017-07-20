@@ -184,6 +184,17 @@ li {
   font-size: 12px;
   margin-left: 0px;
 }
+.main h2.name span.type-signature {
+  font-weight: normal;
+  top: -5px;
+}
+.main h2.name span.type {
+  margin-left: 5px;
+}
+.main h4.name span.type-signature {
+  font-weight: normal;
+  top: -2px;
+}
 .main h4.name span.type {
   margin-left: 5px;
 }
@@ -205,79 +216,49 @@ li {
   color: #808080 !important;
   font-weight: normal !important;
 }
-.main span.static {
+.main span.type-signature {
   position: relative;
   display: inline-block;
   border-radius: 3px;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 8px;
+}
+.main span.static {
   background-color: #779c34 !important;
   color: #ffffff;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 8px;
-  top: -2px;
 }
 .main span.abstract {
-  position: relative;
-  display: inline-block;
-  border-radius: 3px;
   background-color: #d96629 !important;
   color: #ffffff;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 8px;
-  top: -2px;
 }
 .main span.inherited,
 .main span.overrides {
-  position: relative;
-  display: inline-block;
-  border-radius: 3px;
   background-color: #888888 !important;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 5px;
-  top: -2px;
 }
 .main span.inherited a,
 .main span.overrides a {
   color: #ffffff;
 }
 .main span.string {
-  position: relative;
-  display: inline-block;
-  border-radius: 3px;
   background-color: #888888 !important;
   color: #ffffff;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 8px;
-  top: -2px;
 }
 .main span.number,
 .main span.integer,
 .main span.float,
 .main span.boolean {
-  position: relative;
-  display: inline-block;
-  border-radius: 3px;
   background-color: #888888 !important;
   color: #ffffff;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 8px;
-  top: -2px;
 }
 .main span.object,
 .main span.array {
-  position: relative;
-  display: inline-block;
-  border-radius: 3px;
   background-color: #2a6496 !important;
   color: #ffffff;
-  font-size: 11px;
-  padding: 2px 5px;
-  margin-right: 8px;
-  top: -2px;
+}
+.main span.namespace {
+  background-color: #808080 !important;
+  color: #ffffff;
 }
 .main .subsection-title {
   font-size: 16px;

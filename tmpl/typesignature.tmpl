@@ -1,0 +1,15 @@
+<?js
+var data = obj;
+var self = this;
+?>
+
+<?js function typeSignature(name) { ?>
+  <span class="type-signature type <?js= name.toLowerCase() ?>">
+      <?js= self.linkto(name, self.htmlsafe(name)) ?>
+  </span>
+<?js }; ?>
+
+<?js
+if (data.kind === 'namespace'){ typeSignature(data.kind); }
+else if (data.type && data.type.names) { data.type.names.forEach(typeSignature); }
+?>

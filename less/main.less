@@ -63,7 +63,24 @@
     margin-left: 0px;
   }
 
+  h2.name{
+
+    span.type-signature{
+      font-weight: normal;
+      top: -5px;
+    }
+
+    span.type{
+      margin-left: 5px;
+    }
+  }
+
   h4.name{
+
+    span.type-signature{
+      font-weight: normal;
+      top: -2px;
+    }
 
     span.type{
       margin-left: 5px;
@@ -91,82 +108,54 @@
     }
   }
 
-  span.static{
+  span.type-signature{
     position: relative;
     display: inline-block;
     border-radius: 3px;
-    background-color: #779c34 !important;
-    color: #ffffff;
     font-size: 11px;
     padding: 2px 5px;
     margin-right: 8px;
-    top: -2px;
+  }
+
+  span.static{
+    background-color: #779c34 !important;
+    color: #ffffff;
   }
 
   span.abstract{
-    position: relative;
-    display: inline-block;
-    border-radius: 3px;
     background-color: #d96629 !important;
     color: #ffffff;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 8px;
-    top: -2px;
   }
 
   span.inherited,
   span.overrides{
-    position: relative;
-    display: inline-block;
-    border-radius: 3px;
     background-color: #888888 !important;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 5px;
-    top: -2px;
     a{
       color: #ffffff;
     }
   }
 
   span.string{
-    position: relative;
-    display: inline-block;
-    border-radius: 3px;
     background-color: #888888 !important;
     color: #ffffff;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 8px;
-    top: -2px;
   }
 
   span.number,
   span.integer,
   span.float,
   span.boolean{
-    position: relative;
-    display: inline-block;
-    border-radius: 3px;
     background-color: #888888 !important;
     color: #ffffff;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 8px;
-    top: -2px;
   }
 
   span.object,span.array{
-    position: relative;
-    display: inline-block;
-    border-radius: 3px;
     background-color: #2a6496 !important;
     color: #ffffff;
-    font-size: 11px;
-    padding: 2px 5px;
-    margin-right: 8px;
-    top: -2px;
+  }
+
+  span.namespace{
+    background-color: #808080 !important;
+    color: #ffffff;
   }
 
   .subsection-title{
