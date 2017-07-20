@@ -186,7 +186,7 @@ li {
 }
 .main h2.name span.type-signature {
   font-weight: normal;
-  top: -5px;
+  top: -3px;
 }
 .main h2.name span.type {
   margin-left: 5px;
@@ -222,7 +222,7 @@ li {
   border-radius: 3px;
   font-size: 11px;
   padding: 2px 5px;
-  margin-right: 8px;
+  margin-right: 5px;
 }
 .main span.static {
   background-color: #779c34 !important;
@@ -238,6 +238,8 @@ li {
 }
 .main span.inherited a,
 .main span.overrides a {
+  position: relative;
+  top: 1px;
   color: #ffffff;
 }
 .main span.string {

@@ -12,9 +12,13 @@ var self = this;
     <div class="nameContainer<?js= cl ?>">
         <h4 class="name" id="<?js= id ?>">
             <?js if (data.overrides) { ?>
-                <span class="overrides"><?js= this.linkto(data.overrides, 'overrides') ?></span>
+                <span class="type-signature overrides">
+                    <?js= this.linkto(data.overrides, 'overrides') ?>
+                </span>
             <?js } else if (data.inherited || data.inherits) { ?>
-                <span class="inherited"><?js= this.linkto(data.inherits, 'inherited') ?></span>
+                <span class="type-signature inherited">
+                    <?js= this.linkto(data.inherits, 'inherited') ?>
+                </span>
             <?js } ?>
             <?js= data.attribs + ((kind === 'class' && !data.static) ? 'new ' : '') + (data.scope === 'static' ? longname : name) + (data.signature ? data.signature : '') ?>
         </h4>
