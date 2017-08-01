@@ -267,6 +267,9 @@ li {
   margin-top: 30px;
   color: #779c34;
 }
+.main .subsection-list {
+  font-size: 12px;
+}
 .main .description {
   margin: 10px 0px;
   font-size: 13px;
@@ -316,7 +319,7 @@ li {
 }
 .main .nameContainer {
   position: relative;
-  margin-top: 20px;
+  margin-top: 10px;
   padding-top: 5px;
   border-top: 1px solid #e1e1e1;
 }
