@@ -51,6 +51,7 @@ var self = this;
         <?js= this.partial('params.tmpl', params) ?>
     <?js } ?>
 
+    <?js= this.partial('properties.tmpl', data) ?>
     <?js= this.partial('details.tmpl', data) ?>
 
     <?js if (data.fires && fires.length) { ?>

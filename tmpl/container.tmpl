@@ -41,6 +41,7 @@
             <div class="description"><?js= doc.description ?></div>
         <?js } ?>
 
+        <?js= self.partial('properties.tmpl', doc) ?>
         <?js= self.partial('details.tmpl', doc) ?>
 
         <?js if (doc.examples && doc.examples.length) { ?>
