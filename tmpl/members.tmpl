@@ -26,9 +26,9 @@ var self = this;
     <?js= self.partial('details.tmpl', data) ?>
 
     <?js if (data.examples && examples.length) { ?>
-        <h5 class="subsection-title">
+        <h3 class="subsection-title">
             Example<?js= examples.length > 1? 's':'' ?>
-        </h5>
+        </h3>
         <?js= self.partial('examples.tmpl', examples) ?>
     <?js } ?>
 </dd>
