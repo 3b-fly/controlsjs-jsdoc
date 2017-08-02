@@ -51,8 +51,13 @@ You can set options for customizing your documentations.
 Plugins
 ---
 You can add new plugins located in plugins directory into your JSDoc configuration to use new tags:
-- @class-static
-- @event-function
+* class-static.js
+  * @class-static (single)
+* class-static.js
+  * @event-function (single)
+* controlsjs-lib.js
+  * @controlsjs-library (single)
+  * @controlsjs-package (multiple)
 
 License
 ---
