@@ -43,7 +43,6 @@ function needsSignature(doclet) {
     if (
         (doclet.kind === 'function')
         || ((doclet.kind === 'class') && (doclet.static !== true))
-        || ((doclet.kind === 'event') && doclet.is_function)
     ) {
         needsSig = true;
     }
@@ -195,14 +194,6 @@ function attachModuleSymbols(doclets, modules) {
 /**
  * Create the navigation sidebar.
  * @param {object} members The members that will be used to create the sidebar.
- * @param {array<object>} members.classes
- * @param {array<object>} members.externals
- * @param {array<object>} members.globals
- * @param {array<object>} members.mixins
- * @param {array<object>} members.modules
- * @param {array<object>} members.namespaces
- * @param {array<object>} members.tutorials
- * @param {array<object>} members.events
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
@@ -224,10 +215,16 @@ function buildNav(members) {
                 }),
                 methods: find({
                     kind: 'function',
+                    callback: {isUndefined: true},
                     memberof: v.longname
                 }),
                 typedefs: find({
                     kind: 'typedef',
+                    memberof: v.longname
+                }),
+                callbacks: find({
+                    kind: 'function',
+                    callback: true,
                     memberof: v.longname
                 }),
                 events: find({
@@ -256,10 +253,16 @@ function buildNav(members) {
                 }),
                 methods: find({
                     kind: 'function',
+                    callback: {isUndefined: true},
                     memberof: v.longname
                 }),
                 typedefs: find({
                     kind: 'typedef',
+                    memberof: v.longname
+                }),
+                callbacks: find({
+                    kind: 'function',
+                    callback: true,
                     memberof: v.longname
                 }),
                 events: find({

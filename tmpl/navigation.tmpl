@@ -76,9 +76,18 @@ var self = this;
         <?js } ?>
         </ul>
 
+        <ul class="callbacks itemMembers">
+          <?js if (item.callbacks.length) { ?>
+            <span class="subtitle">Events</span>
+          <?js item.callbacks.forEach(function (v) { ?>
+            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+          <?js }); ?>
+        <?js } ?>
+        </ul>
+
         <ul class="events itemMembers">
           <?js if (item.events.length) { ?>
-            <span class="subtitle">Events</span>
+            <span class="subtitle">Event objects</span>
           <?js item.events.forEach(function (v) { ?>
             <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
           <?js }); ?>
