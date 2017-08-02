@@ -75,6 +75,8 @@
         <?js }); ?></ul>
     <?js } ?>
 
+    <?js= self.partial('controlsjs.tmpl', doc) ?>
+
     <?js
         var classes = self.find({kind: 'class', memberof: doc.longname});
         if (doc.kind !== 'globalobj' && classes && classes.length) {
