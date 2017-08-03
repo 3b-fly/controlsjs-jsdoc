@@ -9,7 +9,6 @@ var template = require('jsdoc/template'),
     htmlsafe = helper.htmlsafe,
     linkto = helper.linkto,
     resolveAuthorLinks = helper.resolveAuthorLinks,
-    scopeToPunc = helper.scopeToPunc,
     hasOwnProp = Object.prototype.hasOwnProperty,
     data,
     view,
@@ -192,92 +191,6 @@ function attachModuleSymbols(doclets, modules) {
 }
 
 /**
- * Create the navigation sidebar.
- * @param {object} members The members that will be used to create the sidebar.
- * @return {string} The HTML for the navigation sidebar.
- */
-function buildNav(members) {
-    var nav = [];
-
-    if (members.namespaces.length) {
-        _.each(members.namespaces, function (v) {
-            nav.push({
-                type: 'namespace',
-                longname: v.longname,
-                name: v.name,
-                members: find({
-                    kind: 'member',
-                    memberof: v.longname
-                }),
-                interfaces: find({
-                    kind: 'interface',
-                    memberof: v.longname
-                }),
-                methods: find({
-                    kind: 'function',
-                    callback: {isUndefined: true},
-                    memberof: v.longname
-                }),
-                typedefs: find({
-                    kind: 'typedef',
-                    memberof: v.longname
-                }),
-                callbacks: find({
-                    kind: 'function',
-                    callback: true,
-                    memberof: v.longname
-                }),
-                events: find({
-                    kind: 'event',
-                    memberof: v.longname
-                })
-            });
-        });
-    }
-
-    if (members.classes.length) {
-        _.each(members.classes, function (v) {
-            nav.push({
-                type: 'class',
-                static: v.static,
-                longname: v.longname,
-                name: v.name,
-                properties: v.properties,
-                members: find({
-                    kind: 'member',
-                    memberof: v.longname
-                }),
-                interfaces: find({
-                    kind: 'interface',
-                    memberof: v.longname
-                }),
-                methods: find({
-                    kind: 'function',
-                    callback: {isUndefined: true},
-                    memberof: v.longname
-                }),
-                typedefs: find({
-                    kind: 'typedef',
-                    memberof: v.longname
-                }),
-                callbacks: find({
-                    kind: 'function',
-                    callback: true,
-                    memberof: v.longname
-                }),
-                events: find({
-                    kind: 'event',
-                    memberof: v.longname
-                })
-            });
-        });
-    }
-
-    return nav;
-}
-
-
-/**
     @param {TAFFY} taffyData See <http://taffydb.com/>.
     @param {object} opts
     @param {Tutorial} tutorials
@@ -449,10 +362,11 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.resolveAuthorLinks = resolveAuthorLinks;
     view.tutoriallink = tutoriallink;
     view.htmlsafe = htmlsafe;
-    view.members = members; //@davidshimjs: To make navigation for customizing
+    view.members = members;
 
     // once for all
-    view.nav = buildNav(members);
+    var navigation = require("./incl/navigation.js")();
+    view.nav = navigation.buildNav(data,members);
 
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
