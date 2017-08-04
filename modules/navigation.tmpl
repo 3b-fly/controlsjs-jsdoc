@@ -1,5 +1,6 @@
 <?js
-var self = this;
+var data = this;
+console.log(data);
 ?>
 <div class="navigation">
   <h3 class="applicationName"><a href="index.html"><?js= env.conf.templates.applicationName ?></a></h3>
@@ -9,12 +10,12 @@ var self = this;
   </div>
 
   <ul class="list">
-    <?js this.nav.forEach(function (item) { ?>
+    <?js data.forEach(function (item) { ?>
 
       <li class="item" data-name="<?js= item.longname ?>">
 
         <span class="title">
-          <?js= self.linkto(item.longname, item.longname) ?>
+          <?js= data.linkto(item.longname, item.longname) ?>
           <?js if (item.type === 'namespace') { ?>
             <span class="type-signature namespace">namespace</span>
           <?js } ?>
@@ -34,7 +35,7 @@ var self = this;
               <?js item.properties.forEach(function (p) {
                 if(!p){ return; } ?>
                 <li data-name="<?js= p.name ?>">
-                  <?js= self.linkto(item.longname, p.name, undefined, 'property:'+p.name) ?>
+                  <?js= data.linkto(item.longname, p.name, undefined, 'property:'+p.name) ?>
                 </li>
               <?js }); ?>
           <?js } ?>
@@ -44,7 +45,7 @@ var self = this;
           <?js if (item.typedefs.length) { ?>
             <span class="subtitle">Typedefs</span>
             <?js item.typedefs.forEach(function (v) { ?>
-              <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+              <li data-name="<?js= v.longname ?>"><?js= data.linkto(v.longname, v.name) ?></li>
             <?js }); ?>
           <?js } ?>
         </ul>
@@ -53,7 +54,7 @@ var self = this;
           <?js if (item.members.length) { ?>
             <span class="subtitle">Members</span>
               <?js item.members.forEach(function (v) { ?>
-                <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+                <li data-name="<?js= v.longname ?>"><?js= data.linkto(v.longname, v.name) ?></li>
               <?js }); ?>
           <?js } ?>
         </ul>
@@ -62,7 +63,7 @@ var self = this;
           <?js if (item.interfaces.length) { ?>
             <span class="subtitle">Interfaces</span>
           <?js item.interfaces.forEach(function (i) { ?>
-            <li data-name="<?js= i.longname ?>"><?js= self.linkto(i.longname, i.name) ?></li>
+            <li data-name="<?js= i.longname ?>"><?js= data.linkto(i.longname, i.name) ?></li>
           <?js }); ?>
         <?js } ?>
         </ul>
@@ -71,7 +72,7 @@ var self = this;
           <?js if (item.methods.length) { ?>
             <span class="subtitle">Methods</span>
           <?js item.methods.forEach(function (v) { ?>
-            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+            <li data-name="<?js= v.longname ?>"><?js= data.linkto(v.longname, v.name) ?></li>
           <?js }); ?>
         <?js } ?>
         </ul>
@@ -80,7 +81,7 @@ var self = this;
           <?js if (item.callbacks.length) { ?>
             <span class="subtitle">Events</span>
           <?js item.callbacks.forEach(function (v) { ?>
-            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+            <li data-name="<?js= v.longname ?>"><?js= data.linkto(v.longname, v.name) ?></li>
           <?js }); ?>
         <?js } ?>
         </ul>
@@ -89,7 +90,7 @@ var self = this;
           <?js if (item.events.length) { ?>
             <span class="subtitle">Event objects</span>
           <?js item.events.forEach(function (v) { ?>
-            <li data-name="<?js= v.longname ?>"><?js= self.linkto(v.longname, v.name) ?></li>
+            <li data-name="<?js= v.longname ?>"><?js= data.linkto(v.longname, v.name) ?></li>
           <?js }); ?>
         <?js } ?>
         </ul>

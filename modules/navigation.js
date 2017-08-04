@@ -1,9 +1,19 @@
-module.exports = function(){
+module.exports = function(data,members){
   var self = null;
+  var fs = require('fs');
+  var path = require('path');
   var _ = require('underscore');
   var helper = require('jsdoc/util/templateHelper');
 
   self = {
+    _nav: [],
+    _templateFile: null,
+    _fileSettings: {
+      evaluate: /<\?js([\s\S]+?)\?>/g,
+      interpolate: /<\?js=([\s\S]+?)\?>/g,
+      escape: /<\?js~([\s\S]+?)\?>/g
+    },
+
     buildNavMember: function(data,member,type){
       return {
         type: type,
@@ -42,23 +52,38 @@ module.exports = function(){
     },
 
     buildNav: function(data,members){
-      var nav = [];
+      self._nav = [];
 
       if(members.namespaces.length){
         _.each(members.namespaces,function(member){
-          nav.push(self.buildNavMember(data,member,'namespace'));
+          self._nav.push(self.buildNavMember(data,member,'namespace'));
         });
       }
 
       if(members.classes.length){
         _.each(members.classes,function(member){
-          nav.push(self.buildNavMember(data,member,'class'));
+          self._nav.push(self.buildNavMember(data,member,'class'));
         });
       }
+    },
 
-      return nav;
+    loadTemplateFile: function(){
+      if(!self._templateFile){
+        var filePath = path.join(__dirname,'navigation.tmpl');
+        self._templateFile = _.template(
+          fs.readFileSync(filePath,'utf8'),null,self._fileSettings
+        );
+      }
+      return self._templateFile;
+    },
+
+    generate: function(template){
+      self._nav.linkto = template.linkto;
+      return self.loadTemplateFile().call(self._nav);
     }
   };
+
+  if(data && members){self.buildNav(data,members);}
 
   return self;
 };
