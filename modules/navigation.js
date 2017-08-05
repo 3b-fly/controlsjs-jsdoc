@@ -54,6 +54,12 @@ module.exports = function(data,members){
     buildNav: function(data,members){
       self._nav = [];
 
+      if(members.modules.length){
+        _.each(members.modules,function(module){
+          self._nav.push(self.buildNavMember(data,module,'module'));
+        });
+      }
+
       if(members.namespaces.length){
         _.each(members.namespaces,function(member){
           self._nav.push(self.buildNavMember(data,member,'namespace'));

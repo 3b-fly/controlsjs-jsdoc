@@ -1,26 +1,30 @@
 <?js
 var data = this;
-console.log(data);
 ?>
 <div class="navigation">
-  <h3 class="applicationName"><a href="index.html"><?js= env.conf.templates.applicationName ?></a></h3>
+  <h3 class="applicationName">
+    <a href="index.html"><?js= env.conf.templates.applicationName ?></a>
+  </h3>
 
   <div class="search">
     <input id="search" type="text" placeholder="Search Documentations">
   </div>
 
   <ul class="list">
-    <?js data.forEach(function (item) { ?>
-
+    <?js
+      data.forEach(function(item){
+      var navName = item.longname.substring(item.longname.indexOf(':')+1);
+    ?>
       <li class="item" data-name="<?js= item.longname ?>">
 
         <span class="title">
-          <?js= data.linkto(item.longname, item.longname) ?>
-          <?js if (item.type === 'namespace') { ?>
-            <span class="type-signature namespace">namespace</span>
-          <?js } ?>
+          <?js= data.linkto(item.longname,navName) ?>
+
           <?js if (item.type === 'module') { ?>
             <span class="type-signature module">module</span>
+          <?js } ?>
+          <?js if (item.type === 'namespace') { ?>
+            <span class="type-signature namespace">namespace</span>
           <?js } ?>
           <?js if (item.type === 'class') {
             if(item.static === true) { ?>

@@ -111,6 +111,7 @@ li {
   background-color: #779c34;
   color: #000;
 }
+.navigation li.item .title .module,
 .navigation li.item .title .namespace {
   background-color: #808080;
   color: #000;
