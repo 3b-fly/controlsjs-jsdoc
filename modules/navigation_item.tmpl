@@ -1,0 +1,113 @@
+<?js
+  var self = this;
+?>
+
+<li class="item" data-name="<?js= self.data.navname ?>">
+
+  <span class="title">
+    <?js= self.linkto(self.data.longname,self.data.navname) ?>
+
+    <?js if(self.data.type === 'module'){ ?>
+      <span class="type-signature module">module</span>
+    <?js } ?>
+    <?js if(self.data.type === 'namespace'){ ?>
+      <span class="type-signature namespace">namespace</span>
+    <?js } ?>
+    <?js if(self.data.type === 'class'){
+      if(self.data.static === true) { ?>
+        <span class="type-signature static">static</span>
+      <?js } ?>
+    <?js } ?>
+  </span>
+
+  <?js if(self.data.properties && self.data.properties.length){ ?>
+    <ul class="members itemMembers">
+      <span class="subtitle">Properties</span>
+      <?js self.data.properties.forEach(function(v){
+        if(!v){return;} ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= self.linkto(
+            self.data.longname,v.name,undefined,'property:'+v.name
+          ) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.typedefs && self.data.typedefs.length){ ?>
+    <ul class="typedefs itemMembers">
+      <span class="subtitle">Typedefs</span>
+      <?js self.data.typedefs.forEach(function(v){ ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= data.linkto(v.longname,v.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.members && self.data.members.length){ ?>
+    <ul class="members itemMembers">
+      <span class="subtitle">Members</span>
+      <?js self.data.members.forEach(function(v){ ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= self.linkto(v.longname,v.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.interfaces && self.data.interfaces.length){ ?>
+    <ul class="methods itemMembers">
+      <span class="subtitle">Interfaces</span>
+      <?js self.data.interfaces.forEach(function(i){ ?>
+        <li data-name="<?js= i.navname ?>">
+          <?js= self.linkto(i.longname,i.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.methods && self.data.methods.length){ ?>
+    <ul class="methods itemMembers">
+      <span class="subtitle">Methods</span>
+      <?js self.data.methods.forEach(function(v){ ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= self.linkto(v.longname,v.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.callbacks && self.data.callbacks.length){ ?>
+    <ul class="callbacks itemMembers">
+      <span class="subtitle">Events</span>
+      <?js self.data.callbacks.forEach(function(v){ ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= self.linkto(v.longname,v.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.events && self.data.events.length){ ?>
+    <ul class="events itemMembers">
+      <span class="subtitle">Event objects</span>
+      <?js self.data.events.forEach(function(v){ ?>
+        <li data-name="<?js= v.navname ?>">
+          <?js= self.linkto(v.longname,v.name) ?>
+        </li>
+      <?js }); ?>
+    </ul>
+  <?js } ?>
+
+  <?js if(self.data.childitems && self.data.childitems.length){ ?>
+    <ul class="sublist">
+      <?js
+        self.data.childitems.forEach(function(item){
+          print(self.partial('navigation_item.tmpl',item));
+        });
+      ?>
+    </ul>
+  <?js } ?>
+
+</li>

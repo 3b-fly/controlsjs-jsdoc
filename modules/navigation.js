@@ -7,21 +7,49 @@ module.exports = function(data,members){
 
   self = {
     _nav: [],
-    _templateFile: null,
+    _template: null,
+    _fileCache: [],
     _fileSettings: {
       evaluate: /<\?js([\s\S]+?)\?>/g,
       interpolate: /<\?js=([\s\S]+?)\?>/g,
       escape: /<\?js~([\s\S]+?)\?>/g
     },
 
-    buildNavMember: function(data,member,type){
+    addNavName: function(target){
+      if(Array.isArray(target)){
+        _.each(target,function(item){self.addNavName(item);});
+      }
+      else if(target){
+        var name = (target.longname) ? target.longname : target.name;
+        target.navname = (name) ? name.substring(name.indexOf(':')+1) : '';
+      }
+    },
+
+    addNavItemNames: function(item){
+      self.addNavName(item);
+      self.addNavName(item.properties);
+      self.addNavName(item.typedefs);
+      self.addNavName(item.members);
+      self.addNavName(item.interfaces);
+      self.addNavName(item.methods);
+      self.addNavName(item.callbacks);
+      self.addNavName(item.events);
+    },
+
+    buildNavItem: function(data,member,type){
       return {
         type: type,
         name: member.name,
         longname: member.longname,
+        memberof: member.memberof,
         static: member.static,
         properties: member.properties,
+        childitems: [],
 
+        typedefs: helper.find(data,{
+          kind: 'typedef',
+          memberof: member.longname
+        }),
         members: helper.find(data,{
           kind: 'member',
           memberof: member.longname
@@ -33,10 +61,6 @@ module.exports = function(data,members){
         methods: helper.find(data,{
           kind: 'function',
           callback: {isUndefined: true},
-          memberof: member.longname
-        }),
-        typedefs: helper.find(data,{
-          kind: 'typedef',
           memberof: member.longname
         }),
         callbacks: helper.find(data,{
@@ -51,41 +75,70 @@ module.exports = function(data,members){
       };
     },
 
-    buildNav: function(data,members){
-      self._nav = [];
+    buildNavItems: function(data,members){
+      var items = {};
 
       if(members.modules.length){
-        _.each(members.modules,function(module){
-          self._nav.push(self.buildNavMember(data,module,'module'));
+        _.each(members.modules,function(member){
+          items[member.longname] = self.buildNavItem(data,member,'module');
         });
       }
 
       if(members.namespaces.length){
         _.each(members.namespaces,function(member){
-          self._nav.push(self.buildNavMember(data,member,'namespace'));
+          items[member.longname] = self.buildNavItem(data,member,'namespace');
         });
       }
 
       if(members.classes.length){
         _.each(members.classes,function(member){
-          self._nav.push(self.buildNavMember(data,member,'class'));
+          items[member.longname] = self.buildNavItem(data,member,'class');
         });
+      }
+
+      return items;
+    },
+
+    buildNav: function(data,members){
+      self._nav = [];
+      var items = self.buildNavItems(data,members);
+
+      for(var longname in items){
+        var item = items[longname];
+        self.addNavItemNames(item);
+
+        var parentItem = items[item.memberof];
+        if(parentItem){parentItem.childitems.push(item);}
+        else{self._nav.push(item);}
       }
     },
 
-    loadTemplateFile: function(){
-      if(!self._templateFile){
-        var filePath = path.join(__dirname,'navigation.tmpl');
-        self._templateFile = _.template(
-          fs.readFileSync(filePath,'utf8'),null,self._fileSettings
-        );
+    readFile: function(file){
+      if(!self._fileCache[file]){
+        var filePath = path.join(__dirname,file);
+        self._fileCache[file] = fs.readFileSync(filePath,'utf8');
       }
-      return self._templateFile;
+      return self._fileCache[file];
+    },
+
+    callTemplate: function(file,data){
+      file = _.template(self.readFile(file),null,self._fileSettings);
+
+      return file.call({
+        data: data,
+        linkto: self._template.linkto,
+        partial: function(file,data){
+          return self.callTemplate(file,data);
+        },
+        readFile: function(file){
+          return self.readFile(file);
+        }
+      });
     },
 
     generate: function(template){
-      self._nav.linkto = template.linkto;
-      return self.loadTemplateFile().call(self._nav);
+      self._template = template;
+      return self.callTemplate('navigation.tmpl',self._nav);
     }
   };
 

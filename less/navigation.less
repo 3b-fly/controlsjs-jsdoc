@@ -1,15 +1,14 @@
 @import "common.less";
 
 ::-webkit-scrollbar{
-    width: 8px;
-    background-color: transparent;
+  width: 8px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb{
-    background-color: gray;
-    border-radius: 4px;
+  background-color: gray;
+  border-radius: 4px;
 }
-
 .navigation{
   position: fixed;
   float: left;
@@ -18,13 +17,19 @@
   background-color: #1a1a1a;
 
   .applicationName{
-    margin: 0;
-    margin-top: 15px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 10px;
+    margin: 0px;
     padding: 10px 15px;
-    font-size: 18px;
+    font-size: 17px;
+    line-height: 20px;
     font-weight: bold;
     color: #ffffff;
     text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     a{
       outline: 0;
@@ -39,6 +44,10 @@
   }
 
   .search{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 52px;
     padding: 10px 15px;
 
     input{
@@ -49,19 +58,22 @@
       border: 1px solid #555555;
       background-color: #333333;
       color: #fff;
+      display: none;
     }
   }
 
   .list{
-    padding: 10px 15px 0 15px;
-    position: relative;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 112px;
+    bottom: 0px;
     overflow: auto;
+    padding: 0px 15px;
   }
 
   li.item{
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #333;
+    border-top: 1px solid #333;
 
     a{
       outline: 0;
@@ -78,6 +90,8 @@
       position: relative;
       display: block;
       font-size: 13px;
+      padding: 8px 0px;
+      min-height: 17px;
 
       a{
         outline: 0;
@@ -96,7 +110,6 @@
         font-size: 11px;
         padding: 2px 5px;
         float: right;
-        top: -1px;
       }
 
       .static{
@@ -111,23 +124,24 @@
     }
 
     .subtitle{
-      margin-top: 10px;
       font-size: 10px;
       font-weight: bold;
       color: #779c34;
       display: block;
     }
 
-    ul{
-      & > li{
-        font-size: 11px;
-        padding-left: 8px;
+    .itemMembers{
+      margin-bottom: 10px;
+      li{
         margin-top: 2px;
       }
     }
 
-    .itemMembers{
-      display: none;
+    ul{
+      & > li{
+        font-size: 11px;
+        padding-left: 8px;
+      }
     }
   }
 }

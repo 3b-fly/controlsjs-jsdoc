@@ -34,13 +34,19 @@ li {
   background-color: #1a1a1a;
 }
 .navigation .applicationName {
-  margin: 0;
-  margin-top: 15px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 10px;
+  margin: 0px;
   padding: 10px 15px;
-  font-size: 18px;
+  font-size: 17px;
+  line-height: 20px;
   font-weight: bold;
   color: #ffffff;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .navigation .applicationName a {
   outline: 0;
@@ -53,6 +59,10 @@ li {
   text-decoration: underline;
 }
 .navigation .search {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 52px;
   padding: 10px 15px;
 }
 .navigation .search input {
@@ -63,16 +73,19 @@ li {
   border: 1px solid #555555;
   background-color: #333333;
   color: #fff;
+  display: none;
 }
 .navigation .list {
-  padding: 10px 15px 0 15px;
-  position: relative;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 112px;
+  bottom: 0px;
   overflow: auto;
+  padding: 0px 15px;
 }
 .navigation li.item {
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #333;
+  border-top: 1px solid #333;
 }
 .navigation li.item a {
   outline: 0;
@@ -88,6 +101,8 @@ li {
   position: relative;
   display: block;
   font-size: 13px;
+  padding: 8px 0px;
+  min-height: 17px;
 }
 .navigation li.item .title a {
   outline: 0;
@@ -105,7 +120,6 @@ li {
   font-size: 11px;
   padding: 2px 5px;
   float: right;
-  top: -1px;
 }
 .navigation li.item .title .static {
   background-color: #779c34;
@@ -117,19 +131,20 @@ li {
   color: #000;
 }
 .navigation li.item .subtitle {
-  margin-top: 10px;
   font-size: 10px;
   font-weight: bold;
   color: #779c34;
   display: block;
 }
+.navigation li.item .itemMembers {
+  margin-bottom: 10px;
+}
+.navigation li.item .itemMembers li {
+  margin-top: 2px;
+}
 .navigation li.item ul > li {
   font-size: 11px;
   padding-left: 8px;
-  margin-top: 2px;
-}
-.navigation li.item .itemMembers {
-  display: none;
 }
 .main {
   padding: 20px 20px;
