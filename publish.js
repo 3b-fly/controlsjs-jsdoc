@@ -3,7 +3,6 @@ var template = require('jsdoc/template'),
     fs = require('jsdoc/fs'),
     path = require('jsdoc/path'),
     taffy = require('taffydb').taffy,
-    handle = require('jsdoc/util/error').handle,
     helper = require('jsdoc/util/templateHelper'),
     _ = require('underscore'),
     htmlsafe = helper.htmlsafe,
@@ -91,18 +90,6 @@ function addAttribs(f) {
     }
 }
 
-function shortenPaths(files, commonPrefix) {
-    // always use forward slashes
-    var regexp = new RegExp('\\\\', 'g');
-
-    Object.keys(files).forEach(function(file) {
-        files[file].shortened = files[file].resolved.replace(commonPrefix, '')
-            .replace(regexp, '/');
-    });
-
-    return files;
-}
-
 function resolveSourcePath(filepath) {
     return path.resolve(process.cwd(), filepath);
 }
@@ -117,6 +104,21 @@ function getPathFromDoclet(doclet) {
         doclet.meta.filename;
 
     return filepath;
+}
+
+function getLinkPath(tmplConf,sourcePath){
+  var path = null;
+  if(tmplConf.linkPaths && sourcePath){
+    for(var srcPath in tmplConf.linkPaths){
+      var absSrcPath = resolveSourcePath(srcPath);
+      if(sourcePath.substring(0,absSrcPath.length) === absSrcPath){
+        path = tmplConf.linkPaths[srcPath].replace(
+          '%path%',sourcePath.substring(absSrcPath.length+1)
+        );
+      }
+    };
+  }
+  return path;
 }
 
 function generate(title, docs, filename, resolveLinks) {
@@ -139,28 +141,6 @@ function generate(title, docs, filename, resolveLinks) {
     }
 
     fs.writeFileSync(outpath, html, 'utf8');
-}
-
-function generateSourceFiles(sourceFiles) {
-    Object.keys(sourceFiles).forEach(function(file) {
-        var source;
-        // links are keyed to the shortened path in each doclet's `meta.filename` property
-        var sourceOutfile = helper.getUniqueFilename(sourceFiles[file].shortened);
-        helper.registerLink(sourceFiles[file].shortened, sourceOutfile);
-
-        try {
-            source = {
-                kind: 'source',
-                code: helper.htmlsafe( fs.readFileSync(sourceFiles[file].resolved, 'utf8') )
-            };
-        }
-        catch(e) {
-            handle(e);
-        }
-
-        generate('Source: ' + sourceFiles[file].shortened, [source], sourceOutfile,
-            false);
-    });
 }
 
 /**
@@ -198,8 +178,8 @@ function attachModuleSymbols(doclets, modules) {
 exports.publish = function(taffyData, opts, tutorials) {
     data = taffyData;
 
-    var conf = env.conf.templates || {};
-    conf['default'] = conf['default'] || {};
+    var tmplConf = env.conf.templates || {};
+    tmplConf['default'] = tmplConf['default'] || {};
 
     var templatePath = opts.template;
     view = new template.Template(templatePath + '/tmpl');
@@ -249,14 +229,15 @@ exports.publish = function(taffyData, opts, tutorials) {
         }
 
         // build a list of source files
-        var sourcePath;
-        var resolvedSourcePath;
         if (doclet.meta) {
-            sourcePath = getPathFromDoclet(doclet);
-            resolvedSourcePath = resolveSourcePath(sourcePath);
+            var sourcePath = getPathFromDoclet(doclet);
+            var resolvedSourcePath = resolveSourcePath(sourcePath);
+            var linkPath = getLinkPath(tmplConf,sourcePath);
+
             sourceFiles[sourcePath] = {
+                source: sourcePath,
                 resolved: resolvedSourcePath,
-                shortened: null
+                link: linkPath
             };
             sourceFilePaths.push(resolvedSourcePath);
         }
@@ -283,9 +264,9 @@ exports.publish = function(taffyData, opts, tutorials) {
     var staticFilePaths;
     var staticFileFilter;
     var staticFileScanner;
-    if (conf['default'].staticFiles) {
-        staticFilePaths = conf['default'].staticFiles.paths || [];
-        staticFileFilter = new (require('jsdoc/src/filter')).Filter(conf['default'].staticFiles);
+    if (tmplConf['default'].staticFiles) {
+        staticFilePaths = tmplConf['default'].staticFiles.paths || [];
+        staticFileFilter = new (require('jsdoc/src/filter')).Filter(tmplConf['default'].staticFiles);
         staticFileScanner = new (require('jsdoc/src/scanner')).Scanner();
 
         staticFilePaths.forEach(function(filePath) {
@@ -301,21 +282,29 @@ exports.publish = function(taffyData, opts, tutorials) {
         });
     }
 
-    if (sourceFilePaths.length) {
-        sourceFiles = shortenPaths( sourceFiles, path.commonPrefix(sourceFilePaths) );
-    }
+    var commonPrefix = path.commonPrefix(sourceFilePaths);
+
     data().each(function(doclet) {
         var url = helper.createLink(doclet);
         helper.registerLink(doclet.longname, url);
 
-        // replace the filename with a shortened version of the full path
-        var docletPath;
         if (doclet.meta) {
-            docletPath = getPathFromDoclet(doclet);
-            docletPath = sourceFiles[docletPath].shortened;
-            if (docletPath) {
-                doclet.meta.filename = docletPath;
+            var sourceFile = sourceFiles[getPathFromDoclet(doclet)];
+
+            // replace the filename with a shortened version of the full path
+            if(sourceFile.resolved){
+              doclet.meta.filename = sourceFile.resolved
+                .replace(commonPrefix,'')
+                .replace(new RegExp('\\\\','g'), '/');
             }
+
+            // replace link wildcards by doclet meta data
+            if(sourceFile.link){ //TODO
+              doclet.meta.linkpath = sourceFile.link
+                .replace("%lineno%",doclet.meta.lineno)
+                .replace(new RegExp('\\\\','g'), '/');
+            }
+
         }
     });
 
@@ -369,12 +358,6 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
-
-    // only output pretty-printed source files if requested; do this before generating any other
-    // pages, so the other pages can link to the source files
-    if (conf['default'].outputSourceFiles) {
-        generateSourceFiles(sourceFiles);
-    }
 
     if (members.globals.length) { generate('Global', [{kind: 'globalobj'}], globalUrl); }
 

@@ -5,8 +5,6 @@
 
 <?js if (doc.kind === 'mainpage' || (doc.kind === 'package')) { ?>
     <?js= self.partial('mainpage.tmpl', doc) ?>
-<?js } else if (doc.kind === 'source') { ?>
-    <?js= self.partial('source.tmpl', doc) ?>
 <?js } else if (doc.kind === 'file') { ?>
     <?js= self.partial('file.tmpl', doc) ?>
 <?js } else { ?>

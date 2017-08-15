@@ -30,7 +30,6 @@ You can set options for customizing your documentations.
 ```
 "templates": {
     "applicationName": "Demo",
-    "disqus": "",
     "googleAnalytics": "",
     "openGraph": {
         "title": "",
@@ -44,7 +43,9 @@ You can set options for customizing your documentations.
         "description": "",
         "keyword": ""
     },
-    "linenums": true
+    "linkPaths": {
+      "path/to/src/": "https://github.com/author/app/blob/master/src/%path%#L%lineno%"
+    }
 }
 ```
 

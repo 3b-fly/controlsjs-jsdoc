@@ -20,14 +20,21 @@ var self = this;
                     <?js= this.linkto(data.inherits, 'inherited') ?>
                 </span>
             <?js } ?>
-            <?js= data.attribs + ((kind === 'class' && !data.static) ? 'new ' : '') + (data.scope === 'static' ? longname : name) + (data.signature ? data.signature : '') ?>
+            <?js= data.attribs
+                + ((kind === 'class' && !data.static) ? 'new ' : '')
+                + (data.scope === 'static' ? longname : name)
+                + (data.signature ? data.signature : '') ?>
         </h4>
 
-        <?js if (data.meta) {?>
-        <div class="tag-source">
-            <?js= self.linkto(meta.filename) ?>, <?js= self.linkto(meta.filename, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
-        </div>
+        <?js if(data.meta && data.meta.linkpath){ ?>
+          <div class="tag-source">
+            <?js= self.linkto(
+              data.meta.linkpath,
+              data.meta.filename+', line '+data.meta.lineno
+            ) ?>
+          </div>
         <?js } ?>
+
     </div>
 
     <?js if (data.summary) { ?>
