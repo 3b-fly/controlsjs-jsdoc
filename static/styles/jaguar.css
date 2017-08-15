@@ -240,41 +240,41 @@ li {
   padding: 2px 5px;
   margin-right: 5px;
 }
-.main span.static {
+.main span.type-signature.static {
   background-color: #779c34 !important;
   color: #ffffff;
 }
-.main span.abstract {
+.main span.type-signature.abstract {
   background-color: #d96629 !important;
   color: #ffffff;
 }
-.main span.inherited,
-.main span.overrides {
+.main span.type-signature.inherited,
+.main span.type-signature.overrides {
   background-color: #888888 !important;
 }
-.main span.inherited a,
-.main span.overrides a {
+.main span.type-signature.inherited a,
+.main span.type-signature.overrides a {
   position: relative;
   top: 1px;
   color: #ffffff;
 }
-.main span.string {
+.main span.type-signature.string {
   background-color: #888888 !important;
   color: #ffffff;
 }
-.main span.number,
-.main span.integer,
-.main span.float,
-.main span.boolean {
+.main span.type-signature.number,
+.main span.type-signature.integer,
+.main span.type-signature.float,
+.main span.type-signature.boolean {
   background-color: #888888 !important;
   color: #ffffff;
 }
-.main span.object,
-.main span.array {
+.main span.type-signature.object,
+.main span.type-signature.array {
   background-color: #2a6496 !important;
   color: #ffffff;
 }
-.main span.namespace {
+.main span.type-signature.namespace {
   background-color: #808080 !important;
   color: #ffffff;
 }
@@ -363,24 +363,20 @@ li {
   color: #ffffff;
 }
 .main pre {
-  font-family: Arial CE, Helvetica CE, Arial, Helvetica, sans-serif;
   display: block;
   padding: 10px;
   margin: 0px 0px 10px 0px;
-  font-size: 11px;
-  line-height: 16px;
-  color: #333333;
-  word-break: break-all;
-  word-wrap: break-word;
-  white-space: pre-wrap;
   background-color: #f5f5f5;
   border: 1px solid #cccccc;
 }
 .main pre code {
+  font-size: 11px !important;
+  line-height: 16px !important;
+  color: #333333;
   padding: 0;
-  font-size: inherit;
-  color: inherit;
-  white-space: inherit;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
   background-color: transparent;
 }
 .main table {

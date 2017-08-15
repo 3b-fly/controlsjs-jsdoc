@@ -5,6 +5,7 @@ var template = require('jsdoc/template'),
     taffy = require('taffydb').taffy,
     helper = require('jsdoc/util/templateHelper'),
     _ = require('underscore'),
+    prism = require('node-prismjs'),
     htmlsafe = helper.htmlsafe,
     linkto = helper.linkto,
     resolveAuthorLinks = helper.resolveAuthorLinks,
@@ -204,23 +205,19 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     var sourceFiles = {};
     var sourceFilePaths = [];
-    data().each(function(doclet) {
-         doclet.attribs = '';
 
-        if (doclet.examples) {
-            doclet.examples = doclet.examples.map(function(example) {
-                var caption, code;
+    data().each(function(doclet){
+      doclet.attribs = '';
 
-                if (example.match(/^\s*(?:<p>)?\s*<caption>([\s\S]+?)<\/caption>\s*(?:<\/p>)?[\s\r\n]*([\s\S]+)$/i)) {
-                    caption = RegExp.$1;
-                    code    = RegExp.$2;
-                }
-
-                return {
-                    caption: caption || '',
-                    code: code || example
-                };
-            });
+        if(doclet.examples){
+          doclet.examples = doclet.examples.map(
+            function(example){
+              return prism.highlight(
+                example.replace(/(<([^>]+)>)/ig,''),
+                prism.languages.javascript
+              );
+            }
+          );
         }
         if (doclet.see) {
             doclet.see.forEach(function(seeItem, i) {

@@ -117,18 +117,18 @@
     margin-right: 5px;
   }
 
-  span.static{
+  span.type-signature.static{
     background-color: #779c34 !important;
     color: #ffffff;
   }
 
-  span.abstract{
+  span.type-signature.abstract{
     background-color: #d96629 !important;
     color: #ffffff;
   }
 
-  span.inherited,
-  span.overrides{
+  span.type-signature.inherited,
+  span.type-signature.overrides{
     background-color: #888888 !important;
     a{
       position: relative;
@@ -137,25 +137,26 @@
     }
   }
 
-  span.string{
+  span.type-signature.string{
     background-color: #888888 !important;
     color: #ffffff;
   }
 
-  span.number,
-  span.integer,
-  span.float,
-  span.boolean{
+  span.type-signature.number,
+  span.type-signature.integer,
+  span.type-signature.float,
+  span.type-signature.boolean{
     background-color: #888888 !important;
     color: #ffffff;
   }
 
-  span.object,span.array{
+  span.type-signature.object,
+  span.type-signature.array{
     background-color: #2a6496 !important;
     color: #ffffff;
   }
 
-  span.namespace{
+  span.type-signature.namespace{
     background-color: #808080 !important;
     color: #ffffff;
   }
@@ -263,23 +264,19 @@
   }
 
   pre{
-    font-family: Arial CE, Helvetica CE, Arial, Helvetica,sans-serif;
     display: block;
     padding: 10px;
     margin: 0px 0px 10px 0px;
-    font-size: 11px;
-    line-height: 16px;
-    color: #333333;
-    word-break: break-all;
-    word-wrap: break-word;
-    white-space: pre-wrap;
     background-color: #f5f5f5;
     border: 1px solid #cccccc;
     code{
+      font-size: 11px !important;
+      line-height: 16px !important;
+      color: #333333;
       padding: 0;
-      font-size: inherit;
-      color: inherit;
-      white-space: inherit;
+      word-break: break-all;
+      word-wrap: break-word;
+      white-space: pre-wrap;
       background-color: transparent;
     }
   }

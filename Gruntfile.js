@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     var path = require('path');
     var DEMO_PATH = 'demo/dist';
     var DEMO_SAMPLE_PATH = 'demo/sample';
-    
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -41,11 +41,6 @@ module.exports = function (grunt) {
                 tasks: ['copy:css']
             },
 
-            jscopy: {
-                files: ['static/scripts/main.js'],
-                tasks: ['copy:js']
-            },
-
             jsdoc: {
                 files: ['**/*.tmpl', '*.js'],
                 tasks: ['jsdoc']
@@ -67,7 +62,7 @@ module.exports = function (grunt) {
             demo: {
                 src: [
                     DEMO_SAMPLE_PATH + '/**/*.js',
-                    
+
                     // You can add README.md file for index page at documentations.
                     'README.md'
                 ],
@@ -93,11 +88,6 @@ module.exports = function (grunt) {
                 src: 'static/styles/jaguar.css',
                 dest: DEMO_PATH + '/styles/jaguar.css'
             },
-
-            js: {
-                src: 'static/scripts/main.js',
-                dest: DEMO_PATH + '/scripts/main.js'
-            }
         }
     });
 
@@ -108,7 +98,7 @@ module.exports = function (grunt) {
         'grunt-contrib-copy',
         'grunt-contrib-clean',
         'grunt-contrib-less',
-        'grunt-jsdoc',
+        'grunt-jsdoc'
     ].forEach(function (taskName) {
         grunt.loadNpmTasks(taskName);
     });
