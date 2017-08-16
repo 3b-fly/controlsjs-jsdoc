@@ -3,6 +3,7 @@ module.exports = function(data,members){
   var fs = require('fs');
   var path = require('path');
   var _ = require('underscore');
+  var less = require('less');
   var helper = require('jsdoc/util/templateHelper');
 
   self = {
@@ -121,6 +122,15 @@ module.exports = function(data,members){
       return self._fileCache[file];
     },
 
+    renderLess: function(file){
+      var css = '';
+      less.render(self.readFile(file),{},function(error,output){
+        if(error){console.log(error);}
+        else{css = output.css;}
+      });
+      return css;
+    },
+
     callTemplate: function(file,data){
       file = _.template(self.readFile(file),null,self._fileSettings);
 
@@ -132,6 +142,9 @@ module.exports = function(data,members){
         },
         readFile: function(file){
           return self.readFile(file);
+        },
+        renderLess: function(file){
+          return self.renderLess(file);
         }
       });
     },

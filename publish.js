@@ -351,7 +351,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.members = members;
 
     // once for all
-    view.navigation = require("./modules/navigation.js")(data,members);
+    view.navigation = require("./modules/navigation/navigation.js")(data,members);
 
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
