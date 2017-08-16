@@ -30,14 +30,6 @@ You can set options for customizing your documentations.
 ```
 "templates": {
     "applicationName": "Demo",
-    "googleAnalytics": "",
-    "openGraph": {
-        "title": "",
-        "type": "website",
-        "image": "",
-        "site_name": "",
-        "url": ""
-    },
     "meta": {
         "title": "",
         "description": "",
