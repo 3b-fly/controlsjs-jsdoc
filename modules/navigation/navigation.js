@@ -31,6 +31,7 @@ module.exports = function(data,members){
       self.addNavName(item.properties);
       self.addNavName(item.typedefs);
       self.addNavName(item.members);
+      self.addNavName(item.definitions);
       self.addNavName(item.interfaces);
       self.addNavName(item.methods);
       self.addNavName(item.callbacks);
@@ -53,6 +54,10 @@ module.exports = function(data,members){
         }),
         members: helper.find(data,{
           kind: 'member',
+          memberof: member.longname
+        }),
+        definitions: helper.find(data,{
+          kind: 'definition',
           memberof: member.longname
         }),
         interfaces: helper.find(data,{

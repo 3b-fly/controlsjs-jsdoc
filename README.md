@@ -51,6 +51,8 @@ You can add new plugins located in plugins directory into your JSDoc configurati
 * controlsjs-lib.js
   * @controlsjs-library (single)
   * @controlsjs-package (multiple)
+* controlsjs-def.js
+  * @controlsjs-definition (multiple)
 
 License
 ---

@@ -3,16 +3,15 @@ var template = require('jsdoc/template'),
     fs = require('jsdoc/fs'),
     path = require('jsdoc/path'),
     taffy = require('taffydb').taffy,
-    helper = require('jsdoc/util/templateHelper'),
     _ = require('underscore'),
     prism = require('node-prismjs'),
-    htmlsafe = helper.htmlsafe,
-    linkto = helper.linkto,
-    resolveAuthorLinks = helper.resolveAuthorLinks,
+
     hasOwnProp = Object.prototype.hasOwnProperty,
     data,
     view,
     outdir = env.opts.destination;
+
+var helper = require('./modules/jsdoc/templateHelper.js');
 
 function find(spec) {
     return helper.find(data, spec);
@@ -86,7 +85,7 @@ function addAttribs(f) {
     if (attribs.length) {
       f.attribs = '';
       for (var i in attribs){
-        f.attribs += '<span class="type-signature ' + attribs[i] + '">' + htmlsafe(attribs[i]) + '</span>';
+        f.attribs += '<span class="type-signature ' + attribs[i] + '">' + helper.htmlsafe(attribs[i]) + '</span>';
       }
     }
 }
@@ -284,7 +283,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     data().each(function(doclet) {
         var url = helper.createLink(doclet);
         helper.registerLink(doclet.longname, url);
-
+//TODO
         if (doclet.meta) {
             var sourceFile = sourceFiles[getPathFromDoclet(doclet)];
 
@@ -340,14 +339,15 @@ exports.publish = function(taffyData, opts, tutorials) {
     });
 
     var members = helper.getMembers(data);
+    members.definitions = helper.find(data,{kind:'definition'});
     members.tutorials = tutorials.children;
 
     // add template helpers
     view.find = find;
-    view.linkto = linkto;
-    view.resolveAuthorLinks = resolveAuthorLinks;
+    view.linkto = helper.linkto;
+    view.resolveAuthorLinks = helper.resolveAuthorLinks;
     view.tutoriallink = tutoriallink;
-    view.htmlsafe = htmlsafe;
+    view.htmlsafe = helper.htmlsafe;
     view.members = members;
 
     // once for all
@@ -374,8 +374,9 @@ exports.publish = function(taffyData, opts, tutorials) {
     var namespaces = taffy(members.namespaces);
     var mixins = taffy(members.mixins);
     var externals = taffy(members.externals);
+    var definitions = taffy(members.definitions);
     var interfaces = taffy(members.interfaces);
-
+//console.log(members);
     for (var longname in helper.longnameToUrl) {
         if ( hasOwnProp.call(helper.longnameToUrl, longname) ) {
             var myClasses = helper.find(classes, {longname: longname});
@@ -401,6 +402,11 @@ exports.publish = function(taffyData, opts, tutorials) {
             var myExternals = helper.find(externals, {longname: longname});
             if (myExternals.length) {
                 generate('External: ' + myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
+            }
+
+            var myDefinitions = helper.find(definitions, {longname: longname});
+            if (myDefinitions.length) {
+                generate('Definition: ' + myDefinitions[0].name, myDefinitions, helper.longnameToUrl[longname]);
             }
 
             var myInterfaces = helper.find(interfaces, {longname: longname});
