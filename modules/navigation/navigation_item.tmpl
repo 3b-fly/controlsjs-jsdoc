@@ -61,7 +61,6 @@
       <span class="subtitle">Definitions</span>
       <?js self.data.definitions.forEach(function(d){ ?>
         <li data-name="<?js= d.navname ?>">
-<? console.log('DEF',d) ?>
           <?js= self.linkto(d.longname,d.name) ?>
         </li>
       <?js }); ?>
@@ -73,7 +72,6 @@
       <span class="subtitle">Interfaces</span>
       <?js self.data.interfaces.forEach(function(i){ ?>
         <li data-name="<?js= i.navname ?>">
-<? console.log('INT',i) ?>
           <?js= self.linkto(i.longname,i.name) ?>
         </li>
       <?js }); ?>
