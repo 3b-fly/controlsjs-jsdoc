@@ -40,7 +40,7 @@ function needsSignature(doclet) {
     // function and class definitions always get a signature
     if (
         (doclet.kind === 'function')
-        || ((doclet.kind === 'class') && (doclet.static !== true))
+        || ((doclet.kind === 'class') && (doclet.scope !== 'static'))
     ) {
         needsSig = true;
     }

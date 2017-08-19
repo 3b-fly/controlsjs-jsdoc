@@ -14,7 +14,7 @@
       <span class="type-signature namespace">namespace</span>
     <?js } ?>
     <?js if(self.data.type === 'class'){
-      if(self.data.static === true) { ?>
+      if(self.data.static) { ?>
         <span class="type-signature static">static</span>
       <?js } ?>
     <?js } ?>
@@ -39,7 +39,7 @@
       <span class="subtitle">Typedefs</span>
       <?js self.data.typedefs.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
-          <?js= data.linkto(v.longname,v.name) ?>
+          <?js= self.linkto(v.longname,v.name) ?>
         </li>
       <?js }); ?>
     </ul>

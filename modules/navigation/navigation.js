@@ -10,7 +10,7 @@ module.exports = function(data,members){
     _nav: [],
     _template: null,
     _fileCache: [],
-    _fileSettings: {
+    _templateSettings: {
       evaluate: /<\?js([\s\S]+?)\?>/g,
       interpolate: /<\?js=([\s\S]+?)\?>/g,
       escape: /<\?js~([\s\S]+?)\?>/g
@@ -44,7 +44,7 @@ module.exports = function(data,members){
         name: member.name,
         longname: member.longname,
         memberof: member.memberof,
-        static: member.static,
+        static: (member.scope === 'static'),
         properties: member.properties,
         childitems: [],
 
@@ -137,7 +137,8 @@ module.exports = function(data,members){
     },
 
     callTemplate: function(file,data){
-      file = _.template(self.readFile(file),null,self._fileSettings);
+      file = self.readFile(file);
+      file = _.template(file,self._templateSettings);
 
       return file.call({
         data: data,
