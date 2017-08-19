@@ -140,7 +140,7 @@ function generate(title, docs, filename, resolveLinks) {
         html = html.toString().replace(/<a\s+([^>]*href\s*=\s*['"]*[^\s'"]*:\/\/)/ig, '<a target="_blank" $1');
     }
 
-    fs.writeFileSync(outpath,html.replace(/^\s*[\r\n]/gm,''),'utf8');
+    fs.writeFileSync(outpath,html.replace(/^\s*[\r]/gm,''),'utf8');
 }
 
 /**
