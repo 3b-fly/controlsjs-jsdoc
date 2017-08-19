@@ -20,10 +20,11 @@ var self = this;
                     <?js= this.linkto(data.inherits, 'inherited') ?>
                 </span>
             <?js } ?>
+
             <?js= data.attribs
-                + ((kind === 'class' && !data.static) ? 'new ' : '')
-                + (data.scope === 'static' ? longname : name)
-                + (data.signature ? data.signature : '') ?>
+              + ((kind === 'class' && (scope !== 'static')) ? 'new ' : '')
+              + (scope === 'static' ? longname : name)
+              + (data.signature ? data.signature : '') ?>
         </h4>
 
         <?js if(data.meta && data.meta.linkpath){ ?>
