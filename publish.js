@@ -38,11 +38,8 @@ function needsSignature(doclet) {
     var needsSig = false;
 
     // function and class definitions always get a signature
-    if (
-        (doclet.kind === 'function')
-        || ((doclet.kind === 'class') && (doclet.scope !== 'static'))
-    ) {
-        needsSig = true;
+    if((doclet.kind === 'function') || (doclet.kind === 'class')){
+      needsSig = true;
     }
     // typedefs that contain functions get a signature, too
     else if (doclet.kind === 'typedef' && doclet.type && doclet.type.names &&
@@ -143,7 +140,7 @@ function generate(title, docs, filename, resolveLinks) {
     html = html.replace(/(?:^|<\/pre>)[^]*?(?:<pre>|$)/g,function(m){
       return m.replace(/^\s*[\r]/gm,'');
     });
-    
+
     fs.writeFileSync(outpath,html,'utf8');
 }
 
@@ -318,9 +315,11 @@ exports.publish = function(taffyData, opts, tutorials) {
             doclet.id = doclet.name;
         }
 
-        if ( needsSignature(doclet) ) {
-            addSignatureParams(doclet);
-            addSignatureReturns(doclet);
+        if(needsSignature(doclet)){
+            if(!doclet.hideconstructor){
+              addSignatureParams(doclet);
+              addSignatureReturns(doclet);
+            }
             addAttribs(doclet);
         }
 

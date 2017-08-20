@@ -44,7 +44,7 @@ module.exports = function(data,members){
         name: member.name,
         longname: member.longname,
         memberof: member.memberof,
-        static: (member.scope === 'static'),
+        static: ((member.kind == 'class') && (member.hideconstructor)),
         properties: member.properties,
         childitems: [],
 

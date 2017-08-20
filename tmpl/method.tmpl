@@ -21,10 +21,10 @@ var self = this;
                 </span>
             <?js } ?>
 
-            <?js= data.attribs
-              + ((kind === 'class' && (scope !== 'static')) ? 'new ' : '')
-              + (scope === 'static' ? longname : name)
-              + (data.signature ? data.signature : '') ?>
+          <?js= data.attribs
+            + ((data.kind === 'class') && !data.hideconstructor ? 'new ' : '')
+            + (data.scope === 'static' ? longname : name)
+            + (data.signature ? data.signature : '') ?>
         </h4>
 
         <?js if(data.meta && data.meta.linkpath){ ?>
