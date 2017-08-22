@@ -1,0 +1,38 @@
+<?js
+  var data = obj;
+  var self = this;
+?>
+
+<?js
+  var attrs = {};
+
+  if(data.overrides){attrs['overrides'] = data.overrides;}
+  else if(data.inherited || data.inherits){attrs['inherited'] = data.inherits;}
+
+  if(data.async){attrs['async'] = 'async';}
+  if(data.virtual){attrs['abstract'] = 'abstract';}
+  if(data.generator){attrs['generator'] = 'generator';}
+  if(data.access && (data.access !== 'public')){attrs[data.access] = data.access;}
+
+  if(data.scope && (data.scope !== 'instance') && (data.scope !== 'global')){
+    if((data.kind === 'function') || (data.kind === 'member') || (data.kind === 'constant')){
+      attrs[data.scope] = data.scope;
+    }
+  }
+
+  if((data.readonly === true) && (data.kind === 'member')){attrs['readonly'] = 'readonly';}
+  if(data.kind === 'constant'){attrs['constant'] = 'constant';}
+
+  if(data.nullable === true){attrs['nullable'] = 'nullable';}
+  else if(data.nullable === false){attrs['non-null'] = 'non-null';}
+?>
+
+<?js if(Object.keys(attrs).length > 0){ ?>
+  <span class="attribs">
+    <?js for(var attrName in attrs){ ?>
+      <span class="type-signature <?js= attrName.toLowerCase() ?>">
+        <?js= self.linkto(attrs[attrName],self.htmlsafe(attrName)) ?>
+      </span>
+    <?js } ?>
+  </span>
+<?js } ?>

@@ -1,15 +1,37 @@
 <?js
-var data = obj;
-var self = this;
+  var data = obj;
+  var self = this;
 ?>
-
-<?js function typeSignature(name) { ?>
-  <span class="type-signature type <?js= name.toLowerCase() ?>">
-      <?js= self.linkto(name, self.htmlsafe(name)) ?>
-  </span>
-<?js }; ?>
 
 <?js
-if (data.kind === 'namespace'){ typeSignature(data.kind); }
-else if (data.type && data.type.names) { data.type.names.forEach(typeSignature); }
+  var types = [];
+
+  if(data.type && data.type.names){
+    for(var i in data.type.names){
+      types.push(data.type.names[i]);
+    }
+  }
+
+  var kindSignature = null;
+  switch(data.kind){
+    case 'module': kindSignature = 'module'; break;
+    case 'namespace': kindSignature = 'namespace'; break;
+    case 'class':
+      kindSignature = (data.hideconstructor) ? 'object' : 'class';
+    break;
+  }
+
+  if(kindSignature && types.indexOf(kindSignature) < 0){
+    types.unshift(kindSignature);
+  }
 ?>
+
+<?js if(types.length > 0){ ?>
+  <span class="types">
+    <?js for(var i in types){ ?>
+      <span class="type-signature <?js= types[i].toLowerCase() ?>">
+        <?js= self.linkto(types[i],self.htmlsafe(types[i])) ?>
+      </span>
+    <?js } ?>
+  </span>
+<?js } ?>

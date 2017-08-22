@@ -77,10 +77,6 @@ pre[class*="language-"] {
 	color: #999;
 }
 
-.namespace {
-	opacity: .7;
-}
-
 .token.property,
 .token.tag,
 .token.boolean,

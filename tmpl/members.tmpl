@@ -1,13 +1,14 @@
 <?js
-var data = obj;
-var self = this;
+  var data = obj;
+  var self = this;
 ?>
+
 <dt>
     <div class="nameContainer">
         <h4 class="name" id="<?js= id ?>">
-            <?js= data.attribs ?>
+            <?js= self.partial('attribs.tmpl',data) ?>
             <?js= (data.ancestors.length ? name : longname) ?>
-            <?js= self.partial('typesignature.tmpl', data) ?>
+            <?js= self.partial('typesignature.tmpl',data) ?>
         </h4>
     </div>
 

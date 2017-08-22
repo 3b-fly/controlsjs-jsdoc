@@ -28,6 +28,8 @@
     font-weight: bold;
     font-size: 16px;
     margin: 15px 0px 15px 0px;
+    line-height: 22px;
+    height: 22px;
   }
 
   h5{
@@ -65,10 +67,15 @@
 
     span.type-signature{
       font-weight: normal;
-      top: -3px;
+      line-height: 15px;
+      top: -4px;
     }
 
-    span.type{
+    span.attribs{
+      margin-right: 5px;
+    }
+
+    span.types{
       margin-left: 5px;
     }
   }
@@ -77,10 +84,15 @@
 
     span.type-signature{
       font-weight: normal;
-      top: -2px;
+      line-height: 15px;
+      top: -3px;
     }
 
-    span.type{
+    span.attribs{
+      margin-right: 5px;
+    }
+
+    span.types{
       margin-left: 5px;
     }
 
@@ -97,14 +109,8 @@
         content: "\25b6";
       }
     }
-
-    span.returnType{
-      margin-left: 3px;
-      background-color: transparent !important;
-      color: #808080 !important;
-      font-weight: normal !important;
-    }
   }
+
 
   span.type-signature{
     position: relative;
@@ -112,50 +118,71 @@
     border-radius: 3px;
     font-size: 11px;
     padding: 2px 5px;
-    margin-right: 5px;
+
+    border: 1px solid #808080;
+    color: #808080;
   }
 
-  span.type-signature.static{
+  span.type-signature.returnType{
+    margin-left: 3px;
+    color: #808080 !important;
+    font-weight: normal !important;
+    background-color: transparent !important;
+    border-width: 0px;
+  }
+
+  span.type-signature.static,
+  span.type-signature.constant,
+  span.type-signature.readonly{
+    border-width: 0px;
     background-color: #779c34 !important;
     color: #ffffff;
   }
 
   span.type-signature.abstract{
+    border-width: 0px;
     background-color: #d96629 !important;
     color: #ffffff;
   }
 
   span.type-signature.inherited,
   span.type-signature.overrides{
+    border-width: 0px;
     background-color: #888888 !important;
     a{
       position: relative;
-      top: 1px;
       color: #ffffff;
     }
   }
 
-  span.type-signature.string{
-    background-color: #888888 !important;
+  span.type-signature.module,
+  span.type-signature.namespace{
+    border-width: 0px;
+    background-color: #913d9e !important;
     color: #ffffff;
   }
 
   span.type-signature.number,
   span.type-signature.integer,
   span.type-signature.float,
-  span.type-signature.boolean{
-    background-color: #888888 !important;
+  span.type-signature.boolean,
+  span.type-signature.array,
+  span.type-signature.string{
+    border-width: 0px;
+    background-color: #808080 !important;
     color: #ffffff;
   }
 
   span.type-signature.object,
-  span.type-signature.array{
-    background-color: #2a6496 !important;
+  span.type-signature.class{
+    border-width: 0px;
+    background-color: #3978ae !important;
     color: #ffffff;
   }
 
-  span.type-signature.namespace{
-    background-color: #808080 !important;
+  span.type-signature.control{
+    border-width: 0px;
+    background-color: #b19915 !important;
     color: #ffffff;
   }
 

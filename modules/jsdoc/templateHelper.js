@@ -678,61 +678,6 @@ exports.getMembers = function(data) {
 };
 
 /**
- * Retrieve the member attributes for a doclet (for example, `virtual`, `static`, and
- * `readonly`).
- * @param {object} d The doclet whose attributes will be retrieved.
- * @return {array<string>} The member attributes for the doclet.
- */
-exports.getAttribs = function(d) {
-    var attribs = [];
-
-    if (!d) {
-        return attribs;
-    }
-
-    if (d.async) {
-        attribs.push('async');
-    }
-
-    if (d.generator) {
-        attribs.push('generator');
-    }
-
-    if (d.virtual) {
-        attribs.push('abstract');
-    }
-
-    if (d.access && d.access !== 'public') {
-        attribs.push(d.access);
-    }
-
-    if (d.scope && d.scope !== 'instance' && d.scope !== name.SCOPE.NAMES.GLOBAL) {
-        if (d.kind === 'function' || d.kind === 'member' || d.kind === 'constant') {
-            attribs.push(d.scope);
-        }
-    }
-
-    if (d.readonly === true) {
-        if (d.kind === 'member') {
-            attribs.push('readonly');
-        }
-    }
-
-    if (d.kind === 'constant') {
-        attribs.push('constant');
-    }
-
-    if (d.nullable === true) {
-        attribs.push('nullable');
-    }
-    else if (d.nullable === false) {
-        attribs.push('non-null');
-    }
-
-    return attribs;
-};
-
-/**
  * Retrieve links to allowed types for the member.
  *
  * @param {Object} d - The doclet whose types will be retrieved.

@@ -18,135 +18,6 @@ li {
 #wrap {
   position: relative;
 }
-::-webkit-scrollbar {
-  width: 8px;
-  background-color: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background-color: gray;
-  border-radius: 4px;
-}
-.navigation {
-  position: fixed;
-  float: left;
-  width: 320px;
-  height: 100%;
-  background-color: #1a1a1a;
-}
-.navigation .applicationName {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 10px;
-  margin: 0px;
-  padding: 10px 15px;
-  font-size: 17px;
-  line-height: 20px;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.navigation .applicationName a {
-  outline: 0;
-  color: #ffffff;
-  text-decoration: none;
-}
-.navigation .applicationName a:hover,
-.navigation .applicationName a:focus {
-  color: #cccccc;
-  text-decoration: underline;
-}
-.navigation .search {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 52px;
-  padding: 10px 15px;
-}
-.navigation .search input {
-  width: 90%;
-  padding: 4px 5% 4px 5%;
-  font-size: 12px;
-  line-height: 20px;
-  border: 1px solid #555555;
-  background-color: #333333;
-  color: #fff;
-  display: none;
-}
-.navigation .list {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 112px;
-  bottom: 0px;
-  overflow: auto;
-  padding: 0px 15px;
-}
-.navigation li.item {
-  border-top: 1px solid #333;
-}
-.navigation li.item a {
-  outline: 0;
-  color: #bbb;
-  text-decoration: none;
-}
-.navigation li.item a:hover,
-.navigation li.item a:focus {
-  color: #fff;
-}
-.navigation li.item .title {
-  cursor: default;
-  position: relative;
-  display: block;
-  font-size: 13px;
-  padding: 8px 0px;
-  min-height: 17px;
-}
-.navigation li.item .title a {
-  outline: 0;
-  color: #e1e1e1;
-  text-decoration: none;
-}
-.navigation li.item .title a:hover,
-.navigation li.item .title a:focus {
-  color: #fff;
-}
-.navigation li.item .title .type-signature {
-  position: relative;
-  display: block;
-  border-radius: 3px;
-  font-size: 11px;
-  padding: 2px 5px;
-  float: right;
-}
-.navigation li.item .title .static {
-  background-color: #779c34;
-  color: #000;
-}
-.navigation li.item .title .module,
-.navigation li.item .title .namespace {
-  background-color: #808080;
-  color: #000;
-}
-.navigation li.item .subtitle {
-  cursor: default;
-  font-size: 10px;
-  font-weight: bold;
-  color: #779c34;
-  display: block;
-}
-.navigation li.item .itemMembers {
-  margin-bottom: 10px;
-}
-.navigation li.item .itemMembers li {
-  margin-top: 2px;
-}
-.navigation li.item ul > li {
-  font-size: 11px;
-  padding-left: 8px;
-}
 .main {
   padding: 20px 20px;
   margin-left: 320px;
@@ -173,6 +44,8 @@ li {
   font-weight: bold;
   font-size: 16px;
   margin: 15px 0px 15px 0px;
+  line-height: 22px;
+  height: 22px;
 }
 .main h5 {
   font-weight: bold;
@@ -203,16 +76,24 @@ li {
 }
 .main h2.name span.type-signature {
   font-weight: normal;
-  top: -3px;
+  line-height: 15px;
+  top: -4px;
 }
-.main h2.name span.type {
+.main h2.name span.attribs {
+  margin-right: 5px;
+}
+.main h2.name span.types {
   margin-left: 5px;
 }
 .main h4.name span.type-signature {
   font-weight: normal;
-  top: -2px;
+  line-height: 15px;
+  top: -3px;
 }
-.main h4.name span.type {
+.main h4.name span.attribs {
+  margin-right: 5px;
+}
+.main h4.name span.types {
   margin-left: 5px;
 }
 .main h4.name span.arrow-right {
@@ -227,56 +108,69 @@ li {
 .main h4.name span.arrow-right:before {
   content: "\25b6";
 }
-.main h4.name span.returnType {
-  margin-left: 3px;
-  background-color: transparent !important;
-  color: #808080 !important;
-  font-weight: normal !important;
-}
 .main span.type-signature {
   position: relative;
   display: inline-block;
   border-radius: 3px;
   font-size: 11px;
   padding: 2px 5px;
-  margin-right: 5px;
+  border: 1px solid #808080;
+  color: #808080;
 }
-.main span.type-signature.static {
+.main span.type-signature.returnType {
+  margin-left: 3px;
+  color: #808080 !important;
+  font-weight: normal !important;
+  background-color: transparent !important;
+  border-width: 0px;
+}
+.main span.type-signature.static,
+.main span.type-signature.constant,
+.main span.type-signature.readonly {
+  border-width: 0px;
   background-color: #779c34 !important;
   color: #ffffff;
 }
 .main span.type-signature.abstract {
+  border-width: 0px;
   background-color: #d96629 !important;
   color: #ffffff;
 }
 .main span.type-signature.inherited,
 .main span.type-signature.overrides {
+  border-width: 0px;
   background-color: #888888 !important;
 }
 .main span.type-signature.inherited a,
 .main span.type-signature.overrides a {
   position: relative;
-  top: 1px;
   color: #ffffff;
 }
-.main span.type-signature.string {
-  background-color: #888888 !important;
+.main span.type-signature.module,
+.main span.type-signature.namespace {
+  border-width: 0px;
+  background-color: #913d9e !important;
   color: #ffffff;
 }
 .main span.type-signature.number,
 .main span.type-signature.integer,
 .main span.type-signature.float,
-.main span.type-signature.boolean {
-  background-color: #888888 !important;
+.main span.type-signature.boolean,
+.main span.type-signature.array,
+.main span.type-signature.string {
+  border-width: 0px;
+  background-color: #808080 !important;
   color: #ffffff;
 }
 .main span.type-signature.object,
-.main span.type-signature.array {
-  background-color: #2a6496 !important;
+.main span.type-signature.class {
+  border-width: 0px;
+  background-color: #3978ae !important;
   color: #ffffff;
 }
-.main span.type-signature.namespace {
-  background-color: #808080 !important;
+.main span.type-signature.control {
+  border-width: 0px;
+  background-color: #b19915 !important;
   color: #ffffff;
 }
 .main .subsection-title {

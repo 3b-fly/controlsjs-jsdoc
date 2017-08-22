@@ -16,6 +16,31 @@ module.exports = function(data,members){
       escape: /<\?js~([\s\S]+?)\?>/g
     },
 
+    getMemberSignatures: function(member){
+      var signs = [];
+
+      if(member.type && member.type.names){
+        for(var i in member.type.names){
+          signs.push(member.type.names[i]);
+        }
+      }
+
+      var kindSignature = null;
+      switch(member.kind){
+        case 'module': kindSignature = 'module'; break;
+        case 'namespace': kindSignature = 'namespace'; break;
+        case 'class':
+          kindSignature = (member.hideconstructor) ? 'object' : 'class';
+        break;
+      }
+
+      if(kindSignature && signs.indexOf(kindSignature) < 0){
+        signs.unshift(kindSignature);
+      }
+
+      return signs;
+    },
+
     addNavName: function(target){
       if(Array.isArray(target)){
         _.each(target,function(item){self.addNavName(item);});
@@ -44,8 +69,8 @@ module.exports = function(data,members){
         name: member.name,
         longname: member.longname,
         memberof: member.memberof,
-        static: ((member.kind == 'class') && (member.hideconstructor)),
         properties: member.properties,
+        signatures: self.getMemberSignatures(member),
         childitems: [],
 
         typedefs: helper.find(data,{

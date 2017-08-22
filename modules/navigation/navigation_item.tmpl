@@ -7,16 +7,15 @@
   <span class="title">
     <?js= self.linkto(self.data.longname,self.data.navname) ?>
 
-    <?js if(self.data.type === 'module'){ ?>
-      <span class="type-signature module">module</span>
-    <?js } ?>
-    <?js if(self.data.type === 'namespace'){ ?>
-      <span class="type-signature namespace">namespace</span>
-    <?js } ?>
-    <?js if(self.data.type === 'class'){
-      if(self.data.static) { ?>
-        <span class="type-signature static">static</span>
-      <?js } ?>
+    <?js
+      if(self.data.signatures && self.data.signatures.length){
+        var signs = self.data.signatures.slice().reverse();
+        signs.forEach(function(sign){
+    ?>
+        <span class="type-signature <?js= sign.toLowerCase() ?>">
+          <?js= sign ?>
+        </span>
+      <?js }); ?>
     <?js } ?>
   </span>
 

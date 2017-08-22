@@ -55,7 +55,7 @@
       line-height: 20px;
       border: 1px solid #555555;
       background-color: #333333;
-      color: #fff;
+      color: #ffffff;
       display: none;
     }
   }
@@ -71,11 +71,11 @@
   }
 
   li.item{
-    border-top: 1px solid #333;
+    border-top: 1px solid #333333;
 
     a{
       outline: 0;
-      color: #bbb;
+      color: #bbbbbb;
       text-decoration: none;
       &:hover,
       &:focus{
@@ -108,16 +108,53 @@
         font-size: 11px;
         padding: 2px 5px;
         float: right;
+        margin-left: 6px;
+
+        border: 1px solid #808080;
+        color: #808080;
       }
 
-      .static{
+      .type-signature.static{
+        border-width: 0px;
         background-color: #779c34;
-        color: #000;
+        color: #000000;
       }
-      .module,
-      .namespace{
+
+      .type-signature.abstract{
+        border-width: 0px;
+        background-color: #d96629;
+        color: #000000;
+      }
+
+      .type-signature.module,
+      .type-signature.namespace{
+        border-width: 0px;
+        background-color: #913d9e;
+        color: #000000;
+      }
+
+      .type-signature.number,
+      .type-signature.integer,
+      .type-signature.float,
+      .type-signature.boolean,
+      .type-signature.array,
+      .type-signature.string{
+        border-width: 0px;
         background-color: #808080;
-        color: #000;
+        color: #000000;
+      }
+
+      .type-signature.object,
+      .type-signature.class{
+        border-width: 0px;
+        background-color: #3978ae;
+        color: #000000;
+      }
+
+      .type-signature.control{
+        border-width: 0px;
+        background-color: #b19915;
+        color: #000000;
       }
     }
 

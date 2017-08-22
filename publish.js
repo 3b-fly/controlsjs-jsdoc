@@ -77,16 +77,6 @@ function addSignatureTypes(f) {
     f.signature = (f.signature || '') + '<span class="type-signature">'+(types.length? ' :'+types.join('|') : '')+'</span>';
 }
 
-function addAttribs(f) {
-    var attribs = helper.getAttribs(f);
-    if (attribs.length) {
-      f.attribs = '';
-      for (var i in attribs){
-        f.attribs += '<span class="type-signature ' + attribs[i] + '">' + helper.htmlsafe(attribs[i]) + '</span>';
-      }
-    }
-}
-
 function resolveSourcePath(filepath) {
     return path.resolve(process.cwd(), filepath);
 }
@@ -207,8 +197,6 @@ exports.publish = function(taffyData, opts, tutorials) {
     var sourceFilePaths = [];
 
     data().each(function(doclet){
-      doclet.attribs = '';
-
         if(doclet.examples){
           doclet.examples = doclet.examples.map(
             function(example){
@@ -316,13 +304,11 @@ exports.publish = function(taffyData, opts, tutorials) {
         }
 
         if(needsSignature(doclet)){
-            if(!doclet.hideconstructor){
-              addSignatureParams(doclet);
-              addSignatureReturns(doclet);
-            }
-            addAttribs(doclet);
+          if(!doclet.hideconstructor){
+            addSignatureParams(doclet);
+            addSignatureReturns(doclet);
+          }
         }
-
     });
 
     // do this after the urls have all been generated
@@ -331,12 +317,10 @@ exports.publish = function(taffyData, opts, tutorials) {
 
         if (doclet.kind === 'member') {
             addSignatureTypes(doclet);
-            addAttribs(doclet);
         }
 
         if (doclet.kind === 'constant') {
             addSignatureTypes(doclet);
-            addAttribs(doclet);
             doclet.kind = 'member';
         }
     });
