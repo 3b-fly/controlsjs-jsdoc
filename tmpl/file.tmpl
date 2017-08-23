@@ -1,40 +1,24 @@
 <?js
-var data = obj;
-var self = this;
+  var data = obj;
+  var self = this;
 ?>
 
-<section class="kind-file">
+<dt>
+  <div class="nameContainer">
+    <h4 class="name" id="<?js= id ?>"><?js= data.name ?></h4>
 
-<header>
-    <h2><?js= data.name ?></h2>
-</header>
-
-<article>
-    <div class="container-overview">
-
-    <?js if (data.description) { ?>
-        <div class="description"><?js= data.description ?></div>
+    <?js if(data.meta && data.meta.linkpath){ ?>
+      <div class="tag-source">
+        <?js= self.linkto(data.meta.linkpath,data.meta.filename) ?>
+      </div>
     <?js } ?>
+  </div>
+</dt>
 
-    <?js= self.partial('details.tmpl', data) ?>
+<dd>
+  <?js if(data.description){ ?>
+    <div class="description"><?js= data.description ?></div>
+  <?js } ?>
 
-    </div>
-
-    <?js if (data.requires && data.requires.length) { ?>
-
-        <dl class="details">
-            <dt class="tag-requires">Requires:</dt>
-            <dd class="tag-requires">
-                <ul class="dummy">
-                    <?js data.requires.forEach(function(r) { ?>
-                        <li><?js= self.linkto(r, r) ?></li>
-                    <?js }); ?>
-                </ul>
-            </dd>
-        </dl>
-
-    <?js } ?>
-
-</article>
-
-</section>
+  <?js= self.partial('details.tmpl',data) ?>
+</dd>

@@ -1,14 +1,45 @@
 <?js
-var data = obj;
-var self = this;
+  var data = obj;
+  var self = this;
+
+  var files = self.find({kind: 'file'});
+  var packages = self.find({kind: 'package',name:{isUndefined: false}});
 ?>
 
-<?js if (data.kind === 'package') { ?>
-    <h3><?js= data.name ?> <?js= data.version ?></h3>
-<?js } ?>
+<section class="mainpage">
 
-<?js if (data.readme) { ?>
-    <section>
-        <article class="readme"><?js= data.readme ?></article>
-    </section>
-<?js } ?>
+  <header>
+    <h2 class="name">
+      <?js= env.conf.templates.applicationName ?>
+    </h2>
+  </header>
+
+  <?js if(data.readme){ ?>
+    <article class="readme"><?js= data.readme ?></article>
+  <?js } ?>
+
+  <article>
+
+    <?js if(packages && packages.length){ ?>
+      <h3 class="subsection-title">Packages</h3>
+
+      <dl>
+        <?js packages.forEach(function(f){ ?>
+          <?js= self.partial('package.tmpl',f) ?>
+        <?js }); ?>
+      </dl>
+    <?js } ?>
+
+    <?js if(files && files.length){ ?>
+      <h3 class="subsection-title">Files</h3>
+
+      <dl>
+        <?js files.forEach(function(f){ ?>
+          <?js= self.partial('file.tmpl',f) ?>
+        <?js }); ?>
+      </dl>
+    <?js } ?>
+
+  </article>
+
+</section>

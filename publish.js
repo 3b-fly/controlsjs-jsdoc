@@ -346,14 +346,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     if (members.globals.length) { generate('Global', [{kind: 'globalobj'}], globalUrl); }
 
     // index page displays information from package.json and lists files
-    var files = find({kind: 'file'}),
-        packages = find({kind: 'package'});
-
-    generate('Index',
-        packages.concat(
-            [{kind: 'mainpage', readme: opts.readme, longname: (opts.mainpagetitle) ? opts.mainpagetitle : 'Main Page'}]
-        ).concat(files),
-    indexUrl);
+    generate('Index',[{ kind: 'mainpage', readme: opts.readme }],indexUrl);
 
     // set up the lists that we'll use to generate pages
     var classes = taffy(members.classes);
