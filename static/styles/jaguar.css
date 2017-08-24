@@ -71,6 +71,9 @@ li {
   color: #428bca;
   text-decoration: none;
 }
+.main .details {
+  margin-bottom: 15px;
+}
 .main .details dt {
   font-weight: bold;
   color: #779c34;

@@ -7,8 +7,17 @@
 <div class="navigation">
 
   <h3 class="applicationName">
-    <a href="index.html"><?js= env.conf.templates.applicationName ?></a>
+    <?js= env.conf.templates.applicationName ?>
   </h3>
+
+  <div class="icons">
+    <a href="index.html" class="icon index">
+      <img src="icons/freepik/home.png" alt="Index" title="Index">
+    </a>
+    <a href="files.html" class="icon files">
+      <img src="icons/freepik/file.png" alt="Files" title="Files">
+    </a>
+  </div>
 
   <div class="search">
     <input id="nav-search" type="text" placeholder="Search Documentations"/>

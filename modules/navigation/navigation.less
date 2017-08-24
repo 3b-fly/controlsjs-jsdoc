@@ -41,12 +41,39 @@
     }
   }
 
+  .icons{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 60px;
+    height: 32px;
+    padding: 0px 15px;
+
+    .icon{
+      outline: 0;
+      opacity: 0.5;
+      -moz-opacity: 0.5;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+      &:hover{
+        opacity: 1;
+        -moz-opacity: 1;
+        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+      }
+
+      &.index,
+      &.files{
+        float: right;
+        margin-left: 5px;
+      }
+    }
+  }
+
   .search{
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 52px;
-    padding: 10px 15px;
+    top: 102px;
+    padding: 0px 15px;
 
     input{
       width: 90%;
@@ -64,7 +91,7 @@
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 112px;
+    top: 147px;
     bottom: 0px;
     overflow: auto;
     padding: 0px 15px;

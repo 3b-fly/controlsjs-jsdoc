@@ -108,23 +108,24 @@ function getLinkPath(tmplConf,sourcePath){
   return path;
 }
 
-function generate(title, docs, filename, resolveLinks) {
+function generate(title,docs,filename,resolveLinks,template) {
     resolveLinks = resolveLinks === false ? false : true;
+    template = template || 'container.tmpl';
 
     var docData = {
-        filename: filename,
-        title: title,
-        docs: docs
+      filename: filename,
+      title: title,
+      docs: docs
     };
 
-    var outpath = path.join(outdir, filename),
-        html = view.render('container.tmpl', docData);
+    var outpath = path.join(outdir,filename);
+    var html = view.render(template,docData);
 
-    if (resolveLinks) {
-        html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
-
-        // Add a link target for external links @davidshimjs
-        html = html.toString().replace(/<a\s+([^>]*href\s*=\s*['"]*[^\s'"]*:\/\/)/ig, '<a target="_blank" $1');
+    if(resolveLinks){
+      // turn {@link foo} into <a href="foodoc.html">foo</a>
+      html = helper.resolveLinks(html);
+      // Add a link target for external links @davidshimjs
+      html = html.toString().replace(/<a\s+([^>]*href\s*=\s*['"]*[^\s'"]*:\/\/)/ig, '<a target="_blank" $1');
     }
 
     html = html.replace(/(?:^|<\/pre>)[^]*?(?:<pre>|$)/g,function(m){
@@ -175,13 +176,15 @@ exports.publish = function(taffyData, opts, tutorials) {
     var templatePath = opts.template;
     view = new template.Template(templatePath + '/tmpl');
 
-    // claim some special filenames in advance, so the All-Powerful Overseer of Filename Uniqueness
-    // doesn't try to hand them out later
-    var indexUrl = helper.getUniqueFilename('index');
-    // don't call registerLink() on this one! 'index' is also a valid longname
+    var urls = {
+      index: helper.getUniqueFilename('index'),
+      files: helper.getUniqueFilename('files'),
+      global: helper.getUniqueFilename('global')
+    };
 
-    var globalUrl = helper.getUniqueFilename('global');
-    helper.registerLink('global', globalUrl);
+    _.each(urls,function(url,name){
+      helper.registerLink(name,url);
+    });
 
     // set up templating
     view.layout = 'layout.tmpl';
@@ -228,11 +231,6 @@ exports.publish = function(taffyData, opts, tutorials) {
         }
     });
 
-    // update outdir if necessary, then create outdir
-    var packageInfo = ( find({kind: 'package'}) || [] ) [0];
-    if (packageInfo && packageInfo.name) {
-        outdir = path.join(outdir, packageInfo.name, packageInfo.version);
-    }
     fs.mkPath(outdir);
 
     // copy the template's static files to outdir
@@ -272,7 +270,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     data().each(function(doclet) {
         var url = helper.createLink(doclet);
         helper.registerLink(doclet.longname, url);
-//TODO
+
         if (doclet.meta) {
             var sourceFile = sourceFiles[getPathFromDoclet(doclet)];
 
@@ -343,10 +341,11 @@ exports.publish = function(taffyData, opts, tutorials) {
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
 
-    if (members.globals.length) { generate('Global', [{kind: 'globalobj'}], globalUrl); }
+    if(members.globals.length){ generate('Global',[{kind: 'globalobj'}],urls.global); }
 
     // index page displays information from package.json and lists files
-    generate('Index',[{ kind: 'mainpage', readme: opts.readme }],indexUrl);
+    generate('Index',[{ kind: 'mainpage', readme: opts.readme }],urls.index);
+    generate('Files',find({kind: 'file'}),urls.files,true,'files.tmpl');
 
     // set up the lists that we'll use to generate pages
     var classes = taffy(members.classes);

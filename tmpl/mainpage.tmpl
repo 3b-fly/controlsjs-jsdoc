@@ -2,7 +2,6 @@
   var data = obj;
   var self = this;
 
-  var files = self.find({kind: 'file'});
   var packages = self.find({kind: 'package',name:{isUndefined: false}});
 ?>
 
@@ -26,16 +25,6 @@
       <dl>
         <?js packages.forEach(function(f){ ?>
           <?js= self.partial('package.tmpl',f) ?>
-        <?js }); ?>
-      </dl>
-    <?js } ?>
-
-    <?js if(files && files.length){ ?>
-      <h3 class="subsection-title">Files</h3>
-
-      <dl>
-        <?js files.forEach(function(f){ ?>
-          <?js= self.partial('file.tmpl',f) ?>
         <?js }); ?>
       </dl>
     <?js } ?>
