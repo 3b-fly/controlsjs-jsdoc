@@ -1,20 +1,10 @@
 module.exports = function(data,members){
   var self = null;
-  var fs = require('fs');
-  var path = require('path');
   var _ = require('underscore');
-  var less = require('less');
-  var helper = require('jsdoc/util/templateHelper');
+  var helper = require('../helper/helper.js')(__dirname);
 
   self = {
     _nav: [],
-    _template: null,
-    _fileCache: [],
-    _templateSettings: {
-      evaluate: /<\?js([\s\S]+?)\?>/g,
-      interpolate: /<\?js=([\s\S]+?)\?>/g,
-      escape: /<\?js~([\s\S]+?)\?>/g
-    },
 
     getMemberSignatures: function(member){
       var signs = [];
@@ -73,36 +63,36 @@ module.exports = function(data,members){
         signatures: self.getMemberSignatures(member),
         childitems: [],
 
-        typedefs: helper.find(data,{
+        typedefs: data({
           kind: 'typedef',
           memberof: member.longname
-        }),
-        members: helper.find(data,{
+        }).get(),
+        members: data({
           kind: 'member',
           memberof: member.longname
-        }),
-        definitions: helper.find(data,{
+        }).get(),
+        definitions: data({
           kind: 'definition',
           memberof: member.longname
-        }),
-        interfaces: helper.find(data,{
+        }).get(),
+        interfaces: data({
           kind: 'interface',
           memberof: member.longname
-        }),
-        methods: helper.find(data,{
+        }).get(),
+        methods: data({
           kind: 'function',
           callback: {isUndefined: true},
           memberof: member.longname
-        }),
-        callbacks: helper.find(data,{
+        }).get(),
+        callbacks: data({
           kind: 'function',
           callback: true,
           memberof: member.longname
-        }),
-        events: helper.find(data,{
+        }).get(),
+        events: data({
           kind: 'event',
           memberof: member.longname
-        })
+        }).get()
       };
     },
 
@@ -144,45 +134,8 @@ module.exports = function(data,members){
       }
     },
 
-    readFile: function(file){
-      if(!self._fileCache[file]){
-        var filePath = path.join(__dirname,file);
-        self._fileCache[file] = fs.readFileSync(filePath,'utf8');
-      }
-      return self._fileCache[file];
-    },
-
-    renderLess: function(file){
-      var css = '';
-      less.render(self.readFile(file),{},function(error,output){
-        if(error){console.log(error);}
-        else{css = output.css;}
-      });
-      return css;
-    },
-
-    callTemplate: function(file,data){
-      file = self.readFile(file);
-      file = _.template(file,self._templateSettings);
-
-      return file.call({
-        data: data,
-        linkto: self._template.linkto,
-        partial: function(file,data){
-          return self.callTemplate(file,data);
-        },
-        readFile: function(file){
-          return self.readFile(file);
-        },
-        renderLess: function(file){
-          return self.renderLess(file);
-        }
-      });
-    },
-
-    generate: function(template){
-      self._template = template;
-      return self.callTemplate('navigation.tmpl',self._nav);
+    generate: function(){
+      return helper.callTemplate('navigation.tmpl',self._nav);
     }
   };
 
