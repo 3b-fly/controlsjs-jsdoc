@@ -1,11 +1,12 @@
 module.exports = function(data,members){
   var self = null;
-  var _ = require('underscore');
   var helper = require('../helper/helper.js')(__dirname);
 
   self = {
     _nav: [],
-    _members: [],
+    _modules: [],
+    _files: [],
+    _links: [],
 
     getMemberSignatures: function(member){
       var signs = [];
@@ -35,7 +36,9 @@ module.exports = function(data,members){
 
     addNavName: function(target){
       if(Array.isArray(target)){
-        _.each(target,function(item){self.addNavName(item);});
+        for(var i in target){
+          self.addNavName(target[i]);
+        }
       }
       else if(target){
         var name = (target.longname) ? target.longname : target.name;
@@ -101,16 +104,24 @@ module.exports = function(data,members){
     buildNavItems: function(data,members){
       var items = {};
 
-      if(members.namespaces && members.namespaces.length){
-        _.each(members.namespaces,function(member){
-          items[member.longname] = self.buildNavItem(data,member,'namespace');
-        });
-      }
+      if(members){
+        if(members.namespaces && members.namespaces.length){
+          for(var i in members.namespaces){
+            var member = members.namespaces[i];
+            items[member.longname] = self.buildNavItem(
+              data,member,'namespace'
+            );
+          };
+        }
 
-      if(members.classes && members.classes.length){
-        _.each(members.classes,function(member){
-          items[member.longname] = self.buildNavItem(data,member,'class');
-        });
+        if(members.classes && members.classes.length){
+          for(var j in members.classes){
+            var member = members.classes[j];
+            items[member.longname] = self.buildNavItem(
+              data,member,'class'
+            );
+          };
+        }
       }
 
       return items;
@@ -118,7 +129,6 @@ module.exports = function(data,members){
 
     buildNav: function(data,members){
       self._nav = [];
-      self._members = members;
       var items = self.buildNavItems(data,members);
 
       for(var longname in items){
@@ -129,18 +139,41 @@ module.exports = function(data,members){
         if(parentItem){parentItem.childitems.push(item);}
         else{self._nav.push(item);}
       }
+
+      self._modules = [];
+      self._files = [];
+      if(members){
+        if(members.modules){self._modules = members.modules;}
+        if(members.files){self._files = members.files;}
+      }
+    },
+
+    buildLinks: function(){
+      self._links = [];
+      if(env.conf.templates && env.conf.templates.socialLinks){
+        for(var name in env.conf.templates.socialLinks){
+          var link = env.conf.templates.socialLinks[name];
+          if(typeof link === 'string'){
+            self._links.push({name: name, url: link});
+          }
+        }
+      }
     },
 
     generate: function(){
       return helper.callTemplate('navigation.tmpl',{
-        modules: self._members.modules,
-        files: self._members.files,
+        modules: self._modules,
+        files: self._files,
+        links: self._links,
         members: self._nav
       });
     }
   };
 
-  if(data && members){self.buildNav(data,members);}
+  if(data && members){
+    self.buildNav(data,members);
+    self.buildLinks();
+  }
 
   return self;
 };

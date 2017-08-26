@@ -37,6 +37,12 @@ You can set options for customizing your documentations.
     },
     "linkPaths": {
       "path/to/src/": "https://github.com/author/app/blob/master/src/%path%#L%lineno%"
+    },
+    "socialLinks": {
+      "MyWeb": "...",
+      "GitHub": "...",
+      "Twitter": "...",
+      "Facebook": "..."
     }
 }
 ```

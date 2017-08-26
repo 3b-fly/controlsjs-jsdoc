@@ -37,7 +37,8 @@ module.exports = function(rootPath){
       file = _.template(file,self._templateSettings);
 
       return file.call({
-        data: data,
+        fs: fs,
+        docs: data,
         linkto: linkto,
         partial: function(file,data){
           return self.callTemplate(file,data);

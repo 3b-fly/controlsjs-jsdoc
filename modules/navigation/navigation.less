@@ -9,17 +9,32 @@
 }
 .navigation{
   position: fixed;
-  float: left;
-  width: 320px;
+  left: 0px;
+  width: 367px;
   height: 100%;
   background-color: #1a1a1a;
+
+  .icon{
+    display: block;
+    width: 32px;
+    height: 32px;
+    outline: 0;
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+    &:hover{
+      opacity: 1;
+      -moz-opacity: 1;
+      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+    }
+  }
 
   .applicationName{
     position: absolute;
     left: 0px;
     right: 0px;
     top: 10px;
-    margin: 0px;
+    margin: 0px 0px 0px 63px;
     padding: 10px 15px;
     font-size: 17px;
     line-height: 20px;
@@ -48,18 +63,9 @@
     top: 60px;
     height: 32px;
     padding: 0px 15px;
+    margin-left: 63px;
 
     .icon{
-      outline: 0;
-      opacity: 0.5;
-      -moz-opacity: 0.5;
-      filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
-      &:hover{
-        opacity: 1;
-        -moz-opacity: 1;
-        filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);
-      }
-
       &.index,
       &.tutorials{
         float: left;
@@ -79,6 +85,7 @@
     right: 0px;
     top: 102px;
     padding: 0px 15px;
+    margin-left: 63px;
 
     input{
       width: 90%;
@@ -100,6 +107,7 @@
     bottom: 0px;
     overflow: auto;
     padding: 0px 15px;
+    margin-left: 63px;
   }
 
   li.item{
@@ -211,5 +219,18 @@
         padding-left: 8px;
       }
     }
+  }
+
+  .socialLinks{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 32px;
+    padding: 102px 15px 15px 15px;
+    border-right: 1px solid #333333;
+    .icon{
+      margin-bottom: 10px;
+    }
+
   }
 }

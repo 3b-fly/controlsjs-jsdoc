@@ -1,15 +1,16 @@
 <?js
+  var data = this.docs;
   var self = this;
 ?>
 
-<li class="item" data-name="<?js= self.data.navname ?>">
+<li class="item" data-name="<?js= data.navname ?>">
 
   <span class="title">
-    <?js= self.linkto(self.data.longname,self.data.navname) ?>
+    <?js= self.linkto(data.longname,data.navname) ?>
 
     <?js
-      if(self.data.signatures && self.data.signatures.length){
-        var signs = self.data.signatures.slice().reverse();
+      if(data.signatures && data.signatures.length){
+        var signs = data.signatures.slice().reverse();
         signs.forEach(function(sign){
     ?>
         <span class="type-signature <?js= sign.toLowerCase() ?>">
@@ -19,24 +20,24 @@
     <?js } ?>
   </span>
 
-  <?js if(self.data.properties && self.data.properties.length){ ?>
+  <?js if(data.properties && data.properties.length){ ?>
     <ul class="members itemMembers">
       <span class="subtitle">Properties</span>
-      <?js self.data.properties.forEach(function(v){
+      <?js data.properties.forEach(function(v){
         if(!v){return;} ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(
-            self.data.longname,v.name,undefined,'property:'+v.name
+            data.longname,v.name,undefined,'property:'+v.name
           ) ?>
         </li>
       <?js }); ?>
     </ul>
   <?js } ?>
 
-  <?js if(self.data.typedefs && self.data.typedefs.length){ ?>
+  <?js if(data.typedefs && data.typedefs.length){ ?>
     <ul class="typedefs itemMembers">
       <span class="subtitle">Typedefs</span>
-      <?js self.data.typedefs.forEach(function(v){ ?>
+      <?js data.typedefs.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(v.longname,v.name) ?>
         </li>
@@ -44,10 +45,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.members && self.data.members.length){ ?>
+  <?js if(data.members && data.members.length){ ?>
     <ul class="members itemMembers">
       <span class="subtitle">Members</span>
-      <?js self.data.members.forEach(function(v){ ?>
+      <?js data.members.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(v.longname,v.name) ?>
         </li>
@@ -55,10 +56,10 @@
     </ul>
   <?js } ?>
 
-    <?js if(self.data.definitions && self.data.definitions.length){ ?>
+    <?js if(data.definitions && data.definitions.length){ ?>
     <ul class="definitions itemMembers">
       <span class="subtitle">Definitions</span>
-      <?js self.data.definitions.forEach(function(d){ ?>
+      <?js data.definitions.forEach(function(d){ ?>
         <li data-name="<?js= d.navname ?>">
           <?js= self.linkto(d.longname,d.name) ?>
         </li>
@@ -66,10 +67,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.interfaces && self.data.interfaces.length){ ?>
+  <?js if(data.interfaces && data.interfaces.length){ ?>
     <ul class="methods itemMembers">
       <span class="subtitle">Interfaces</span>
-      <?js self.data.interfaces.forEach(function(i){ ?>
+      <?js data.interfaces.forEach(function(i){ ?>
         <li data-name="<?js= i.navname ?>">
           <?js= self.linkto(i.longname,i.name) ?>
         </li>
@@ -77,10 +78,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.methods && self.data.methods.length){ ?>
+  <?js if(data.methods && data.methods.length){ ?>
     <ul class="methods itemMembers">
       <span class="subtitle">Methods</span>
-      <?js self.data.methods.forEach(function(v){ ?>
+      <?js data.methods.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(v.longname,v.name) ?>
         </li>
@@ -88,10 +89,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.callbacks && self.data.callbacks.length){ ?>
+  <?js if(data.callbacks && data.callbacks.length){ ?>
     <ul class="callbacks itemMembers">
       <span class="subtitle">Events</span>
-      <?js self.data.callbacks.forEach(function(v){ ?>
+      <?js data.callbacks.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(v.longname,v.name) ?>
         </li>
@@ -99,10 +100,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.events && self.data.events.length){ ?>
+  <?js if(data.events && data.events.length){ ?>
     <ul class="events itemMembers">
       <span class="subtitle">Event objects</span>
-      <?js self.data.events.forEach(function(v){ ?>
+      <?js data.events.forEach(function(v){ ?>
         <li data-name="<?js= v.navname ?>">
           <?js= self.linkto(v.longname,v.name) ?>
         </li>
@@ -110,10 +111,10 @@
     </ul>
   <?js } ?>
 
-  <?js if(self.data.childitems && self.data.childitems.length){ ?>
+  <?js if(data.childitems && data.childitems.length){ ?>
     <ul class="sublist">
       <?js
-        self.data.childitems.forEach(function(item){
+        data.childitems.forEach(function(item){
           print(self.partial('navigation_item.tmpl',item));
         });
       ?>

@@ -1,4 +1,5 @@
 <?js
+  var data = this.docs;
   var self = this;
 ?>
 
@@ -12,18 +13,18 @@
 
   <div class="icons">
     <a href="index.html" class="icon index">
-      <img src="icons/freepik/home.png" alt="Index" title="Index">
+      <img src="icons/freepik/home.png" alt="Index" title="Index"/>
     </a>
 
-    <?js if(self.data.files && self.data.files.length){ ?>
+    <?js if(data.files && data.files.length){ ?>
       <a href="files.html" class="icon files">
-        <img src="icons/freepik/file.png" alt="Files" title="Files">
+        <img src="icons/freepik/file.png" alt="Files" title="Files"/>
       </a>
     <?js } ?>
 
-    <?js if(self.data.modules && self.data.modules.length){ ?>
+    <?js if(data.modules && data.modules.length){ ?>
       <a href="modules.html" class="icon modules">
-        <img src="icons/freepik/package.png" alt="Packages" title="Packages">
+        <img src="icons/freepik/package.png" alt="Packages" title="Packages"/>
       </a>
     <?js } ?>
   </div>
@@ -34,11 +35,30 @@
 
   <ul id="nav-list" class="list">
     <?js
-      self.data.members.forEach(function(item){
+      data.members.forEach(function(item){
         print(self.partial('navigation_item.tmpl',item));
       });
     ?>
   </ul>
+
+  <div class="socialLinks">
+    <?js if(data.links && data.links.length){ ?>
+      <?js
+        data.links.forEach(function(link){
+          var icon = link.name.toLowerCase();
+          var iconPath = env.opts.template+'/static/icons/social/'+icon+'.png';
+          if(!self.fs.existsSync(iconPath)){icon = 'default';}
+      ?>
+        <a href="<?js= link.url ?>" class="icon social">
+          <img
+            src="icons/social/<?js= icon ?>.png"
+            alt="<?js= link.name ?>"
+            title="<?js= link.name ?>"
+          />
+        </a>
+      <?js }); ?>
+    <?js } ?>
+  </div>
 
 </div>
 
