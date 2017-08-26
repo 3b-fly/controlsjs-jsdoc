@@ -5,6 +5,7 @@ module.exports = function(data,members){
 
   self = {
     _nav: [],
+    _members: [],
 
     getMemberSignatures: function(member){
       var signs = [];
@@ -17,8 +18,9 @@ module.exports = function(data,members){
 
       var kindSignature = null;
       switch(member.kind){
-        case 'module': kindSignature = 'module'; break;
-        case 'namespace': kindSignature = 'namespace'; break;
+        case 'namespace':
+          kindSignature = 'namespace';
+        break;
         case 'class':
           kindSignature = (member.hideconstructor) ? 'object' : 'class';
         break;
@@ -99,19 +101,13 @@ module.exports = function(data,members){
     buildNavItems: function(data,members){
       var items = {};
 
-      if(members.modules.length){
-        _.each(members.modules,function(member){
-          items[member.longname] = self.buildNavItem(data,member,'module');
-        });
-      }
-
-      if(members.namespaces.length){
+      if(members.namespaces && members.namespaces.length){
         _.each(members.namespaces,function(member){
           items[member.longname] = self.buildNavItem(data,member,'namespace');
         });
       }
 
-      if(members.classes.length){
+      if(members.classes && members.classes.length){
         _.each(members.classes,function(member){
           items[member.longname] = self.buildNavItem(data,member,'class');
         });
@@ -122,6 +118,7 @@ module.exports = function(data,members){
 
     buildNav: function(data,members){
       self._nav = [];
+      self._members = members;
       var items = self.buildNavItems(data,members);
 
       for(var longname in items){
@@ -135,7 +132,11 @@ module.exports = function(data,members){
     },
 
     generate: function(){
-      return helper.callTemplate('navigation.tmpl',self._nav);
+      return helper.callTemplate('navigation.tmpl',{
+        modules: self._members.modules,
+        files: self._members.files,
+        members: self._nav
+      });
     }
   };
 

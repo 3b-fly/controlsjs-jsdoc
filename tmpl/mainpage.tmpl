@@ -1,8 +1,6 @@
 <?js
   var data = obj;
   var self = this;
-
-  var packages = self.find({kind: 'package',name:{isUndefined: false}});
 ?>
 
 <section class="mainpage">
@@ -18,16 +16,6 @@
   <?js } ?>
 
   <article>
-
-    <?js if(packages && packages.length){ ?>
-      <h3 class="subsection-title">Packages</h3>
-
-      <dl>
-        <?js packages.forEach(function(f){ ?>
-          <?js= self.partial('package.tmpl',f) ?>
-        <?js }); ?>
-      </dl>
-    <?js } ?>
 
   </article>
 

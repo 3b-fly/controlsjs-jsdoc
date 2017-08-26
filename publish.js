@@ -136,33 +136,6 @@ function generate(title,docs,filename,resolveLinks,template) {
 }
 
 /**
- * Look for classes or functions with the same name as modules (which indicates that the module
- * exports only that class or function), then attach the classes or functions to the `module`
- * property of the appropriate module doclets. The name of each class or function is also updated
- * for display purposes. This function mutates the original arrays.
- *
- * @private
- * @param {Array.<module:jsdoc/doclet.Doclet>} doclets - The array of classes and functions to
- * check.
- * @param {Array.<module:jsdoc/doclet.Doclet>} modules - The array of module doclets to search.
- */
-function attachModuleSymbols(doclets, modules) {
-    var symbols = {};
-
-    // build a lookup table
-    doclets.forEach(function(symbol) {
-        symbols[symbol.longname] = symbol;
-    });
-
-    return modules.map(function(module) {
-        if (symbols[module.longname]) {
-            module.module = symbols[module.longname];
-            module.module.name = module.module.name.replace('module:', 'require("') + '")';
-        }
-    });
-}
-
-/**
     @param {TAFFY} taffyData See <http://taffydb.com/>.
     @param {object} opts
     @param {Tutorial} tutorials
@@ -179,6 +152,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     var urls = {
       index: helper.getUniqueFilename('index'),
       files: helper.getUniqueFilename('files'),
+      modules: helper.getUniqueFilename('modules'),
       global: helper.getUniqueFilename('global')
     };
 
@@ -325,6 +299,7 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     var members = helper.getMembers(data);
     members.definitions = helper.find(data,{kind:'definition'});
+    members.files = helper.find(data,{kind:'file'});
     members.tutorials = tutorials.children;
 
     // add template helpers
@@ -335,37 +310,34 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.htmlsafe = helper.htmlsafe;
     view.members = members;
 
-    // once for all
     view.navigation = require("./modules/navigation/navigation.js")(data,members);
 
-    attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
-        members.modules );
-
-    if(members.globals.length){ generate('Global',[{kind: 'globalobj'}],urls.global); }
-
-    // index page displays information from package.json and lists files
     generate('Index',[{ kind: 'mainpage', readme: opts.readme }],urls.index);
-    generate('Files',find({kind: 'file'}),urls.files,true,'files.tmpl');
+
+    if(members.files.length){
+      generate('Files',members.files,urls.files,true,'files.tmpl');
+    }
+    if(members.modules.length){
+      generate('Modules',members.modules,urls.modules,true,'modules.tmpl');
+    }
+    if(members.globals.length){
+      generate('Global',[{kind: 'globalobj'}],urls.global);
+    }
+
 
     // set up the lists that we'll use to generate pages
     var classes = taffy(members.classes);
-    var modules = taffy(members.modules);
     var namespaces = taffy(members.namespaces);
     var mixins = taffy(members.mixins);
     var externals = taffy(members.externals);
     var definitions = taffy(members.definitions);
     var interfaces = taffy(members.interfaces);
-//console.log(members);
+
     for (var longname in helper.longnameToUrl) {
         if ( hasOwnProp.call(helper.longnameToUrl, longname) ) {
             var myClasses = helper.find(classes, {longname: longname});
             if (myClasses.length) {
                 generate('Class: ' + myClasses[0].name, myClasses, helper.longnameToUrl[longname]);
-            }
-
-            var myModules = helper.find(modules, {longname: longname});
-            if (myModules.length) {
-                generate('Module: ' + myModules[0].name, myModules, helper.longnameToUrl[longname]);
             }
 
             var myNamespaces = helper.find(namespaces, {longname: longname});

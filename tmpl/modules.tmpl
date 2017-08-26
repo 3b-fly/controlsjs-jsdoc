@@ -1,0 +1,37 @@
+<?js
+  var data = obj;
+  var self = this;
+console.log(data.docs);
+?>
+
+<section class="mainpage">
+
+  <header>
+    <h2 class="name">Packages</h2>
+  </header>
+
+  <article>
+
+    <?js if(data.docs && data.docs.length){ ?>
+      <dl>
+        <?js data.docs.forEach(function(doc){ ?>
+          <dt>
+            <div class="nameContainer">
+              <h4 class="name" id="<?js= doc.id ?>"><?js= doc.name ?></h4>
+            </div>
+          </dt>
+
+          <dd>
+            <?js if(doc.description){ ?>
+              <div class="description"><?js= doc.description ?></div>
+            <?js } ?>
+
+            <?js= self.partial('details.tmpl',doc) ?>
+          </dd>
+        <?js }); ?>
+      </dl>
+    <?js } ?>
+
+  </article>
+
+</section>
