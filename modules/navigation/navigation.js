@@ -86,12 +86,10 @@ module.exports = function(data,members){
         }).get(),
         methods: data({
           kind: 'function',
-          callback: {isUndefined: true},
           memberof: member.longname
         }).get(),
         callbacks: data({
-          kind: 'function',
-          callback: true,
+          kind: 'event-callback',
           memberof: member.longname
         }).get(),
         events: data({

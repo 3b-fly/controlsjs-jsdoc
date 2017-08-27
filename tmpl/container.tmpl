@@ -179,8 +179,7 @@
 
     <?js
         var callbacks = self.find({
-            kind: 'function',
-            callback: true,
+            kind: 'event-callback',
             memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
         });
         if (callbacks && callbacks.length && callbacks.forEach) {
