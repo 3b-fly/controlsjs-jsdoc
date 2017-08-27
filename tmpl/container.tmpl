@@ -10,7 +10,7 @@
 <section class="kind-<?js= doc.kind.toLowerCase() ?>">
 
 <header>
-    <h2 class="name">
+    <h1 class="name">
       <?js if (doc.ancestors && doc.ancestors.length) { ?>
         <span class="ancestors"><?js= doc.ancestors.join('') ?></span>
       <?js } ?>
@@ -19,7 +19,7 @@
         <sup class="variation"><?js= doc.variation ?></sup>
       <?js } ?>
       <?js= self.partial('typesignature.tmpl', doc) ?>
-    </h2>
+    </h1>
     <?js if (doc.classdesc) { ?>
       <div class="class-description"><?js= doc.classdesc ?></div>
     <?js } ?>
@@ -27,13 +27,10 @@
 
 <article>
     <div class="container-overview">
-    <?js if (doc.kind === 'module' && doc.module) { ?>
-        <?js= self.partial('method.tmpl', doc.module) ?>
-    <?js } ?>
 
-    <?js if (doc.kind === 'class') { ?>
+      <?js if (doc.kind === 'class') { ?>
         <?js= self.partial('method.tmpl', doc) ?>
-    <?js } else { ?>
+      <?js }else{ ?>
         <?js if (doc.description) { ?>
             <div class="description"><?js= doc.description ?></div>
         <?js } ?>
@@ -42,14 +39,15 @@
         <?js= self.partial('details.tmpl', doc) ?>
 
         <?js if (doc.examples && doc.examples.length) { ?>
-            <h3 class="subsection-title">Example<?js= doc.examples.length > 1? 's':'' ?></h3>
+            <h3>Example<?js= doc.examples.length > 1? 's':'' ?></h3>
+
             <?js= self.partial('examples.tmpl', doc.examples) ?>
         <?js } ?>
-    <?js } ?>
+      <?js } ?>
     </div>
 
     <?js if (doc.augments && doc.augments.length) { ?>
-        <h3 class="subsection-title">Extends</h3>
+        <h3>Extends</h3>
 
         <ul class="subsection-list"><?js doc.augments.forEach(function(a) { ?>
             <li><?js= self.linkto(a, a) ?></li>
@@ -57,7 +55,7 @@
     <?js } ?>
 
     <?js if (doc.mixes && doc.mixes.length) { ?>
-        <h3 class="subsection-title">Mixes In</h3>
+        <h3>Mixes In</h3>
 
         <ul><?js doc.mixes.forEach(function(a) { ?>
             <li><?js= self.linkto(a, a) ?></li>
@@ -65,7 +63,7 @@
     <?js } ?>
 
     <?js if (doc.requires && doc.requires.length) { ?>
-        <h3 class="subsection-title">Requires</h3>
+        <h3>Requires</h3>
 
         <ul class="subsection-list"><?js doc.requires.forEach(function(r) { ?>
             <li><?js= self.linkto(r, r) ?></li>
@@ -78,7 +76,7 @@
         var classes = self.find({kind: 'class', memberof: doc.longname});
         if (doc.kind !== 'globalobj' && classes && classes.length) {
     ?>
-        <h3 class="subsection-title">Classes</h3>
+        <h3>Classes</h3>
 
         <dl><?js classes.forEach(function(c) { ?>
             <dt><?js= self.linkto(c.longname, c.name) ?></dt>
@@ -90,7 +88,7 @@
         var namespaces = self.find({kind: 'namespace', memberof: doc.longname});
         if (doc.kind !== 'globalobj' && namespaces && namespaces.length) {
     ?>
-        <h3 class="subsection-title">Namespaces</h3>
+        <h3>Namespaces</h3>
 
         <dl><?js namespaces.forEach(function(n) { ?>
             <dt>
@@ -109,7 +107,7 @@
         });
         if (typedefs && typedefs.length && typedefs.forEach) {
     ?>
-        <h3 class="subsection-title">Type Definitions</h3>
+        <h3>Type Definitions</h3>
 
         <dl>
             <?js typedefs.forEach(function(e) { ?>
@@ -129,7 +127,7 @@
         });
         if (definitions && definitions.length && definitions.forEach) {
     ?>
-        <h3 class="subsection-title">Definitions</h3>
+        <h3>Definitions</h3>
 
         <ul><?js definitions.forEach(function(i) { ?>
             <li><?js= self.linkto(i.longname, i.name) ?></li>
@@ -143,7 +141,7 @@
         });
         if (interfaces && interfaces.length && interfaces.forEach) {
     ?>
-        <h3 class="subsection-title">Interfaces</h3>
+        <h3>Interfaces</h3>
 
         <ul><?js interfaces.forEach(function(i) { ?>
             <li><?js= self.linkto(i.longname, i.name) ?></li>
@@ -157,7 +155,7 @@
         });
         if (members && members.length && members.forEach) {
     ?>
-        <h3 class="subsection-title">Members</h3>
+        <h3>Members</h3>
 
         <dl><?js members.forEach(function(p) { ?>
             <?js= self.partial('members.tmpl', p) ?>
@@ -172,7 +170,7 @@
         });
         if (methods && methods.length && methods.forEach) {
     ?>
-        <h3 class="subsection-title">Methods</h3>
+        <h3>Methods</h3>
 
         <dl><?js methods.forEach(function(m) { ?>
             <?js= self.partial('method.tmpl', m) ?>
@@ -187,7 +185,7 @@
         });
         if (callbacks && callbacks.length && callbacks.forEach) {
     ?>
-        <h3 class="subsection-title">Events</h3>
+        <h3>Events</h3>
 
         <dl><?js callbacks.forEach(function(m) { ?>
             <?js= self.partial('method.tmpl', m) ?>
@@ -201,7 +199,7 @@
         });
         if (events && events.length && events.forEach) {
     ?>
-        <h3 class="subsection-title">Event objects</h3>
+        <h3>Event objects</h3>
 
         <dl><?js events.forEach(function(e) { ?>
             <?js= self.partial('method.tmpl', e) ?>

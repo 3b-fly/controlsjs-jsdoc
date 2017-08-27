@@ -10,21 +10,29 @@
         else if(data.inherited || data.inherits){cl = ' inherited';}
     ?>
     <div class="nameContainer<?js= cl ?>">
-        <h4 class="name" id="<?js= id ?>">
+      <?js if(data.kind === 'class'){ ?>
+        <h2 id="<?js= id ?>">
           <?js= self.partial('attribs.tmpl',data) ?>
-          <?js= ((data.kind === 'class') && !data.hideconstructor ? 'new ' : '') ?>
+          <?js= (!data.hideconstructor ? 'new ' : '') ?>
+          <?js= (data.scope === 'static' ? longname : name) ?>
+          <?js= (data.signature ? data.signature : '') ?>
+        </h2>
+      <?js }else{ ?>
+        <h4 id="<?js= id ?>">
+          <?js= self.partial('attribs.tmpl',data) ?>
           <?js= (data.scope === 'static' ? longname : name) ?>
           <?js= (data.signature ? data.signature : '') ?>
         </h4>
+      <?js } ?>
 
-        <?js if(data.meta && data.meta.linkpath){ ?>
-          <div class="tag-source">
-            <?js= self.linkto(
-              data.meta.linkpath,
-              data.meta.filename+', line '+data.meta.lineno
-            ) ?>
-          </div>
-        <?js } ?>
+      <?js if(data.meta && data.meta.linkpath){ ?>
+        <div class="tag-source">
+          <?js= self.linkto(
+            data.meta.linkpath,
+            data.meta.filename+', line '+data.meta.lineno
+          ) ?>
+        </div>
+      <?js } ?>
 
     </div>
 
@@ -45,7 +53,7 @@
 
     <?js if (data.params && params.length) { ?>
       <?js if(data.kind === 'class'){ ?>
-        <h3 class="subsection-title">Parameters</h3>
+        <h3>Parameters</h3>
       <?js }else{ ?>
         <h5>Parameters:</h5>
       <?js } ?>
@@ -94,7 +102,7 @@
     <?js } ?>
 
     <?js if (data.examples && examples.length) { ?>
-        <h5 class="subsection-title">Example<?js= examples.length > 1? 's':'' ?></h5>
+        <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
         <?js= this.partial('examples.tmpl', examples) ?>
     <?js } ?>
 </dd>

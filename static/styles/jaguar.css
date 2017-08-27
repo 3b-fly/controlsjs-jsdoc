@@ -22,23 +22,27 @@ li {
   padding: 20px 20px;
   margin-left: 382px;
 }
-.main .page-title {
-  display: none;
-}
 .main h1 {
   font-weight: bold;
   font-size: 26px;
   margin: 0;
 }
+.main h1 .type-signature {
+  top: -5px;
+}
 .main h2 {
   font-weight: bold;
-  font-size: 24px;
-  margin: 0;
+  font-size: 20px;
+  margin: 20px 0px 5px 0px;
+}
+.main h2 .type-signature {
+  top: -4px;
 }
 .main h3 {
   font-weight: bold;
-  font-size: 12px;
-  margin: 5px 0;
+  font-size: 18px;
+  margin: 20px 0px 5px 0px;
+  color: #779c34;
 }
 .main h4 {
   font-weight: bold;
@@ -46,6 +50,9 @@ li {
   margin: 15px 0px 15px 0px;
   line-height: 22px;
   height: 22px;
+}
+.main h4 .type-signature {
+  top: -3px;
 }
 .main h5 {
   font-weight: bold;
@@ -82,109 +89,90 @@ li {
   font-size: 12px;
   margin-left: 0px;
 }
-.main h2.name span.type-signature {
-  font-weight: normal;
-  line-height: 15px;
-  top: -4px;
-}
-.main h2.name span.attribs {
-  margin-right: 5px;
-}
-.main h2.name span.types {
-  margin-left: 5px;
-}
-.main h4.name span.type-signature {
-  font-weight: normal;
-  line-height: 15px;
-  top: -3px;
-}
-.main h4.name span.attribs {
-  margin-right: 5px;
-}
-.main h4.name span.types {
-  margin-left: 5px;
-}
-.main h4.name span.arrow-right {
+.main span.arrow-right {
   display: inline-block;
   vertical-align: middle;
-  margin: -2px 7px 0px 7px;
+  margin: -2px 0px 0px 7px;
   color: #808080;
 }
-.main h4.name span.arrow-right:empty {
+.main span.arrow-right:empty {
   width: 15px;
 }
-.main h4.name span.arrow-right:before {
+.main span.arrow-right:before {
   content: "\25b6";
 }
-.main span.type-signature {
+.main .attribs {
+  margin-right: 5px;
+}
+.main .types {
+  margin-left: 5px;
+}
+.main .type-signature {
   position: relative;
   display: inline-block;
-  border-radius: 3px;
+  font-weight: normal;
   font-size: 11px;
+  line-height: 15px;
+  border-radius: 3px;
   padding: 2px 5px;
   border: 1px solid #808080;
   color: #808080;
 }
-.main span.type-signature.returnType {
+.main .type-signature.returnType {
   margin-left: 3px;
   color: #808080 !important;
   font-weight: normal !important;
   background-color: transparent !important;
   border-width: 0px;
 }
-.main span.type-signature.static,
-.main span.type-signature.constant,
-.main span.type-signature.readonly {
+.main .type-signature.static,
+.main .type-signature.constant,
+.main .type-signature.readonly {
   border-width: 0px;
   background-color: #779c34 !important;
   color: #ffffff;
 }
-.main span.type-signature.abstract {
+.main .type-signature.abstract {
   border-width: 0px;
   background-color: #d96629 !important;
   color: #ffffff;
 }
-.main span.type-signature.inherited,
-.main span.type-signature.overrides {
+.main .type-signature.inherited,
+.main .type-signature.overrides {
   border-width: 0px;
   background-color: #888888 !important;
 }
-.main span.type-signature.inherited a,
-.main span.type-signature.overrides a {
+.main .type-signature.inherited a,
+.main .type-signature.overrides a {
   position: relative;
   color: #ffffff;
 }
-.main span.type-signature.module,
-.main span.type-signature.namespace {
+.main .type-signature.module,
+.main .type-signature.namespace {
   border-width: 0px;
   background-color: #913d9e !important;
   color: #ffffff;
 }
-.main span.type-signature.number,
-.main span.type-signature.integer,
-.main span.type-signature.float,
-.main span.type-signature.boolean,
-.main span.type-signature.array,
-.main span.type-signature.string {
+.main .type-signature.number,
+.main .type-signature.integer,
+.main .type-signature.float,
+.main .type-signature.boolean,
+.main .type-signature.array,
+.main .type-signature.string {
   border-width: 0px;
   background-color: #808080 !important;
   color: #ffffff;
 }
-.main span.type-signature.object,
-.main span.type-signature.class {
+.main .type-signature.object,
+.main .type-signature.class {
   border-width: 0px;
   background-color: #3978ae !important;
   color: #ffffff;
 }
-.main span.type-signature.control {
+.main .type-signature.control {
   border-width: 0px;
   background-color: #b19915 !important;
   color: #ffffff;
-}
-.main .subsection-title {
-  font-size: 16px;
-  margin-top: 30px;
-  color: #779c34;
 }
 .main .subsection-list {
   font-size: 12px;
@@ -200,12 +188,6 @@ li {
 }
 .main .description p {
   font-size: 13px;
-}
-.main .description h2 {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #efefef;
 }
 .main .description pre {
   margin: 10px 0;
@@ -362,24 +344,6 @@ li {
   margin-right: 5px;
   color: #808080;
 }
-.main .readme p {
-  margin-top: 15px;
-  line-height: 1.2;
-  font-size: 14px;
-}
-.main .readme h1 {
-  font-size: 26px;
-}
-.main .readme h2 {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e1e1e1;
-}
-.main .readme li {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
 .main article ol,
 .main article ul {
   margin-left: 25px;
@@ -392,19 +356,21 @@ li {
   margin-bottom: 5px;
   list-style-type: disc;
 }
-.main dd.member-content .details {
-  margin-left: 30px;
+.main blockquote {
+  margin: 0px;
+  padding: 0px 25px;
+  border-left: 4px solid #e1e1e1;
+  color: #6a737d;
 }
-.main dd.member-content .details .subsection-title {
-  font-size: 14px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+.main blockquote h3,
+.main blockquote h5 {
+  color: #6a737d;
 }
 footer {
   margin: 15px 0;
   padding-top: 15px;
   border-top: 1px solid #e1e1e1;
   font-family: "freight-text-pro", Georgia, Cambria, "Times New Roman", Times, serif;
-  font-size: 0.8em;
-  color: gray;
+  font-size: 12px;
+  color: #6a737d;
 }

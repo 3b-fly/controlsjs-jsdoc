@@ -2,26 +2,31 @@
   padding: 20px 20px;
   margin-left: 382px;
 
-  .page-title{
-      display: none;
-  }
-
   h1{
     font-weight: bold;
     font-size: 26px;
     margin: 0;
+
+    .type-signature{
+      top: -5px;
+    }
   }
 
   h2{
     font-weight: bold;
-    font-size: 24px;
-    margin: 0;
+    font-size: 20px;
+    margin: 20px 0px 5px 0px;
+
+    .type-signature{
+      top: -4px;
+    }
   }
 
   h3{
     font-weight: bold;
-    font-size: 12px;
-    margin: 5px 0;
+    font-size: 18px;
+    margin: 20px 0px 5px 0px;
+    color: #779c34;
   }
 
   h4{
@@ -30,6 +35,10 @@
     margin: 15px 0px 15px 0px;
     line-height: 22px;
     height: 22px;
+
+    .type-signature{
+      top: -3px;
+    }
   }
 
   h5{
@@ -72,67 +81,42 @@
     margin-left: 0px;
   }
 
-  h2.name{
+  span.arrow-right{
+    display: inline-block;
+    vertical-align: middle;
+    margin: -2px 0px 0px 7px;
+    color: #808080;
 
-    span.type-signature{
-      font-weight: normal;
-      line-height: 15px;
-      top: -4px;
+    &:empty{
+      width: 15px;
     }
-
-    span.attribs{
-      margin-right: 5px;
-    }
-
-    span.types{
-      margin-left: 5px;
+    &:before{
+      content: "\25b6";
     }
   }
 
-  h4.name{
-
-    span.type-signature{
-      font-weight: normal;
-      line-height: 15px;
-      top: -3px;
-    }
-
-    span.attribs{
-      margin-right: 5px;
-    }
-
-    span.types{
-      margin-left: 5px;
-    }
-
-    span.arrow-right{
-      display: inline-block;
-      vertical-align: middle;
-      margin: -2px 7px 0px 7px;
-      color: #808080;
-
-      &:empty{
-        width: 15px;
-      }
-      &:before{
-        content: "\25b6";
-      }
-    }
+  .attribs{
+    margin-right: 5px;
   }
 
+  .types{
+    margin-left: 5px;
+  }
 
-  span.type-signature{
+  .type-signature{
     position: relative;
     display: inline-block;
-    border-radius: 3px;
+    font-weight: normal;
     font-size: 11px;
+    line-height: 15px;
+    border-radius: 3px;
     padding: 2px 5px;
 
     border: 1px solid #808080;
     color: #808080;
   }
 
-  span.type-signature.returnType{
+  .type-signature.returnType{
     margin-left: 3px;
     color: #808080 !important;
     font-weight: normal !important;
@@ -140,22 +124,22 @@
     border-width: 0px;
   }
 
-  span.type-signature.static,
-  span.type-signature.constant,
-  span.type-signature.readonly{
+  .type-signature.static,
+  .type-signature.constant,
+  .type-signature.readonly{
     border-width: 0px;
     background-color: #779c34 !important;
     color: #ffffff;
   }
 
-  span.type-signature.abstract{
+  .type-signature.abstract{
     border-width: 0px;
     background-color: #d96629 !important;
     color: #ffffff;
   }
 
-  span.type-signature.inherited,
-  span.type-signature.overrides{
+  .type-signature.inherited,
+  .type-signature.overrides{
     border-width: 0px;
     background-color: #888888 !important;
     a{
@@ -164,41 +148,35 @@
     }
   }
 
-  span.type-signature.module,
-  span.type-signature.namespace{
+  .type-signature.module,
+  .type-signature.namespace{
     border-width: 0px;
     background-color: #913d9e !important;
     color: #ffffff;
   }
 
-  span.type-signature.number,
-  span.type-signature.integer,
-  span.type-signature.float,
-  span.type-signature.boolean,
-  span.type-signature.array,
-  span.type-signature.string{
+  .type-signature.number,
+  .type-signature.integer,
+  .type-signature.float,
+  .type-signature.boolean,
+  .type-signature.array,
+  .type-signature.string{
     border-width: 0px;
     background-color: #808080 !important;
     color: #ffffff;
   }
 
-  span.type-signature.object,
-  span.type-signature.class{
+  .type-signature.object,
+  .type-signature.class{
     border-width: 0px;
     background-color: #3978ae !important;
     color: #ffffff;
   }
 
-  span.type-signature.control{
+  .type-signature.control{
     border-width: 0px;
     background-color: #b19915 !important;
     color: #ffffff;
-  }
-
-  .subsection-title{
-    font-size: 16px;
-    margin-top: 30px;
-    color: #779c34;
   }
 
   .subsection-list{
@@ -216,13 +194,6 @@
 
     p{
       font-size: 13px;
-    }
-
-    h2{
-      margin-top: 30px;
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #efefef;
     }
 
     pre{
@@ -418,30 +389,6 @@
     }
   }
 
-  .readme {
-    p{
-      margin-top: 15px;
-      line-height: 1.2;
-      font-size: 14px;
-    }
-
-    h1{
-      font-size: 26px;
-    }
-
-    h2{
-      margin-top: 30px;
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #e1e1e1;
-    }
-
-    li{
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-  }
-
   article{
     ol,ul{
       margin-left: 25px;
@@ -458,16 +405,13 @@
     }
   }
 
-  dd.member-content{
-    .details{
-      margin-left: 30px;
-      .subsection-title{
-        font-size: 14px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-      }
+  blockquote{
+    margin: 0px;
+    padding: 0px 25px;
+    border-left: 4px solid #e1e1e1;
+    color: #6a737d;
+    h3,h5{
+      color: #6a737d;
     }
   }
-
-
 }

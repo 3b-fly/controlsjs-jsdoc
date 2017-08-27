@@ -27,9 +27,7 @@
     <?js= self.partial('details.tmpl', data) ?>
 
     <?js if (data.examples && examples.length) { ?>
-        <h3 class="subsection-title">
-            Example<?js= examples.length > 1? 's':'' ?>
-        </h3>
+        <h5>Example<?js= examples.length > 1? 's':'' ?></h5>
         <?js= self.partial('examples.tmpl', examples) ?>
     <?js } ?>
 </dd>
