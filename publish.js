@@ -95,11 +95,11 @@ function getPathFromDoclet(doclet) {
 
 function getLinkPath(tmplConf,sourcePath){
   var path = null;
-  if(tmplConf.linkPaths && sourcePath){
-    for(var srcPath in tmplConf.linkPaths){
+  if(tmplConf.sourceLinks && sourcePath){
+    for(var srcPath in tmplConf.sourceLinks){
       var absSrcPath = resolveSourcePath(srcPath);
       if(sourcePath.substring(0,absSrcPath.length) === absSrcPath){
-        path = tmplConf.linkPaths[srcPath].replace(
+        path = tmplConf.sourceLinks[srcPath].replace(
           '%path%',sourcePath.substring(absSrcPath.length+1)
         );
       }
@@ -241,27 +241,33 @@ exports.publish = function(taffyData, opts, tutorials) {
 
     var commonPrefix = path.commonPrefix(sourceFilePaths);
 
-    data().each(function(doclet) {
-        var url = helper.createLink(doclet);
-        helper.registerLink(doclet.longname, url);
+    data().each(function(doclet){
 
-        if (doclet.meta) {
-            var sourceFile = sourceFiles[getPathFromDoclet(doclet)];
+        if(doclet.kind === 'file'){
+          var url = urls.files+'#'+doclet.longname;
+          helper.registerLink(doclet.longname,url);
+        }
+        else{
+          var url = helper.createLink(doclet);
+          helper.registerLink(doclet.longname,url);
+        }
 
-            // replace the filename with a shortened version of the full path
-            if(sourceFile.resolved){
-              doclet.meta.filename = sourceFile.resolved
-                .replace(commonPrefix,'')
-                .replace(new RegExp('\\\\','g'), '/');
-            }
+        if(doclet.meta){
+          var sourceFile = sourceFiles[getPathFromDoclet(doclet)];
 
-            // replace link wildcards by doclet meta data
-            if(sourceFile.link){ //TODO
-              doclet.meta.linkpath = sourceFile.link
-                .replace("%lineno%",doclet.meta.lineno)
-                .replace(new RegExp('\\\\','g'), '/');
-            }
+          // replace the filename with a shortened version of the full path
+          if(sourceFile.resolved){
+            doclet.meta.filename = sourceFile.resolved
+              .replace(commonPrefix,'')
+              .replace(new RegExp('\\\\','g'), '/');
+          }
 
+          // replace link wildcards by doclet meta data
+          if(sourceFile.link){
+            doclet.meta.linkpath = sourceFile.link
+              .replace("%lineno%",doclet.meta.lineno)
+              .replace(new RegExp('\\\\','g'), '/');
+          }
         }
     });
 

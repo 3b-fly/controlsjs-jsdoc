@@ -35,7 +35,7 @@ You can set options for customizing your documentations.
         "description": "",
         "keyword": ""
     },
-    "linkPaths": {
+    "sourceLinks": {
       "path/to/src/": "https://github.com/author/app/blob/master/src/%path%#L%lineno%"
     },
     "socialLinks": {
