@@ -4,7 +4,7 @@ module.exports = function(data,members){
 
   self = {
     _nav: [],
-    _modules: [],
+    _packages: [],
     _files: [],
     _links: [],
 
@@ -138,10 +138,10 @@ module.exports = function(data,members){
         else{self._nav.push(item);}
       }
 
-      self._modules = [];
+      self._packages = [];
       self._files = [];
       if(members){
-        if(members.modules){self._modules = members.modules;}
+        if(members.packages){self._packages = members.packages;}
         if(members.files){self._files = members.files;}
       }
     },
@@ -160,7 +160,7 @@ module.exports = function(data,members){
 
     generate: function(){
       return helper.callTemplate('navigation.tmpl',{
-        modules: self._modules,
+        packages: self._packages,
         files: self._files,
         links: self._links,
         members: self._nav

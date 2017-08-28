@@ -70,7 +70,13 @@
         <?js }); ?></ul>
     <?js } ?>
 
-    <?js= self.partial('controlsjs.tmpl', doc) ?>
+    <?js if (doc.packages && doc.packages.length) { ?>
+        <h3>In Packages</h3>
+
+        <ul><?js doc.packages.forEach(function(p){ ?>
+              <li><?js= self.linkto(p.longname,p.name) ?></li>
+        <?js }); ?></ul>
+    <?js } ?>
 
     <?js
         var classes = self.find({kind: 'class', memberof: doc.longname});

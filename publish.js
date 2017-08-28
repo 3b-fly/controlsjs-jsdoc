@@ -152,7 +152,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     var urls = {
       index: helper.getUniqueFilename('index'),
       files: helper.getUniqueFilename('files'),
-      modules: helper.getUniqueFilename('modules'),
+      packages: helper.getUniqueFilename('packages'),
       global: helper.getUniqueFilename('global')
     };
 
@@ -247,6 +247,10 @@ exports.publish = function(taffyData, opts, tutorials) {
           var url = urls.files+'#'+doclet.longname;
           helper.registerLink(doclet.longname,url);
         }
+        else if(doclet.kind === 'package'){
+          var url = urls.packages+'#'+doclet.longname;
+          helper.registerLink(doclet.longname,url);
+        }
         else{
           var url = helper.createLink(doclet);
           helper.registerLink(doclet.longname,url);
@@ -304,6 +308,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     });
 
     var members = helper.getMembers(data);
+    members.packages = helper.find(data,{kind:'package',scope:'global'});
     members.definitions = helper.find(data,{kind:'definition'});
     members.files = helper.find(data,{kind:'file'});
     members.tutorials = tutorials.children;
@@ -323,13 +328,12 @@ exports.publish = function(taffyData, opts, tutorials) {
     if(members.files.length){
       generate('Files',members.files,urls.files,true,'files.tmpl');
     }
-    if(members.modules.length){
-      generate('Modules',members.modules,urls.modules,true,'modules.tmpl');
+    if(members.packages.length){
+      generate('Packages',members.packages,urls.packages,true,'packages.tmpl');
     }
     if(members.globals.length){
       generate('Global',[{kind: 'globalobj'}],urls.global);
     }
-
 
     // set up the lists that we'll use to generate pages
     var classes = taffy(members.classes);
