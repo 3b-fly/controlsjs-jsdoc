@@ -52,7 +52,6 @@ module.exports = function(data,members){
       self.addNavName(item.properties);
       self.addNavName(item.typedefs);
       self.addNavName(item.members);
-      self.addNavName(item.definitions);
       self.addNavName(item.interfaces);
       self.addNavName(item.methods);
       self.addNavName(item.events);
@@ -74,10 +73,6 @@ module.exports = function(data,members){
         }).get(),
         members: data({
           kind: 'member',
-          memberof: member.longname
-        }).get(),
-        definitions: data({
-          kind: 'definition',
           memberof: member.longname
         }).get(),
         interfaces: data({

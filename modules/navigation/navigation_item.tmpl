@@ -56,17 +56,6 @@
     </ul>
   <?js } ?>
 
-    <?js if(data.definitions && data.definitions.length){ ?>
-    <ul class="definitions itemMembers">
-      <span class="subtitle">Definitions</span>
-      <?js data.definitions.forEach(function(d){ ?>
-        <li data-name="<?js= d.navname ?>">
-          <?js= self.linkto(d.longname,d.name) ?>
-        </li>
-      <?js }); ?>
-    </ul>
-  <?js } ?>
-
   <?js if(data.interfaces && data.interfaces.length){ ?>
     <ul class="methods itemMembers">
       <span class="subtitle">Interfaces</span>

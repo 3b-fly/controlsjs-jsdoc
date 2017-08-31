@@ -118,14 +118,9 @@ exports.defineTags = function(dictionary){
   };
 
   tagDefs.definition = {
-    canHaveName: true,
-    isNamespace: true,
     onTagged: function(doclet,tag){
       doclet.addTag('kind','definition');
-
-      if(tag.value && tag.value.name){
-        doclet.addTag('name',tag.value.name);
-      }
+      doclet.addTag('name','definition');
     }
   };
 

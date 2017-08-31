@@ -127,20 +127,6 @@
     <?js } ?>
 
     <?js
-        var definitions = self.find({
-            kind: 'definition',
-            memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
-        });
-        if (definitions && definitions.length && definitions.forEach) {
-    ?>
-        <h3>Definitions</h3>
-
-        <ul><?js definitions.forEach(function(i) { ?>
-            <li><?js= self.linkto(i.longname, i.name) ?></li>
-        <?js }); ?></ul>
-    <?js } ?>
-
-    <?js
         var interfaces = self.find({
             kind: 'interface',
             memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
