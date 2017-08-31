@@ -13,14 +13,12 @@ var util = require('util');
 
 var hasOwnProp = Object.prototype.hasOwnProperty;
 
-var MODULE_NAMESPACE = 'module:';
-
 var files = {};
 var ids = {};
 
 // each container gets its own html file
 var containers = [
-  'class','module','external','namespace','mixin','interface','definition'
+  'class','external','namespace','mixin','interface','definition'
 ];
 
 var tutorials;
@@ -134,7 +132,7 @@ var getUniqueFilename = exports.getUniqueFilename = function(str) {
         .replace(/~/g, '-')
         // use _ instead of # to denote 'instance'
         .replace(/#/g, '_')
-        // use _ instead of / (for example, in module names)
+        // use _ instead of / (for example, in file names)
         .replace(/\//g, '_')
         // remove the variation, if any
         .replace(/\([\s\S]*\)$/, '')
@@ -164,20 +162,6 @@ function getFilename(longname) {
     }
 
     return fileUrl;
-}
-
-/**
- * Check whether a symbol is the only symbol exported by a module (as in
- * `module.exports = function() {};`).
- *
- * @private
- * @param {module:jsdoc/doclet.Doclet} doclet - The doclet for the symbol.
- * @return {boolean} `true` if the symbol is the only symbol exported by a module; otherwise,
- * `false`.
- */
-function isModuleExports(doclet) {
-    return doclet.longname && doclet.longname === doclet.name &&
-        doclet.longname.indexOf(MODULE_NAMESPACE) === 0 && doclet.kind !== 'module';
 }
 
 function makeUniqueId(filename, id) {
@@ -632,31 +616,24 @@ var find = exports.find = function(data, spec) {
 /**
  * Retrieve all of the following types of members from a set of doclets:
  *
- * + Classes
- * + Externals
- * + Globals
- * + Mixins
- * + Modules
- * + Namespaces
- * + Events
  * @param {TAFFY} data The TaffyDB database to search.
- * @return {object} An object with `classes`, `externals`, `globals`, `mixins`, `modules`,
- * `events`, and `namespaces` properties. Each property contains an array of objects.
+ * @return {object} Each property contains an array of objects.
  */
 exports.getMembers = function(data) {
     var members = {
-        classes: find( data, {kind: 'class'} ),
-        externals: find( data, {kind: 'external'} ),
-        events: find( data, {kind: 'event'} ),
-        globals: find(data, {
-            kind: ['member', 'function', 'constant', 'typedef'],
-            memberof: { isUndefined: true }
-        }),
-        mixins: find( data, {kind: 'mixin'} ),
-        modules: find( data, {kind: 'module'} ),
-        namespaces: find( data, {kind: 'namespace'} ),
-        definitions: find( data, {kind: 'definition'} ),
-        interfaces: find( data, {kind: 'interface'} )
+      files: find(data,{kind:'file'}),
+      classes: find(data,{kind: 'class'}),
+      externals: find(data,{kind: 'external'}),
+      events: find(data,{kind: 'event'}),
+      mixins: find(data,{kind: 'mixin'}),
+      namespaces: find(data,{kind: 'namespace'}),
+      definitions: find(data,{kind: 'definition'}),
+      interfaces: find(data,{kind: 'interface'}),
+      packages: find(data,{kind:'package',scope:'global'}),
+      globals: find(data,{
+          kind: ['member', 'function', 'constant', 'typedef'],
+          memberof: { isUndefined: true }
+      })
     };
 
     // strip quotes from externals, since we allow quoted names that would normally indicate a
@@ -667,11 +644,6 @@ exports.getMembers = function(data) {
         doclet.name = doclet.name.replace(/(^"|"$)/g, '');
 
         return doclet;
-    });
-
-    // functions that are also modules (as in `module.exports = function() {};`) are not globals
-    members.globals = members.globals.filter(function(doclet) {
-        return !isModuleExports(doclet);
     });
 
     return members;
@@ -925,7 +897,7 @@ exports.createLink = function(doclet) {
     }
 
     // the doclet gets its own HTML file
-    if ( containers.indexOf(doclet.kind) !== -1 || isModuleExports(doclet) ) {
+    if ( containers.indexOf(doclet.kind) !== -1 ) {
         filename = getFilename(longname);
     }
     // mistagged version of a doclet that gets its own HTML file

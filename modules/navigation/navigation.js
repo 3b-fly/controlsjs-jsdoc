@@ -4,6 +4,7 @@ module.exports = function(data,members){
 
   self = {
     _nav: [],
+    _globals: [],
     _packages: [],
     _files: [],
     _links: [],
@@ -54,7 +55,6 @@ module.exports = function(data,members){
       self.addNavName(item.definitions);
       self.addNavName(item.interfaces);
       self.addNavName(item.methods);
-      self.addNavName(item.callbacks);
       self.addNavName(item.events);
     },
 
@@ -86,10 +86,6 @@ module.exports = function(data,members){
         }).get(),
         methods: data({
           kind: 'function',
-          memberof: member.longname
-        }).get(),
-        callbacks: data({
-          kind: 'event-callback',
           memberof: member.longname
         }).get(),
         events: data({
@@ -138,9 +134,11 @@ module.exports = function(data,members){
         else{self._nav.push(item);}
       }
 
+      self._globals = [],
       self._packages = [];
       self._files = [];
       if(members){
+        if(members.globals){self._globals = members.globals;}
         if(members.packages){self._packages = members.packages;}
         if(members.files){self._files = members.files;}
       }
@@ -160,6 +158,7 @@ module.exports = function(data,members){
 
     generate: function(){
       return helper.callTemplate('navigation.tmpl',{
+        globals: self._globals,
         packages: self._packages,
         files: self._files,
         links: self._links,

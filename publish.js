@@ -38,7 +38,11 @@ function needsSignature(doclet) {
     var needsSig = false;
 
     // function and class definitions always get a signature
-    if((doclet.kind === 'function') || (doclet.kind === 'class')){
+    if(
+      (doclet.kind === 'function')
+      || (doclet.kind === 'event')
+      || (doclet.kind === 'class')
+    ){
       needsSig = true;
     }
     // typedefs that contain functions get a signature, too
@@ -308,9 +312,6 @@ exports.publish = function(taffyData, opts, tutorials) {
     });
 
     var members = helper.getMembers(data);
-    members.packages = helper.find(data,{kind:'package',scope:'global'});
-    members.definitions = helper.find(data,{kind:'definition'});
-    members.files = helper.find(data,{kind:'file'});
     members.tutorials = tutorials.children;
 
     // add template helpers

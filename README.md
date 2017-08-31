@@ -35,6 +35,9 @@ You can set options for customizing your documentations.
         "description": "",
         "keyword": ""
     },
+    "plugins": [
+      "path/to/controlsjs-jsdoc/plugins/controlsjs" //add Controls.js dictionary plugin
+    ],
     "sourceLinks": {
       "path/to/src/": "https://github.com/author/app/blob/master/src/%path%#L%lineno%"
     },
@@ -49,17 +52,6 @@ You can set options for customizing your documentations.
     }
 }
 ```
-
-Plugins
----
-You can add new plugins located in plugins directory into your JSDoc configuration to use new tags:
-* event-callback.js
-  * @event-callback (single)
-* controlsjs-lib.js
-  * @controlsjs-library (single)
-  * @controlsjs-package (multiple)
-* controlsjs-def.js
-  * @controlsjs-definition (multiple)
 
 License
 ---

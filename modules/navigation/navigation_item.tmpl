@@ -81,20 +81,9 @@
   <?js if(data.methods && data.methods.length){ ?>
     <ul class="methods itemMembers">
       <span class="subtitle">Methods</span>
-      <?js data.methods.forEach(function(v){ ?>
-        <li data-name="<?js= v.navname ?>">
-          <?js= self.linkto(v.longname,v.name) ?>
-        </li>
-      <?js }); ?>
-    </ul>
-  <?js } ?>
-
-  <?js if(data.callbacks && data.callbacks.length){ ?>
-    <ul class="callbacks itemMembers">
-      <span class="subtitle">Events</span>
-      <?js data.callbacks.forEach(function(v){ ?>
-        <li data-name="<?js= v.navname ?>">
-          <?js= self.linkto(v.longname,v.name) ?>
+      <?js data.methods.forEach(function(m){ ?>
+        <li data-name="<?js= m.navname ?>">
+          <?js= self.linkto(m.longname,m.name) ?>
         </li>
       <?js }); ?>
     </ul>
@@ -102,10 +91,10 @@
 
   <?js if(data.events && data.events.length){ ?>
     <ul class="events itemMembers">
-      <span class="subtitle">Event objects</span>
-      <?js data.events.forEach(function(v){ ?>
-        <li data-name="<?js= v.navname ?>">
-          <?js= self.linkto(v.longname,v.name) ?>
+      <span class="subtitle">Events</span>
+      <?js data.events.forEach(function(e){ ?>
+        <li data-name="<?js= e.navname ?>">
+          <?js= self.linkto(e.longname,e.name) ?>
         </li>
       <?js }); ?>
     </ul>

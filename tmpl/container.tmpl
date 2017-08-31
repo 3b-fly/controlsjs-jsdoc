@@ -171,7 +171,6 @@
     <?js
         var methods = self.find({
             kind: 'function',
-            callback: {isUndefined: true},
             memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
         });
         if (methods && methods.length && methods.forEach) {
@@ -184,27 +183,13 @@
     <?js } ?>
 
     <?js
-        var callbacks = self.find({
-            kind: 'event-callback',
-            memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
-        });
-        if (callbacks && callbacks.length && callbacks.forEach) {
-    ?>
-        <h3>Events</h3>
-
-        <dl><?js callbacks.forEach(function(m) { ?>
-            <?js= self.partial('method.tmpl', m) ?>
-        <?js }); ?></dl>
-    <?js } ?>
-
-    <?js
         var events = self.find({
             kind: 'event',
             memberof: (title === 'Global' ? {isUndefined: true} : doc.longname)
         });
         if (events && events.length && events.forEach) {
     ?>
-        <h3>Event objects</h3>
+        <h3>Events</h3>
 
         <dl><?js events.forEach(function(e) { ?>
             <?js= self.partial('method.tmpl', e) ?>
