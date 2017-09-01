@@ -1,12 +1,13 @@
 <?js
   var data = obj;
   var props = data.properties;
+if(data.name === 'wrapOptions'){console.log(data);}
 ?>
 
 <?js if (props && props.length && props.forEach) { ?>
 
 <dl class="details">
-  <?js if(data.kind === 'member'){ ?>
+  <?js if((data.kind === 'member') || (data.kind === 'typedef')){ ?>
     <?js if(!data.isEnum){ ?>
       <h5>Properties:</h5>
     <?js } ?>
