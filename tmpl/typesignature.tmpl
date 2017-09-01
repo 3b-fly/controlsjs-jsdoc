@@ -14,10 +14,17 @@
 
   var kindSignature = null;
   switch(data.kind){
-    case 'module': kindSignature = 'module'; break;
-    case 'namespace': kindSignature = 'namespace'; break;
+    case 'module':
+      kindSignature = 'module';
+    break;
+    case 'namespace':
+      kindSignature = 'namespace';
+    break;
     case 'class':
       kindSignature = (data.hideconstructor) ? 'object' : 'class';
+    break;
+    case 'member':
+      if(data.isEnum){kindSignature = 'enum';}
     break;
   }
 

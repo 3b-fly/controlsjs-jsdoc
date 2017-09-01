@@ -1,13 +1,15 @@
 <?js
-var data = obj;
-var props = data.properties;
+  var data = obj;
+  var props = data.properties;
 ?>
 
 <?js if (props && props.length && props.forEach) { ?>
 
 <dl class="details">
   <?js if(data.kind === 'member'){ ?>
-    <h5>Properties:</h5>
+    <?js if(!data.isEnum){ ?>
+      <h5>Properties:</h5>
+    <?js } ?>
   <?js }else{ ?>
     <h3>Properties</h3>
   <?js } ?>
