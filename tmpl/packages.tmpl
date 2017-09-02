@@ -20,13 +20,59 @@
             </div>
           </dt>
 
-          <dd>
+          <dd class="member-content">
             <?js if(doc.description){ ?>
               <div class="description"><?js= doc.description ?></div>
             <?js } ?>
 
             <?js= self.partial('details.tmpl',doc) ?>
+
+            <?js
+              var cond = {isArray: true,has: doc.longname};
+              var classes = self.find({inpackage: cond,kind: 'class'});
+              var namespaces = self.find({inpackage: cond,kind: 'namespace'});
+              var typedefs = self.find({inpackage: cond,kind: 'typedef'});
+              var interfaces = self.find({inpackage: cond,kind: 'interface'});
+            ?>
+
+            <?js if(classes && classes.length){ ?>
+              <h5>Classes:</h5>
+              <ul>
+                <?js classes.forEach(function(c){ ?>
+                  <li><?js= self.linkto(c.longname,c.name) ?></li>
+                <?js }); ?>
+              </ul>
+            <?js } ?>
+
+            <?js if(namespaces && namespaces.length){ ?>
+              <h5>Namespaces:</h5>
+              <ul>
+                <?js namespaces.forEach(function(n){ ?>
+                  <li><?js= self.linkto(n.longname,n.name) ?></li>
+                <?js }); ?>
+              </ul>
+            <?js } ?>
+
+            <?js if(typedefs && typedefs.length){ ?>
+              <h5>Type Definitions:</h5>
+              <ul>
+                <?js typedefs.forEach(function(t){ ?>
+                  <li><?js= self.linkto(t.longname,t.name) ?></li>
+                <?js }); ?>
+              </ul>
+            <?js } ?>
+
+            <?js if(interfaces && interfaces.length){ ?>
+              <h5>Interfaces:</h5>
+              <ul>
+                <?js interfaces.forEach(function(i){ ?>
+                  <li><?js= self.linkto(i.longname,i.name) ?></li>
+                <?js }); ?>
+              </ul>
+            <?js } ?>
+
           </dd>
+
         <?js }); ?>
       </dl>
     <?js } ?>
