@@ -39,7 +39,7 @@
         <?js= self.partial('details.tmpl', doc) ?>
 
         <?js if (doc.examples && doc.examples.length) { ?>
-            <h3>Example<?js= doc.examples.length > 1? 's':'' ?></h3>
+            <h3>Examples</h3>
 
             <?js= self.partial('examples.tmpl', doc.examples) ?>
         <?js } ?>
@@ -73,8 +73,9 @@
     <?js if (doc.packages && doc.packages.length) { ?>
         <h3>In Packages</h3>
 
-        <ul><?js doc.packages.forEach(function(p){ ?>
-              <li><?js= self.linkto(p.longname,p.name) ?></li>
+        <ul><?js doc.packages.forEach(function(longname) { ?>
+          <?js var name = longname.substring(longname.indexOf(':')+1) ?>
+              <li><?js= self.linkto(longname,name) ?></li>
         <?js }); ?></ul>
     <?js } ?>
 
