@@ -27,9 +27,10 @@
     "jsdoc",
     "jsdoc3",
     "jaguar.js",
-    "template"
+    "template",
+    "controlsjs"
   ],
-  "author": "davidshimjs",
+  "author": "davidshimjs,3b-fly",
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
