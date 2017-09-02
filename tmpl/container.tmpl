@@ -70,10 +70,10 @@
         <?js }); ?></ul>
     <?js } ?>
 
-    <?js if (doc.packages && doc.packages.length) { ?>
+    <?js if (doc.inpackage && doc.inpackage.length) { ?>
         <h3>In Packages</h3>
 
-        <ul><?js doc.packages.forEach(function(longname) { ?>
+        <ul><?js doc.inpackage.forEach(function(longname) { ?>
           <?js var name = longname.substring(longname.indexOf(':')+1) ?>
               <li><?js= self.linkto(longname,name) ?></li>
         <?js }); ?></ul>

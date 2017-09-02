@@ -105,13 +105,10 @@ exports.defineTags = function(dictionary){
       var packages = tag.value.split('|');
 
       if(packages && packages.length && packages.forEach){
-        if(!doclet.packages){doclet.packages = [];}
+        if(!doclet.inpackage){doclet.inpackage = [];}
 
         packages.forEach(function(name){
-          doclet.packages.push({
-            longname: 'package:'+name,
-            name: name
-          });
+          doclet.inpackage.push('package:'+name);
         });
       }
     }
