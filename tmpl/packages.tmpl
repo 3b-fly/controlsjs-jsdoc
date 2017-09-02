@@ -33,6 +33,7 @@
               var namespaces = self.find({inpackage: cond,kind: 'namespace'});
               var typedefs = self.find({inpackage: cond,kind: 'typedef'});
               var interfaces = self.find({inpackage: cond,kind: 'interface'});
+              var files = self.find({inpackage: cond,kind: 'file'});
             ?>
 
             <?js if(classes && classes.length){ ?>
@@ -67,6 +68,15 @@
               <ul>
                 <?js interfaces.forEach(function(i){ ?>
                   <li><?js= self.linkto(i.longname,i.name) ?></li>
+                <?js }); ?>
+              </ul>
+            <?js } ?>
+
+            <?js if(files && files.length){ ?>
+              <h5>Files:</h5>
+              <ul>
+                <?js files.forEach(function(f){ ?>
+                  <li><?js= self.linkto(f.longname,f.name) ?></li>
                 <?js }); ?>
               </ul>
             <?js } ?>
