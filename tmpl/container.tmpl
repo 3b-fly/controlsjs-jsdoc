@@ -49,7 +49,7 @@
     <?js if (doc.augments && doc.augments.length) { ?>
         <h3>Extends</h3>
 
-        <ul class="subsection-list"><?js doc.augments.forEach(function(a) { ?>
+        <ul><?js doc.augments.forEach(function(a) { ?>
             <li><?js= self.linkto(a, a) ?></li>
         <?js }); ?></ul>
     <?js } ?>
@@ -65,7 +65,7 @@
     <?js if (doc.requires && doc.requires.length) { ?>
         <h3>Requires</h3>
 
-        <ul class="subsection-list"><?js doc.requires.forEach(function(r) { ?>
+        <ul><?js doc.requires.forEach(function(r) { ?>
             <li><?js= self.linkto(r, r) ?></li>
         <?js }); ?></ul>
     <?js } ?>
