@@ -54,6 +54,14 @@
         <?js }); ?></ul>
     <?js } ?>
 
+    <?js if (doc.implements && doc.implements.length) { ?>
+        <h3>Implements</h3>
+
+        <ul><?js doc.implements.forEach(function(i) { ?>
+            <li><?js= self.linkto(i, i) ?></li>
+        <?js }); ?></ul>
+    <?js } ?>
+
     <?js if (doc.mixes && doc.mixes.length) { ?>
         <h3>Mixes In</h3>
 
