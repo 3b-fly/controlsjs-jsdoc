@@ -93,10 +93,14 @@
     ?>
         <h3>Classes</h3>
 
-        <dl><?js classes.forEach(function(c) { ?>
-            <dt><?js= self.linkto(c.longname, c.name) ?></dt>
-            <dd><?js if (c.summary) { ?><?js= c.summary ?><?js } ?></dd>
-        <?js }); ?></dl>
+        <ul>
+          <?js classes.forEach(function(c) { ?>
+            <li>
+              <?js= self.linkto(c.longname, c.name) ?>
+              <dd><?js if (c.summary) { ?><?js= c.summary ?><?js } ?></dd>
+            </li>
+          <?js }); ?>
+        </ul>
     <?js } ?>
 
     <?js
