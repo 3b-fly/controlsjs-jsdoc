@@ -109,14 +109,13 @@
     ?>
         <h3>Namespaces</h3>
 
-        <dl><?js namespaces.forEach(function(n) { ?>
-            <dt>
-                <a href="namespaces.html#<?js= n.longname ?>">
-                    <?js= self.linkto(n.longname, n.name) ?>
-                </a>
-            </dt>
-            <dd><?js if (n.summary) { ?><?js= n.summary ?><?js } ?></dd>
-        <?js }); ?></dl>
+        <ul>
+          <?js namespaces.forEach(function(n) { ?>
+            <li><?js= self.linkto(n.longname, n.name) ?>
+              <dd><?js if (n.summary) { ?><?js= n.summary ?><?js } ?></dd>
+            </li>
+          <?js }); ?>
+        </ul>
     <?js } ?>
 
     <?js
