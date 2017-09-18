@@ -11,14 +11,18 @@
 
 <header>
     <h1 class="name">
-      <?js if (doc.ancestors && doc.ancestors.length) { ?>
-        <span class="ancestors"><?js= doc.ancestors.join('') ?></span>
+      <?js if(title === 'Global'){ ?>
+        Globals
+      <?js }else{ ?>
+        <?js if (doc.ancestors && doc.ancestors.length) { ?>
+          <span class="ancestors"><?js= doc.ancestors.join('') ?></span>
+        <?js } ?>
+        <?js= doc.name ?>
+        <?js if (doc.variation) { ?>
+          <sup class="variation"><?js= doc.variation ?></sup>
+        <?js } ?>
+        <?js= self.partial('typesignature.tmpl', doc) ?>
       <?js } ?>
-      <?js= doc.name ?>
-      <?js if (doc.variation) { ?>
-        <sup class="variation"><?js= doc.variation ?></sup>
-      <?js } ?>
-      <?js= self.partial('typesignature.tmpl', doc) ?>
     </h1>
     <?js if (doc.classdesc) { ?>
       <div class="class-description"><?js= doc.classdesc ?></div>
