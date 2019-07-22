@@ -210,8 +210,8 @@ li {
   font-size: 10px;
 }
 .main .important {
-  background-color: #D99B28;
-  color: #333333;
+  background-color: #D99B28 !important;
+  color: #333333 !important;
   padding: 2px 5px;
   border-radius: 3px;
 }
