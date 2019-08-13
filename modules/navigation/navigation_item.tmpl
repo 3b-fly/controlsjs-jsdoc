@@ -6,8 +6,6 @@
 <li class="item" data-name="<?js= data.navname ?>">
 
   <span class="title">
-    <?js= self.linkto(data.longname,data.navname) ?>
-
     <?js
       if(data.signatures && data.signatures.length){
         var signs = data.signatures.slice().reverse();
@@ -18,6 +16,8 @@
         </span>
       <?js }); ?>
     <?js } ?>
+
+    <?js= self.linkto(data.longname,data.navname) ?>
   </span>
 
   <?js if(data.properties && data.properties.length){ ?>
