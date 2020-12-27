@@ -268,12 +268,12 @@ li {
   margin: 0px 0px 15px 10px;
 }
 .main table th {
-  padding: 3px 3px;
+  padding: 3px 10px 3px 3px;
   text-align: left;
 }
 .main table td {
   vertical-align: top;
-  padding: 5px 3px;
+  padding: 5px 10px 5px 3px;
 }
 .main table .name {
   width: 120px;
@@ -316,6 +316,9 @@ li {
   color: #aaaaaa;
   font-size: 12px;
 }
+.main table .type span {
+  white-space: nowrap;
+}
 .main table .attributes {
   width: 120px;
   color: #aaaaaa;
@@ -324,6 +327,9 @@ li {
 .main table .default {
   width: 120px;
   font-size: 12px;
+}
+.main table .default span {
+  white-space: nowrap;
 }
 .main table .description {
   font-size: 12px;

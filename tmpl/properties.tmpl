@@ -84,7 +84,9 @@
             <tr id="property:<?js= prop.longname ?>">
                 <?js if (hasName) {?>
                     <td class="name">
-                      <span class="param-name"><?js= prop.name ?></span>
+                      <span class="param-name">
+                        <?js= prop.name ?>
+                      </span>
                     </td>
                 <?js } ?>
 
@@ -97,7 +99,9 @@
                 <?js if (hasDefault) {?>
                     <td class="default">
                     <?js if (typeof prop.defaultvalue !== 'undefined') { ?>
+                      <span class="param-default">
                         <?js= self.htmlsafe(prop.defaultvalue) ?>
+                      </span>
                     <?js } ?>
                     </td>
                 <?js } ?>
