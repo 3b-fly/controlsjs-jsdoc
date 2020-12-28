@@ -45,7 +45,7 @@
         <?js if (doc.examples && doc.examples.length) { ?>
             <h3>Examples</h3>
 
-            <?js= self.partial('examples.tmpl', doc.examples) ?>
+            <?js= self.partial('examples.tmpl', doc) ?>
         <?js } ?>
       <?js } ?>
     </div>
@@ -61,9 +61,7 @@
     <?js if (doc.implements && doc.implements.length) { ?>
         <h3>Implements</h3>
 
-        <ul><?js doc.implements.forEach(function(i) { ?>
-            <li><?js= self.linkto(i, i) ?></li>
-        <?js }); ?></ul>
+        <?js= self.partial('implements.tmpl', doc) ?>
     <?js } ?>
 
     <?js if (doc.mixes && doc.mixes.length) { ?>

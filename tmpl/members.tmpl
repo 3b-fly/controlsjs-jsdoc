@@ -25,8 +25,13 @@
   <?js= self.partial('properties.tmpl', data) ?>
   <?js= self.partial('details.tmpl', data) ?>
 
-  <?js if (data.examples && examples.length) { ?>
+  <?js if (data.examples && data.examples.length) { ?>
     <h5>Examples</h5>
-    <?js= self.partial('examples.tmpl', examples) ?>
+    <?js= self.partial('examples.tmpl', data) ?>
+  <?js } ?>
+
+  <?js if (data.implements && data.implements.length) { ?>
+    <h5>Implements</h5>
+    <?js= self.partial('implements.tmpl', data) ?>
   <?js } ?>
 </dd>

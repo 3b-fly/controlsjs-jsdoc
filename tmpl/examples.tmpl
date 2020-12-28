@@ -1,5 +1,12 @@
-<?js var data = obj;  ?>
+<?js
+  var data = obj;
+  var examples = data.examples;
+?>
 
-<?js data.forEach(function(example){ ?>
-  <pre><code class="language-javascript"><?js= example ?></code></pre>
-<?js }); ?>
+<?js if (examples && examples.length && examples.forEach) { ?>
+
+  <?js examples.forEach(function(example){ ?>
+    <pre><code class="language-javascript"><?js= example ?></code></pre>
+  <?js }); ?>
+
+<?js } ?>

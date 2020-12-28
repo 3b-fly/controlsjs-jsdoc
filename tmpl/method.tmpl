@@ -101,8 +101,8 @@
     <?js= self.partial('returns.tmpl', data.returns) ?>
     <?js } ?>
 
-    <?js if (data.examples && examples.length) { ?>
+    <?js if (data.examples && data.examples.length) { ?>
         <h5>Examples</h5>
-        <?js= this.partial('examples.tmpl', examples) ?>
+        <?js= this.partial('examples.tmpl', data) ?>
     <?js } ?>
 </dd>

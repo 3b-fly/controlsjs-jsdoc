@@ -1,0 +1,16 @@
+<?js
+  var data = obj;
+  var implements = data.implements;
+
+  var self = this;
+?>
+
+<?js if (implements && implements.length && implements.forEach) { ?>
+
+  <ul>
+    <?js implements.forEach(function(interface) { ?>
+      <li><?js= self.linkto(interface,interface) ?></li>
+    <?js }); ?>
+  </ul>
+
+<?js } ?>
